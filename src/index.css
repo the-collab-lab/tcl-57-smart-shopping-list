@@ -39,15 +39,24 @@
 }
 
 /**
- * Make sure the app fills the height of the viewport
+ * Make sure the app fills the height of the screen.
+ * The fill-available value allows the browser to account
+ * for the address bar and other browser chrome on mobile.
  */
 html,
 body,
 #root,
 #root > * {
-	min-height: 100vh;
+	height: 100vh;
+	height: -webkit-fill-available;
+	height: fill-available;
 }
 
+/**
+ * Set the value of 1rem to 10px to make relative units
+ * easier to work with.
+ * (The default is 16px. 16 * 62.5% = 10)
+ */
 html {
 	font-size: 62.5%;
 }
