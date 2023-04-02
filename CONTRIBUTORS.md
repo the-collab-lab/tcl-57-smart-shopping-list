@@ -6,6 +6,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
+- [Amy Preci](https://github.com/Amy-Pr) 🦄
+
 ## Mentors
 
 - [DJ Taylor](https://github.com/djtaylor8) 💥
