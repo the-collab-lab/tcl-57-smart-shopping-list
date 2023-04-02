@@ -9,5 +9,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Mentors
 
 - [DJ Taylor](https://github.com/djtaylor8) 💥
+- [Dana Pughakoff](https://github.com/danainjax) 🌎
 
 ## Code of Conduct Contacts
