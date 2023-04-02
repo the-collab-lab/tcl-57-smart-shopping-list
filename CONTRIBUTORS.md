@@ -7,6 +7,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Cohort Participants
 
 - [Amy Preci](https://github.com/Amy-Pr) 🦄
+- [Jon Granados](https://github.com/jongranados) 🦉
 - [Emily Sellers] (https://github.com/emilysellers)🌿
 
 ## Mentors
