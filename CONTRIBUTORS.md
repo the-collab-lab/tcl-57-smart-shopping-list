@@ -15,5 +15,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [DJ Taylor](https://github.com/djtaylor8) 💥
 - [Dana Pughakoff](https://github.com/danainjax) 🌎
+- [EJ Mason](https://github.com/mxmason) 🐧
 
 ## Code of Conduct Contacts
+
+- [Stacie Taylor](stacie@the-collab-lab.codes) 🌈
