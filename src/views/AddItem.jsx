@@ -1,3 +1,10 @@
 export function AddItem() {
-	return <p>Hello from the <code>/add-item</code> page!</p>
+	return (
+		<form>
+			<label for="item-name-input">
+				Item name:
+				<input type="text" id="item-name-input" placeholder="eggs"></input>
+			</label>
+		</form>
+	);
 }
