@@ -1,10 +1,15 @@
+import { Navigate } from 'react-router-dom';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
+import * as React from 'react';
 
 export function Home({ setListToken }) {
+	const [clicked, setClicked] = React.useState(false);
+
 	function handleClick() {
 		const token = generateToken();
 		setListToken(token);
+		setClicked(true);
 	}
 
 	return (
@@ -15,6 +20,7 @@ export function Home({ setListToken }) {
 			<button type="button" onClick={handleClick}>
 				Create New List
 			</button>
+			{clicked && <Navigate to="/list" replace={true}></Navigate>}
 		</div>
 	);
 }
