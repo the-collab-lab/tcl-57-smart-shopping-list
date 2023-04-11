@@ -8,6 +8,7 @@ export function Home() {
 				Hello from the home (<code>/</code>) page!
 			</p>
 			<button>Create New List</button>
+			<>{console.log(generateToken())}</>
 		</div>
 	);
 }
