@@ -39,6 +39,7 @@ export function AddItem() {
 						id="soon"
 						name="time"
 						onChange={() => setDaysUntilNextPurchase(7)}
+						checked
 					/>
 					<label htmlFor="soon">Soon</label> <br />
 					<input
