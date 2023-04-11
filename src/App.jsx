@@ -51,7 +51,7 @@ export function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
+					<Route index element={<Home setListToken={setListToken} />} />
 					<Route path="/list" element={<List data={data} />} />
 					<Route path="/add-item" element={<AddItem />} />
 				</Route>
