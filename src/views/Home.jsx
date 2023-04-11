@@ -3,13 +3,16 @@ import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import * as React from 'react';
 
-export function Home({ setListToken }) {
-	const [clicked, setClicked] = React.useState(false);
+export function Home({ listToken, setListToken }) {
+	console.log(listToken); // prints 'undefined' even when a token exists in localStorage
+	const [tokenExists, setTokenExists] = React.useState(
+		listToken ? true : false,
+	);
 
 	function handleClick() {
 		const token = generateToken();
 		setListToken(token);
-		setClicked(true);
+		setTokenExists(true);
 	}
 
 	return (
@@ -20,7 +23,7 @@ export function Home({ setListToken }) {
 			<button type="button" onClick={handleClick}>
 				Create New List
 			</button>
-			{clicked && <Navigate to="/list" replace={true}></Navigate>}
+			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 		</div>
 	);
 }
