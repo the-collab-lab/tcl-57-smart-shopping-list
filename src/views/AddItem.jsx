@@ -3,7 +3,7 @@ import { addItem } from '../api/firebase.js';
 
 export function AddItem() {
 	const [itemName, setItemName] = useState('');
-	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(0);
+	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
 	const [itemAdded, setItemAdded] = useState(false);
 	const [error, setError] = useState(false);
 
@@ -29,17 +29,16 @@ export function AddItem() {
 				<input
 					type="text"
 					id="item-name-input"
-					placeholder="eggs"
 					onChange={(e) => setItemName(e.target.value)}
 				/>
 				<fieldset>
-					<p>How soon will you buy this again?</p>
+					<legend>How soon will you buy this again?</legend>
 					<input
 						type="radio"
 						id="soon"
 						name="time"
 						onChange={() => setDaysUntilNextPurchase(7)}
-						checked
+						checked={daysUntilNextPurchase === 7}
 					/>
 					<label htmlFor="soon">Soon</label> <br />
 					<input
@@ -47,6 +46,7 @@ export function AddItem() {
 						id="kind-of-soon"
 						name="time"
 						onChange={() => setDaysUntilNextPurchase(14)}
+						checked={daysUntilNextPurchase === 14}
 					/>
 					<label htmlFor="kind-of-soon">Kind of soon</label> <br />
 					<input
@@ -54,6 +54,7 @@ export function AddItem() {
 						id="not-soon"
 						name="time"
 						onChange={() => setDaysUntilNextPurchase(30)}
+						checked={daysUntilNextPurchase === 30}
 					/>
 					<label htmlFor="not-soon">Not soon</label>
 				</fieldset>
