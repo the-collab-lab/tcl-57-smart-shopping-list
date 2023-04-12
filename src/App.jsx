@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
 
@@ -52,8 +57,14 @@ export function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route
-						index
-						element={<Home listToken={listToken} setListToken={setListToken} />}
+						path="/"
+						element={
+							listToken ? (
+								<Navigate to="/list" />
+							) : (
+								<Home setListToken={setListToken} />
+							)
+						}
 					/>
 					<Route path="/list" element={<List data={data} />} />
 					<Route path="/add-item" element={<AddItem />} />
