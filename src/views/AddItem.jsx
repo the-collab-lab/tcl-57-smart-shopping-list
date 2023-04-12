@@ -59,7 +59,7 @@ export function AddItem() {
 					<label htmlFor="not-soon">Not soon</label>
 				</fieldset>
 
-				<input type="submit" id="Add Item" />
+				<input type="submit" value="Add Item" />
 			</form>
 			{itemAdded && <p>Your item has been added.</p>}
 			{error && <p>Oh no, something went wrong.</p>}
