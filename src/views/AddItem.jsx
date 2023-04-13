@@ -36,7 +36,6 @@ export function AddItem() {
 					<input
 						type="radio"
 						id="soon"
-						name="time"
 						onChange={() => setDaysUntilNextPurchase(7)}
 						checked={daysUntilNextPurchase === 7}
 					/>
@@ -44,7 +43,6 @@ export function AddItem() {
 					<input
 						type="radio"
 						id="kind-of-soon"
-						name="time"
 						onChange={() => setDaysUntilNextPurchase(14)}
 						checked={daysUntilNextPurchase === 14}
 					/>
@@ -52,7 +50,6 @@ export function AddItem() {
 					<input
 						type="radio"
 						id="not-soon"
-						name="time"
 						onChange={() => setDaysUntilNextPurchase(30)}
 						checked={daysUntilNextPurchase === 30}
 					/>
