@@ -3,11 +3,8 @@ import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import * as React from 'react';
 
-export function Home({ listToken, setListToken }) {
-	console.log(listToken); // prints 'undefined' even when a token exists in localStorage
-	const [tokenExists, setTokenExists] = React.useState(
-		listToken ? true : false,
-	);
+export function Home({ setListToken }) {
+	const [tokenExists, setTokenExists] = React.useState(false);
 
 	function handleClick() {
 		const token = generateToken();
