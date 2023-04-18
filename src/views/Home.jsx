@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import * as React from 'react';
-import streamListItems from '../api';
+import { streamListItems } from '../api/firebase';
 export function Home({ setListToken }) {
 	const [token, setToken] = React.useState('');
 	const [tokenExists, setTokenExists] = React.useState(false);
@@ -11,6 +11,19 @@ export function Home({ setListToken }) {
 		const token = generateToken();
 		setListToken(token);
 		setTokenExists(true);
+	}
+
+	function handleSumbit(e) {
+		e.preventDefault();
+
+		try {
+			streamListItems(token, (snapShot) => {
+				setListToken(token);
+				setTokenExists(true);
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (
@@ -22,7 +35,7 @@ export function Home({ setListToken }) {
 				Create New List
 			</button>
 
-			<form>
+			<form onSubmit={handleSumbit}>
 				<label htmlFor="tokenInput">Have a token already? </label>
 
 				<input
