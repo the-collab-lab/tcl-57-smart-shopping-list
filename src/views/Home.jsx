@@ -42,15 +42,19 @@ export function Home({ setListToken }) {
 				Hello from the home (<code>/</code>) page!
 			</p>
 			<button type="button" onClick={handleClick}>
-				Create New List
+				Create new list
 			</button>
-
+			<p> - or - </p>
 			<form onSubmit={handleSumbit}>
-				<label htmlFor="tokenInput">Have a token already? </label>
+				<label htmlFor="tokenInput">
+					enter three word token to view existing list:
+				</label>
 
 				<input
+					type="text"
 					id="tokenInput"
 					onChange={(event) => setUserListNameInput(event.target.value)}
+					required
 				/>
 
 				<button type="submit">Submit</button>
