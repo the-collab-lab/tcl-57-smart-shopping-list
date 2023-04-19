@@ -21,7 +21,7 @@ export function List({ data }) {
 	return (
 		<>
 			<form>
-				<label htmlFor="search-filter">Item name:</label>
+				<label htmlFor="search-filter">Search for Item:</label>
 				<input
 					type="text"
 					id="search-filter"
