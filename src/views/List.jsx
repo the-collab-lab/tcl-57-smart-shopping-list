@@ -16,6 +16,8 @@ export function List({ data }) {
 		<ListItem name={item.name} key={item.id} />
 	));
 
+	const handleClick = () => setSearchTerm('');
+
 	return (
 		<>
 			<form>
@@ -25,6 +27,7 @@ export function List({ data }) {
 					id="search-filter"
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
+				<button onClick={handleClick}> X </button>
 			</form>
 			<ul>{renderList}</ul>
 		</>
