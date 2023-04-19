@@ -23,13 +23,8 @@ export function streamListItems(listId, handleSuccess) {
 export async function validateToken(userListNameInput) {
 	const listCollectionRef = collection(db, userListNameInput);
 	const listSnapshot = await getDocs(listCollectionRef);
-	const newArr = [];
-
-	listSnapshot.forEach((doc) => {
-		newArr.push(doc.id);
-	});
-
-	return Boolean(newArr.length);
+	console.log(listSnapshot);
+	return !listSnapshot.empty;
 }
 
 /**
