@@ -2,7 +2,9 @@ import { Navigate } from 'react-router-dom';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import * as React from 'react';
-import { streamListItems, validateToken } from '../api/firebase';
+import { validateToken } from '../api/firebase';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 export function Home({ setListToken }) {
 	const [userListNameInput, setUserListNameInput] = React.useState('');
@@ -25,7 +27,12 @@ export function Home({ setListToken }) {
 		} else {
 			setListToken('');
 			setTokenExists(false);
-			alert('invalid token input');
+			Toastify({
+				text: 'Sorry, this list does not exist.',
+				position: 'center',
+				gravity: 'top',
+				duration: 3000,
+			}).showToast();
 		}
 	}
 
