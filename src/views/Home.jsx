@@ -2,9 +2,10 @@ import { Navigate } from 'react-router-dom';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import * as React from 'react';
-import { streamListItems } from '../api/firebase';
+import { streamListItems, validateToken } from '../api/firebase';
+
 export function Home({ setListToken }) {
-	const [token, setToken] = React.useState('');
+	const [userListNameInput, setUserListNameInput] = React.useState('');
 	const [tokenExists, setTokenExists] = React.useState(false);
 
 	function handleClick() {
@@ -13,16 +14,18 @@ export function Home({ setListToken }) {
 		setTokenExists(true);
 	}
 
-	function handleSumbit(e) {
+	async function handleSumbit(e) {
 		e.preventDefault();
 
-		try {
-			streamListItems(token, (snapShot) => {
-				setListToken(token);
-				setTokenExists(true);
-			});
-		} catch (error) {
-			console.log(error);
+		const isValid = await validateToken(userListNameInput);
+		console.log(isValid);
+		if (isValid) {
+			setListToken(userListNameInput);
+			setTokenExists(true);
+		} else {
+			setListToken('');
+			setTokenExists(false);
+			alert('invalid token input');
 		}
 	}
 
@@ -40,7 +43,7 @@ export function Home({ setListToken }) {
 
 				<input
 					id="tokenInput"
-					onChange={(event) => setToken(event.target.value)}
+					onChange={(event) => setUserListNameInput(event.target.value)}
 				/>
 
 				<button type="submit">Submit</button>
