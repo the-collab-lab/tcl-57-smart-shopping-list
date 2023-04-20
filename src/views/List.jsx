@@ -16,18 +16,22 @@ export function List({ data }) {
 		<ListItem name={item.name} key={item.id} />
 	));
 
-	const handleClick = () => setSearchTerm('');
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setSearchTerm('');
+	};
 
 	return (
 		<>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<label htmlFor="search-filter">Item name:</label>
 				<input
 					type="text"
 					id="search-filter"
+					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
-				<button onClick={handleClick}> X </button>
+				<button type="submit"> X </button>
 			</form>
 			<ul>{renderList}</ul>
 		</>
