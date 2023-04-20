@@ -18,9 +18,7 @@ export function Home({ setListToken }) {
 
 	async function handleSumbit(e) {
 		e.preventDefault();
-
 		const isValid = await validateToken(userListNameInput);
-		console.log(isValid);
 		if (isValid) {
 			setListToken(userListNameInput);
 			setTokenExists(true);
