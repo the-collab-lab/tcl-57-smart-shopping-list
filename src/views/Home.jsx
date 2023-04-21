@@ -45,15 +45,16 @@ export function Home({ setListToken }) {
 				<label htmlFor="tokenInput">
 					enter three word token to view existing list:
 				</label>
+				<div>
+					<input
+						type="text"
+						id="tokenInput"
+						onChange={(event) => setUserTokenInput(event.target.value)}
+						required
+					/>
 
-				<input
-					type="text"
-					id="tokenInput"
-					onChange={(event) => setUserTokenInput(event.target.value)}
-					required
-				/>
-
-				<button type="submit">Submit</button>
+					<button type="submit">Submit</button>
+				</div>
 			</form>
 
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
