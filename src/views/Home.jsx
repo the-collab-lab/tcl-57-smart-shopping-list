@@ -23,8 +23,6 @@ export function Home({ setListToken }) {
 			setListToken(userListNameInput);
 			setTokenExists(true);
 		} else {
-			setListToken('');
-			setTokenExists(false);
 			Toastify({
 				text: 'Sorry, this list does not exist.',
 				position: 'center',
