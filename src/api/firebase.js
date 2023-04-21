@@ -17,11 +17,10 @@ export function streamListItems(listId, handleSuccess) {
 
 /**
  * Check existence of list in Firestore associated with user token input.
- * @param {string} userListNameInput The user's token input
- *
+ * @param {string} userTokenInput The user's token input requesting to be validated
  */
-export async function validateToken(userListNameInput) {
-	const listCollectionRef = collection(db, userListNameInput);
+export async function validateToken(userTokenInput) {
+	const listCollectionRef = collection(db, userTokenInput);
 	const listSnapshot = await getDocs(listCollectionRef);
 	return !listSnapshot.empty;
 }

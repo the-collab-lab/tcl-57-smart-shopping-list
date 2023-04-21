@@ -7,7 +7,7 @@ import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
 export function Home({ setListToken }) {
-	const [userListNameInput, setUserListNameInput] = React.useState('');
+	const [userTokenInput, setUserTokenInput] = React.useState('');
 	const [tokenExists, setTokenExists] = React.useState(false);
 
 	function handleClick() {
@@ -18,9 +18,9 @@ export function Home({ setListToken }) {
 
 	async function handleSumbit(e) {
 		e.preventDefault();
-		const isValid = await validateToken(userListNameInput);
+		const isValid = await validateToken(userTokenInput);
 		if (isValid) {
-			setListToken(userListNameInput);
+			setListToken(userTokenInput);
 			setTokenExists(true);
 		} else {
 			Toastify({
@@ -49,7 +49,7 @@ export function Home({ setListToken }) {
 				<input
 					type="text"
 					id="tokenInput"
-					onChange={(event) => setUserListNameInput(event.target.value)}
+					onChange={(event) => setUserTokenInput(event.target.value)}
 					required
 				/>
 
