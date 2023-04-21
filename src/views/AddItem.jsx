@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
 
-export function AddItem() {
+export function AddItem({ listToken }) {
 	const [itemName, setItemName] = useState('');
 	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
 	const [itemAdded, setItemAdded] = useState(false);
@@ -11,7 +11,7 @@ export function AddItem() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await addItem('my test list', {
+			await addItem(listToken, {
 				itemName,
 				daysUntilNextPurchase,
 			});
