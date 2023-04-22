@@ -1,14 +1,14 @@
 import { Navigate } from 'react-router-dom';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
-import * as React from 'react';
+import { useState } from 'react';
 import { validateToken } from '../api/firebase';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
 export function Home({ setListToken }) {
-	const [userTokenInput, setUserTokenInput] = React.useState('');
-	const [tokenExists, setTokenExists] = React.useState(false);
+	const [userTokenInput, setUserTokenInput] = useState('');
+	const [tokenExists, setTokenExists] = useState(false);
 
 	function handleClick() {
 		const token = generateToken();
