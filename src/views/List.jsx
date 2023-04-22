@@ -6,7 +6,7 @@ export function List({ data }) {
 
 	/* TO DO: Make separate resuable input component with a filter feature*/
 
-	const filterList = data.filter((item) => {
+	const filteredList = data.filter((item) => {
 		if (searchTerm === '') {
 			return item;
 		} else if (item.name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -14,18 +14,18 @@ export function List({ data }) {
 		}
 	});
 
-	const renderList = filterList.map((item) => (
+	const renderedList = filteredList.map((item) => (
 		<ListItem name={item.name} key={item.id} />
 	));
 
-	const handleSubmit = (e) => {
+	const clearSearchField = (e) => {
 		e.preventDefault();
 		setSearchTerm('');
 	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={clearSearchField}>
 				<label htmlFor="search-filter">Item name:</label>
 				<input
 					type="text"
@@ -35,7 +35,7 @@ export function List({ data }) {
 				/>
 				<button type="submit"> X </button>
 			</form>
-			<ul>{renderList}</ul>
+			<ul>{renderedList}</ul>
 		</>
 	);
 }
