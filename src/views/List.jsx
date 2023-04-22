@@ -4,6 +4,8 @@ import { ListItem } from '../components';
 export function List({ data }) {
 	const [searchTerm, setSearchTerm] = useState('');
 
+	/* TO DO: Make separate resuable input component with a filter feature*/
+
 	const filterList = data.filter((item) => {
 		if (searchTerm === '') {
 			return item;
@@ -16,7 +18,7 @@ export function List({ data }) {
 		<ListItem name={item.name} key={item.id} />
 	));
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		setSearchTerm('');
 	};
