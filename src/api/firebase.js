@@ -1,4 +1,4 @@
-import { addDoc, collection, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, getDocs } from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
 
@@ -13,6 +13,16 @@ import { getFutureDate } from '../utils';
 export function streamListItems(listId, handleSuccess) {
 	const listCollectionRef = collection(db, listId);
 	return onSnapshot(listCollectionRef, handleSuccess);
+}
+
+/**
+ * Check existence of list in Firestore associated with user token input.
+ * @param {string} userTokenInput The user's token input requesting to be validated
+ */
+export async function validateToken(userTokenInput) {
+	const listCollectionRef = collection(db, userTokenInput);
+	const listSnapshot = await getDocs(listCollectionRef);
+	return !listSnapshot.empty;
 }
 
 /**
