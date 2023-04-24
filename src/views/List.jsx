@@ -15,7 +15,7 @@ export function List({ data }) {
 	});
 
 	const renderedList = filteredList.map((item) => (
-		<ListItem name={item.name} key={item.id} />
+		<ListItem name={item.name} key={item.id} itemId={item.id} />
 	));
 
 	const clearSearchField = (e) => {
