@@ -23,6 +23,18 @@ export function List({ data }) {
 		setSearchTerm('');
 	};
 
+	// const checkList = () => {
+	// 	console.log(renderedList, 'rendered list');
+	// 	if (renderedList.length === 0) {
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// };
+
+	const renderedListLength = renderedList.length;
+	console.log(renderedListLength, 'rendered list length');
+
 	return (
 		<>
 			<form onSubmit={clearSearchField}>
@@ -36,6 +48,9 @@ export function List({ data }) {
 				<button type="submit"> clear </button>
 			</form>
 			<ul>{renderedList}</ul>
+			{renderedListLength === 0 && <button> add first item</button>}
 		</>
 	);
 }
+
+//conditionally render a button for user to add item to list if there are no items in their list
