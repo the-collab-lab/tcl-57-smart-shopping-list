@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ListItem } from '../components';
+import { Link } from 'react-router-dom';
 
 export function List({ data }) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -23,17 +24,7 @@ export function List({ data }) {
 		setSearchTerm('');
 	};
 
-	// const checkList = () => {
-	// 	console.log(renderedList, 'rendered list');
-	// 	if (renderedList.length === 0) {
-	// 		return true;
-	// 	} else {
-	// 		return false;
-	// 	}
-	// };
-
 	const renderedListLength = renderedList.length;
-	console.log(renderedListLength, 'rendered list length');
 
 	return (
 		<>
@@ -48,9 +39,11 @@ export function List({ data }) {
 				<button type="submit"> clear </button>
 			</form>
 			<ul>{renderedList}</ul>
-			{renderedListLength === 0 && <button> add first item</button>}
+			{renderedListLength === 0 && (
+				<Link to="/add-item">
+					<button> add first item</button>
+				</Link>
+			)}
 		</>
 	);
 }
-
-//conditionally render a button for user to add item to list if there are no items in their list
