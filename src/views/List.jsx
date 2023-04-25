@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ListItem } from '../components';
+import { updateItem } from '../api/firebase.js';
 
-export function List({ data }) {
+export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
+	const [checkedItemId, setCheckedItemId] = useState('');
+
+	useEffect(() => {
+		updateItem(listToken, checkedItemId);
+	}, [checkedItemId]);
 
 	/* TO DO: Make separate resuable input component with a filter feature*/
 
@@ -15,7 +21,12 @@ export function List({ data }) {
 	});
 
 	const renderedList = filteredList.map((item) => (
-		<ListItem name={item.name} key={item.id} itemId={item.id} />
+		<ListItem
+			name={item.name}
+			key={item.id}
+			itemId={item.id}
+			setCheckedItemId={setCheckedItemId}
+		/>
 	));
 
 	const clearSearchField = (e) => {
