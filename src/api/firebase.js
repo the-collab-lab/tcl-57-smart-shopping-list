@@ -5,6 +5,7 @@ import {
 	getDocs,
 	updateDoc,
 	doc,
+	increment,
 } from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -86,6 +87,7 @@ export async function updateItem(listId, listItemId) {
 
 	await updateDoc(listItemRef, {
 		dateLastPurchased: new Date(),
+		totalPurchases: increment(1),
 	});
 }
 
