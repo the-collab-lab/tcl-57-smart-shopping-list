@@ -8,7 +8,7 @@ export function List({ data, listToken }) {
 
 	useEffect(() => {
 		updateItem(listToken, checkedItemId);
-	}, [checkedItemId]);
+	}, [listToken, checkedItemId]);
 
 	/* TO DO: Make separate resuable input component with a filter feature*/
 
