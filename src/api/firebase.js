@@ -3,7 +3,6 @@ import {
 	collection,
 	onSnapshot,
 	getDocs,
-	getDoc,
 	updateDoc,
 	doc,
 } from 'firebase/firestore';
