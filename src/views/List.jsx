@@ -5,12 +5,13 @@ import { updateItem } from '../api/firebase.js';
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [checkedItemId, setCheckedItemId] = useState('');
+	const [isChecked, setIsChecked] = useState(false);
 
 	useEffect(() => {
-		updateItem(listToken, checkedItemId);
-	}, [listToken, checkedItemId]);
-
-	/* TO DO: Make separate resuable input component with a filter feature*/
+		if (isChecked) {
+			updateItem(listToken, checkedItemId);
+		}
+	}, [isChecked, listToken, checkedItemId]);
 
 	const filteredList = data.filter((item) => {
 		if (searchTerm === '') {
@@ -26,6 +27,7 @@ export function List({ data, listToken }) {
 			key={item.id}
 			itemId={item.id}
 			setCheckedItemId={setCheckedItemId}
+			setIsChecked={setIsChecked}
 		/>
 	));
 
