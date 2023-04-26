@@ -58,6 +58,20 @@ export function getItemData(snapshot) {
 		 */
 		data.id = docRef.id;
 
+		let isDefaultChecked;
+
+		if (!data.dateLastPurchased) {
+			isDefaultChecked = false;
+		} else {
+			const dayInMilliseconds = 24 * 60 * 60 * 1000;
+			const date = data.dateLastPurchased.toDate();
+			const currentDate = new Date();
+			const timeElapsed = currentDate - date;
+			isDefaultChecked = timeElapsed < dayInMilliseconds;
+		}
+
+		data.isDefaultChecked = isDefaultChecked;
+
 		return data;
 	});
 }

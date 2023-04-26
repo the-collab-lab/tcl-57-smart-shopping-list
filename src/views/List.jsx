@@ -24,7 +24,7 @@ export function List({ data, listToken }) {
 	const renderedList = filteredList.map((item) => (
 		<ListItem
 			name={item.name}
-			dateLastPurchased={item.dateLastPurchased}
+			isDefaultChecked={item.isDefaultChecked}
 			key={item.id}
 			itemId={item.id}
 			setCheckedItemId={setCheckedItemId}
