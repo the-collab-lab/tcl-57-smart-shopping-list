@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 export function List({ data }) {
 	const [searchTerm, setSearchTerm] = useState('');
 
-	/* TO DO: Make separate resuable input component with a filter feature*/
+	// TO DO: Make separate reusable input component with a filter feature
+	// TO DO: consider adding option for user to navigate home to create a new list
 
 	const filteredList = data.filter((item) => {
 		if (searchTerm === '') {
@@ -30,7 +31,7 @@ export function List({ data }) {
 		<>
 			{renderedListLength === 0 && (
 				<>
-					<h2> Your list currently has no items. </h2>
+					<h2>Your list currently has no items. </h2>
 					<h3>Click on the add first item button to start your list.</h3>
 					<Link to="/add-item">
 						<button> add first item</button>
@@ -49,9 +50,10 @@ export function List({ data }) {
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
-						<button type="submit"> clear to reset search </button>
+						{/* TO DO: reconsider button text - might be too long and/or affect alignment as is */}
+						<button type="submit">clear to reset search </button>
 					</form>
-					<h3> Here are the items in your list:</h3>
+					<h3>Here are the items in your list:</h3>
 				</>
 			)}
 
