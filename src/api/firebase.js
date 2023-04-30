@@ -8,7 +8,7 @@ import {
 	increment,
 } from 'firebase/firestore';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, ONE_DAY_IN_MILLISECONDS, CURRENT_DATE } from '../utils';
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
@@ -58,16 +58,19 @@ export function getItemData(snapshot) {
 		 */
 		data.id = docRef.id;
 
+		/**
+		 * Add a new property to each item object in the data array called 'isDefaultChecked' whose value is set to true
+		 * if the item was checked less than 24 hours ago, and to false if 24 hours or more have elapsed. This property
+		 * will be used in the ListItem Component to control default status of the item's checkmark.
+		 */
 		let isDefaultChecked;
 
 		if (!data.dateLastPurchased) {
 			isDefaultChecked = false;
 		} else {
-			const dayInMilliseconds = 24 * 60 * 60 * 1000;
 			const date = data.dateLastPurchased.toDate();
-			const currentDate = new Date();
-			const timeElapsed = currentDate - date;
-			isDefaultChecked = timeElapsed < dayInMilliseconds;
+			const timeElapsed = CURRENT_DATE - date;
+			isDefaultChecked = timeElapsed < ONE_DAY_IN_MILLISECONDS;
 		}
 
 		data.isDefaultChecked = isDefaultChecked;
@@ -95,6 +98,12 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 		totalPurchases: 0,
 	});
 }
+
+/**
+ * Update the dateLastPurchased and the totalPurchases fields in Firestore for a specified item on user's list.
+ * @param {string} listId The id of the user's list
+ * @param {string} listItemId The id of the indiividual item
+ */
 
 export async function updateItem(listId, listItemId) {
 	const listItemRef = doc(db, listId, listItemId);
