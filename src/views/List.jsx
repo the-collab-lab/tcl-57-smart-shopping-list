@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ListItem } from '../components';
+import { updateItem } from '../api/firebase.js';
 
-export function List({ data }) {
+export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
+	const [checkedItemId, setCheckedItemId] = useState('');
+	const [isChecked, setIsChecked] = useState(false);
 
-	/* TO DO: Make separate resuable input component with a filter feature*/
+	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
+	persist when user unchecks item.*/
+	useEffect(() => {
+		if (isChecked) {
+			updateItem(listToken, checkedItemId);
+		}
+	}, [isChecked, listToken, checkedItemId]);
 
 	const filteredList = data.filter((item) => {
 		if (searchTerm === '') {
@@ -15,7 +24,14 @@ export function List({ data }) {
 	});
 
 	const renderedList = filteredList.map((item) => (
-		<ListItem name={item.name} key={item.id} />
+		<ListItem
+			name={item.name}
+			isDefaultChecked={item.isDefaultChecked}
+			key={item.id}
+			itemId={item.id}
+			setCheckedItemId={setCheckedItemId}
+			setIsChecked={setIsChecked}
+		/>
 	));
 
 	const clearSearchField = (e) => {
