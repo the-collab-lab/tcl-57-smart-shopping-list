@@ -7,6 +7,8 @@ export function List({ data, listToken }) {
 	const [checkedItemId, setCheckedItemId] = useState('');
 	const [isChecked, setIsChecked] = useState(false);
 
+	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
+	persist when user unchecks item.*/
 	useEffect(() => {
 		if (isChecked) {
 			updateItem(listToken, checkedItemId);
