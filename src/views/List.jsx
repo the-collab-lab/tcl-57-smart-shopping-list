@@ -49,7 +49,7 @@ export function List({ data }) {
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
-						<button type="submit"> clear to reset search </button>
+						<button type="submit"> Search </button>
 					</form>
 					<h3> Here are the items in your list:</h3>
 				</>

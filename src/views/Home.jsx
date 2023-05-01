@@ -34,7 +34,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<div className="Home">
-			<h2>Welcome to your Smart Shopping List! </h2>{' '}
+			<h2>Welcome to your Smart Shopping List! </h2>
 			<h3>
 				You can create a new shopping list, or type in a token to view an
 				existing list.
