@@ -32,7 +32,7 @@ export function App() {
 		if (!listToken) return;
 
 		/**
-		 * streamListItems` takes a `listToken` so it can commuinicate
+		 * streamListItems` takes a `listToken` so it can communicate
 		 * with our database, then calls a callback function with
 		 * a `snapshot` from the database.
 		 *

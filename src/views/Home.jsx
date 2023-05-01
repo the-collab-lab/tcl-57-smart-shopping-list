@@ -34,14 +34,17 @@ export function Home({ setListToken }) {
 
 	return (
 		<div className="Home">
+			<h2>Welcome to your Smart Shopping List! </h2>
+			<h3>
+				You can create a new shopping list, or type in a token to view an
+				existing list.
+			</h3>
 			<button type="button" onClick={handleClick}>
 				Create new list
 			</button>
 			<p> - or - </p>
 			<form onSubmit={handleSumbit}>
-				<label htmlFor="tokenInput">
-					enter three word token to view existing list:
-				</label>
+				<label htmlFor="tokenInput">Three word token:</label>
 				<div>
 					<input
 						type="text"
@@ -53,7 +56,6 @@ export function Home({ setListToken }) {
 					<button type="submit">Submit</button>
 				</div>
 			</form>
-
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 		</div>
 	);
