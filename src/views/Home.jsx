@@ -44,7 +44,7 @@ export function Home({ setListToken }) {
 			</button>
 			<p> - or - </p>
 			<form onSubmit={handleSumbit}>
-				<label htmlFor="tokenInput">enter three word token:</label>
+				<label htmlFor="tokenInput">three word token:</label>
 				<div>
 					<input
 						type="text"
