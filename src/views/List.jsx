@@ -30,16 +30,7 @@ export function List({ data }) {
 
 	return (
 		<>
-			{renderedListLength === 0 && (
-				<>
-					<h2>Your list currently has no items. </h2>
-					<h3>Click on the add first item button to start your list.</h3>
-					<Link to="/add-item">
-						<button>Add first item</button>
-					</Link>
-				</>
-			)}
-			{renderedListLength > 0 && (
+			{renderedListLength > 0 ? (
 				<>
 					<form onSubmit={clearSearchField}>
 						<label htmlFor="search-filter">
@@ -51,13 +42,20 @@ export function List({ data }) {
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
-						<button type="submit"> Search </button>
+						<button type="submit">Search</button>
 					</form>
 					<h3>Here are the items in your list:</h3>
+					<ul>{renderedList}</ul>
+				</>
+			) : (
+				<>
+					<h2>Your list currently has no items.</h2>
+					<h3>Click on the add first item button to start your list.</h3>
+					<Link to="/add-item">
+						<button>Add first item</button>
+					</Link>
 				</>
 			)}
-
-			<ul>{renderedList}</ul>
 		</>
 	);
 }
