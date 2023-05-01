@@ -53,7 +53,7 @@ export function Home({ setListToken }) {
 						required
 					/>
 
-					<button type="submit">submit</button>
+					<button type="submit">Submit</button>
 				</div>
 			</form>
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
