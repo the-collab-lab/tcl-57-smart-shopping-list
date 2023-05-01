@@ -25,7 +25,7 @@ export function AddItem({ listToken }) {
 	// TODO: implement clear input after user adds item to list
 	return (
 		<>
-			<h2> Add an item to your shopping list</h2>
+			<h2>Add an item to your shopping list</h2>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="item-name-input">Item name:</label>
 				<input
@@ -58,7 +58,7 @@ export function AddItem({ listToken }) {
 					<label htmlFor="not-soon">Not soon</label>
 				</fieldset>
 
-				<input type="submit" value="add item" />
+				<input type="submit" value="Add item" />
 			</form>
 			{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
 			{itemAdded && <p>Your item has been added.</p>}

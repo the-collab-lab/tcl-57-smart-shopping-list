@@ -40,11 +40,11 @@ export function Home({ setListToken }) {
 				existing list.
 			</h3>
 			<button type="button" onClick={handleClick}>
-				create new list
+				Create new list
 			</button>
 			<p> - or - </p>
 			<form onSubmit={handleSumbit}>
-				<label htmlFor="tokenInput">three word token:</label>
+				<label htmlFor="tokenInput">Three word token:</label>
 				<div>
 					<input
 						type="text"

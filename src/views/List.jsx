@@ -7,6 +7,7 @@ export function List({ data }) {
 
 	// TO DO: Make separate reusable input component with a filter feature
 	// TO DO: consider adding option for user to navigate home to create a new list
+	// TO DO: Redirect user to Add Item view if list is empty.
 
 	const filteredList = data.filter((item) => {
 		if (searchTerm === '') {
@@ -34,7 +35,7 @@ export function List({ data }) {
 					<h2>Your list currently has no items. </h2>
 					<h3>Click on the add first item button to start your list.</h3>
 					<Link to="/add-item">
-						<button> add first item</button>
+						<button>Add first item</button>
 					</Link>
 				</>
 			)}
