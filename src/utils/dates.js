@@ -1,4 +1,5 @@
-const ONE_DAY_IN_MILLISECONDS = 86400000;
+export const ONE_DAY_IN_MILLISECONDS = 86400000;
+export const CURRENT_DATE = new Date();
 
 /**
  * Get a new JavaScript Date that is `offset` days in the future.

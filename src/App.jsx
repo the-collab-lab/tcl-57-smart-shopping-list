@@ -60,7 +60,7 @@ export function App() {
 						path="/"
 						element={
 							listToken ? (
-								<Navigate to="/list" />
+								<Navigate to="/list" listToken={listToken} />
 							) : (
 								<Home setListToken={setListToken} />
 							)
