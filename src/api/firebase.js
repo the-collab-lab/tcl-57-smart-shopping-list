@@ -8,7 +8,12 @@ import {
 	increment,
 } from 'firebase/firestore';
 import { db } from './config';
-import { getFutureDate, ONE_DAY_IN_MILLISECONDS, CURRENT_DATE } from '../utils';
+import {
+	getFutureDate,
+	ONE_DAY_IN_MILLISECONDS,
+	CURRENT_DATE,
+	getDaysBetweenDates,
+} from '../utils';
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
