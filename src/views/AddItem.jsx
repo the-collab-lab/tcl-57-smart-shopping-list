@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
 
-export function AddItem({ listToken }) {
+export function AddItem({ listToken, data }) {
 	const [itemName, setItemName] = useState('');
 	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
 	const [itemAdded, setItemAdded] = useState(false);
@@ -15,6 +15,7 @@ export function AddItem({ listToken }) {
 		// 		if (user item name input === '') {
 		// 			alert user;
 		// 			return;}
+
 		if (itemName === '') {
 			window.alert('Please enter an item name');
 			return;
@@ -33,7 +34,8 @@ export function AddItem({ listToken }) {
 		// 			return;}
 		let updatedUserInput = itemName.replace(/\s/g, '').toLowerCase();
 		let noPunctuationUserInput = updatedUserInput.replace(/[^\w\s]|_/g, '');
-		console.log(noPunctuationUserInput);
+		//console.log(noPunctuationUserInput);
+		//FILTER THROUGH THE DATA ARRAY AND MAKE EACH ITEM LOWERCASE WITHOUT SPACES AND PUNCTUATION. SAVE TO A NEW VARIABLE.
 		// 		else
 		try {
 			await addItem(listToken, {
