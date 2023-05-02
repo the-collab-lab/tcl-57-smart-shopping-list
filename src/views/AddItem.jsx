@@ -26,6 +26,9 @@ export function AddItem({ listToken }) {
 		//		if (updatedItem === existingItem) {
 		// 			alert user;
 		// 			return;}
+		let updatedUserInput = itemName.replace(/\s/g, '').toLowerCase();
+		let noPunctuationUserInput = updatedUserInput.replace(/[^\w\s]|_/g, '');
+		console.log(noPunctuationUserInput);
 		// 		else
 		try {
 			await addItem(listToken, {
