@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
-import { userEvent } from '@testing-library/user-event/dist/types/setup/index.js';
 
 export function AddItem({ listToken }) {
 	const [itemName, setItemName] = useState('');
