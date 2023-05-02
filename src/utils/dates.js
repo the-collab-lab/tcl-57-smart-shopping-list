@@ -11,3 +11,9 @@ export const CURRENT_DATE = new Date();
 export function getFutureDate(offset) {
 	return new Date(Date.now() + offset * ONE_DAY_IN_MILLISECONDS);
 }
+
+//create a function called getDaysBetweenDates that takes two javascript dates
+//convert passed in arguments into milliseconds
+//compute the difference between the two times
+//compute the whole number of days of the difference
+//return the whole number of days

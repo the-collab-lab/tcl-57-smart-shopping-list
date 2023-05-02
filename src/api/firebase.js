@@ -114,12 +114,13 @@ export async function updateItem(listId, listItemId) {
 	});
 
 	//import calculateEstimate from @the-collab-lab/shopping-list-util into firebase.js
+	//import getDaysBetweenDates utility function
 	//take a snapshot of the item in question
 	//access dateLastPurchased from firestore and convert to javascript date object
 	//access dateNextPurchased from firestore and convert to javascript date object
 	//access totalPurchases
-	//compute previousEstimate as days between dateNextPurchased and dateLastPurchased using getDaysBetweenDates utility function
-	//compute daysSinceLastPurchase as days between today's date and dateLastPurchased using getDaysBetweenDates utility function
+	//compute previousEstimate as days between dateNextPurchased and dateLastPurchased calling getDaysBetweenDates utility function
+	//compute daysSinceLastPurchase as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
 	//call calculateEstimate with previousEstimate, daysSinceLastPurchase, and totalPurchases
 }
 
