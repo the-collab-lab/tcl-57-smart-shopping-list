@@ -6,6 +6,7 @@ import {
 	updateDoc,
 	doc,
 	increment,
+	getDoc,
 } from 'firebase/firestore';
 import { db } from './config';
 import {
@@ -14,6 +15,7 @@ import {
 	CURRENT_DATE,
 	getDaysBetweenDates,
 } from '../utils';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
@@ -112,21 +114,48 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 
 export async function updateItem(listId, listItemId) {
 	const listItemRef = doc(db, listId, listItemId);
+	const now = new Date();
+
+	//take a snapshot of the item in question
+	const itemSnap = await (await getDoc(listItemRef)).data();
+
+	//access dateLastPurchased from firestore and convert to javascript date object
+	const dateLastPurchased = itemSnap.dateLastPurchased
+		? itemSnap.dateLastPurchased.toDate()
+		: now;
+
+	//access dateNextPurchased from firestore and convert to javascript date object
+	const dateNextPurchased = itemSnap.dateNextPurchased.toDate();
+
+	//access totalPurchases
+	const totalPurchases = itemSnap.totalPurchases;
+
+	//compute previousEstimate as days between dateNextPurchased and dateLastPurchased calling getDaysBetweenDates utility function
+	const previousEstimate = getDaysBetweenDates(
+		dateLastPurchased,
+		dateNextPurchased,
+	);
+
+	//compute daysSinceLastPurchase as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
+	let today = new Date();
+	const daysSinceLastPurchase = getDaysBetweenDates(dateLastPurchased, today);
+
+	//call calculateEstimate with previousEstimate, daysSinceLastPurchase, and totalPurchases
+	const offsetDays = calculateEstimate(
+		previousEstimate,
+		daysSinceLastPurchase,
+		totalPurchases,
+	);
+
+	// console.log(`previousEstimate: ${previousEstimate} ; daysSinceLastPurchase: ${daysSinceLastPurchase} ; totalPurchases: ${totalPurchases} ; offset: ${offsetDays}`);
+
+	const newDateNextPurchase = getFutureDate(offsetDays);
 
 	await updateDoc(listItemRef, {
-		dateLastPurchased: new Date(),
+		dateLastPurchased: now,
+		dateNextPurchased: newDateNextPurchase,
 		totalPurchases: increment(1),
 	});
-
-	//import calculateEstimate from @the-collab-lab/shopping-list-util into firebase.js
-	//import getDaysBetweenDates utility function
-	//take a snapshot of the item in question
-	//access dateLastPurchased from firestore and convert to javascript date object
-	//access dateNextPurchased from firestore and convert to javascript date object
-	//access totalPurchases
-	//compute previousEstimate as days between dateNextPurchased and dateLastPurchased calling getDaysBetweenDates utility function
-	//compute daysSinceLastPurchase as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
-	//call calculateEstimate with previousEstimate, daysSinceLastPurchase, and totalPurchases
 }
 
 export async function deleteItem() {
