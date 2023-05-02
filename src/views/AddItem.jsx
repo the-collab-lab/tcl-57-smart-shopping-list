@@ -15,6 +15,11 @@ export function AddItem({ listToken }) {
 		// 		if (user item name input === '') {
 		// 			alert user;
 		// 			return;}
+		if (itemName === '') {
+			window.alert('Please enter an item name');
+			return;
+		}
+
 		// 2. If user's item name input is identical to an existing item, alert user and don't save input to database.
 		//		if (user item name input === existing item) {
 		//			alert user;
