@@ -13,7 +13,16 @@ export function getFutureDate(offset) {
 }
 
 //create a function called getDaysBetweenDates that takes two javascript dates
-//convert passed in arguments into milliseconds
-//compute the difference between the two times
-//compute the whole number of days of the difference
-//return the whole number of days
+export function getDaysBetweenDates(firstDate, secondDate) {
+	//convert passed in arguments into milliseconds
+	const firstDateInMilliseconds = firstDate.getTime();
+	const secondDateInMilliseconds = secondDate.getTime();
+	//compute the difference between the two times
+	//compute the whole number of days of the difference
+	const timeDifference = Math.floor(
+		(secondDateInMilliseconds - firstDateInMilliseconds) /
+			ONE_DAY_IN_MILLISECONDS,
+	);
+	//return the whole number of days
+	return timeDifference;
+}
