@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
+import { userEvent } from '@testing-library/user-event/dist/types/setup/index.js';
 
 export function AddItem({ listToken }) {
 	const [itemName, setItemName] = useState('');
@@ -10,6 +11,23 @@ export function AddItem({ listToken }) {
 	// TODO: dynamically pass in the list token so item is added to correct list
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		// Pseudocode:
+		// 1. If user's item name input is empty, alert user and don't save input to database.
+		// 		if (user item name input === '') {
+		// 			alert user;
+		// 			return;}
+		// 2. If user's item name input is identical to an existing item, alert user and don't save input to database.
+		//		if (user item name input === existing item) {
+		//			alert user;
+		// 			return;}
+		// 3. If user's item name input has unconventional title case or spacing but still matches an existing item, alert user OR user confirms and don't save input to datebase.
+		//		const updatedItem = user item input, converted to lower case and spaces removed
+		// 		(ex: "App les" becomes "apples", "root beer" becomes "rootbeer")
+		//		const existingItem = existing item, converted to lower case and spaces removed
+		//		if (updatedItem === existingItem) {
+		// 			alert user;
+		// 			return;}
+		// 		else
 		try {
 			await addItem(listToken, {
 				itemName,
