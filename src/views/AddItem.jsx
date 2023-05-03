@@ -4,8 +4,8 @@ import { addItem } from '../api/firebase.js';
 export function AddItem({ listToken, data }) {
 	const [itemName, setItemName] = useState('');
 	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
-	const [itemAdded, setItemAdded] = useState(false);
 	const [error, setError] = useState(false);
+	const [userAlertMessage, setUserAlertMessage] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -33,11 +33,11 @@ export function AddItem({ listToken, data }) {
 				.replace(/[\s\W]|_+/g, '')
 				.toLowerCase();
 			if (normalizedItemName === '') {
-				window.alert('Please enter an item name');
+				setUserAlertMessage('Please enter an item name.');
 				return;
 			}
 			if (normalizedItemName === updatedExistingItem) {
-				window.alert(`${existingItem} is already on your list.`);
+				setUserAlertMessage(`${existingItem} is already on your list.`);
 				return;
 			}
 		}
@@ -47,11 +47,11 @@ export function AddItem({ listToken, data }) {
 				itemName,
 				daysUntilNextPurchase,
 			});
-			setItemAdded(true);
+			setUserAlertMessage(`${itemName} has been added to your list.`);
 			setError(false);
 		} catch (e) {
 			setError(true);
-			setItemAdded(false);
+			setUserAlertMessage('');
 		}
 	};
 	// TODO: implement clear input after user adds item to list
@@ -93,8 +93,7 @@ export function AddItem({ listToken, data }) {
 				<input type="submit" value="Add item" />
 			</form>
 			{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
-			{itemAdded && <p>Your item has been added.</p>}
-			{error && <p>Oh no, something went wrong.</p>}
+			{error ? <p>Oh no, something went wrong.</p> : <p>{userAlertMessage}</p>}
 		</>
 	);
 }
