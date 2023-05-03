@@ -36,6 +36,19 @@ export function AddItem({ listToken, data }) {
 		let noPunctuationUserInput = updatedUserInput.replace(/[^\w\s]|_/g, '');
 		//console.log(noPunctuationUserInput);
 		//FILTER THROUGH THE DATA ARRAY AND MAKE EACH ITEM LOWERCASE WITHOUT SPACES AND PUNCTUATION. SAVE TO A NEW VARIABLE.
+
+		for (const item of data) {
+			const existingItem = item.name;
+			const updateExistingItem = existingItem
+				.replace(/[^\w\s]|_/g, '')
+				.replace(/\s/g, '')
+				.toLowerCase();
+			if (noPunctuationUserInput === updateExistingItem) {
+				window.alert(`${existingItem} is already on your list.`);
+				return;
+			}
+		}
+
 		// 		else
 		try {
 			await addItem(listToken, {
