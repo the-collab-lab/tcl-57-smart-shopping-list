@@ -16,10 +16,10 @@ export function AddItem({ listToken, data }) {
 		// 			alert user;
 		// 			return;}
 
-		if (itemName === '') {
-			window.alert('Please enter an item name');
-			return;
-		}
+		// if (itemName === '') {
+		// 	window.alert('Please enter an item name');
+		// 	return;
+		// }
 
 		// 2. If user's item name input is identical to an existing item, alert user and don't save input to database.
 		//		if (user item name input === existing item) {
@@ -32,18 +32,24 @@ export function AddItem({ listToken, data }) {
 		//		if (updatedItem === existingItem) {
 		// 			alert user;
 		// 			return;}
-		let updatedUserInput = itemName.replace(/\s/g, '').toLowerCase();
-		let noPunctuationUserInput = updatedUserInput.replace(/[^\w\s]|_/g, '');
+		const normalizedItemName = itemName.replace(/[\s\W]|_+/g, '').toLowerCase();
+		// let updatedUserInput = itemName.replace(/\s/g, '').toLowerCase();
+		// let noPunctuationUserInput = updatedUserInput.replace(/[^\w\s]|_/g, '');
 		//console.log(noPunctuationUserInput);
 		//FILTER THROUGH THE DATA ARRAY AND MAKE EACH ITEM LOWERCASE WITHOUT SPACES AND PUNCTUATION. SAVE TO A NEW VARIABLE.
-
 		for (const item of data) {
 			const existingItem = item.name;
-			const updateExistingItem = existingItem
-				.replace(/[^\w\s]|_/g, '')
-				.replace(/\s/g, '')
+			const updatedExistingItem = existingItem
+				.replace(/[\s\W]|_+/g, '')
+				// .replace(/[^\w\s]|_/g, '')
+				// .replace(/\s/g, '')
 				.toLowerCase();
-			if (noPunctuationUserInput === updateExistingItem) {
+			// if (noPunctuationUserInput === updateExistingItem) {
+			if (normalizedItemName === '') {
+				window.alert('Please enter an item name');
+				return;
+			}
+			if (normalizedItemName === updatedExistingItem) {
 				window.alert(`${existingItem} is already on your list.`);
 				return;
 			}
