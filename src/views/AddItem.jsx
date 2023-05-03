@@ -7,7 +7,6 @@ export function AddItem({ listToken, data }) {
 	const [itemAdded, setItemAdded] = useState(false);
 	const [error, setError] = useState(false);
 
-	// TODO: dynamically pass in the list token so item is added to correct list
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// Pseudocode:
@@ -15,12 +14,6 @@ export function AddItem({ listToken, data }) {
 		// 		if (user item name input === '') {
 		// 			alert user;
 		// 			return;}
-
-		// if (itemName === '') {
-		// 	window.alert('Please enter an item name');
-		// 	return;
-		// }
-
 		// 2. If user's item name input is identical to an existing item, alert user and don't save input to database.
 		//		if (user item name input === existing item) {
 		//			alert user;
@@ -28,23 +21,17 @@ export function AddItem({ listToken, data }) {
 		// 3. If user's item name input has unconventional title case or spacing but still matches an existing item, alert user OR user confirms and don't save input to datebase.
 		//		const updatedItem = user item input, converted to lower case and spaces removed
 		// 		(ex: "App les" becomes "apples", "root beer" becomes "rootbeer")
+		const normalizedItemName = itemName.replace(/[\s\W]|_+/g, '').toLowerCase();
 		//		const existingItem = existing item, converted to lower case and spaces removed
 		//		if (updatedItem === existingItem) {
 		// 			alert user;
 		// 			return;}
-		const normalizedItemName = itemName.replace(/[\s\W]|_+/g, '').toLowerCase();
-		// let updatedUserInput = itemName.replace(/\s/g, '').toLowerCase();
-		// let noPunctuationUserInput = updatedUserInput.replace(/[^\w\s]|_/g, '');
-		//console.log(noPunctuationUserInput);
 		//FILTER THROUGH THE DATA ARRAY AND MAKE EACH ITEM LOWERCASE WITHOUT SPACES AND PUNCTUATION. SAVE TO A NEW VARIABLE.
 		for (const item of data) {
 			const existingItem = item.name;
 			const updatedExistingItem = existingItem
 				.replace(/[\s\W]|_+/g, '')
-				// .replace(/[^\w\s]|_/g, '')
-				// .replace(/\s/g, '')
 				.toLowerCase();
-			// if (noPunctuationUserInput === updateExistingItem) {
 			if (normalizedItemName === '') {
 				window.alert('Please enter an item name');
 				return;
@@ -54,7 +41,6 @@ export function AddItem({ listToken, data }) {
 				return;
 			}
 		}
-
 		// 		else
 		try {
 			await addItem(listToken, {
