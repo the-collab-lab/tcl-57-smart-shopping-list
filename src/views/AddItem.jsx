@@ -21,10 +21,7 @@ export function AddItem({ listToken, data }) {
 			const updatedExistingItem = existingItem
 				.replace(/[\s\W]|_+/g, '')
 				.toLowerCase();
-			// if (normalizedItemName === '') {
-			// 	setUserAlertMessage('Please enter an item name.');
-			// 	return;
-			// }
+
 			if (normalizedItemName === updatedExistingItem) {
 				setUserAlertMessage(
 					`The item '${existingItem}' is already on your list.`,
