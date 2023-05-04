@@ -137,8 +137,7 @@ export async function updateItem(listId, listItemId) {
 	);
 
 	//compute daysSinceLastPurchase as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
-	let today = new Date();
-	const daysSinceLastPurchase = getDaysBetweenDates(dateLastPurchased, today);
+	const daysSinceLastPurchase = getDaysBetweenDates(dateLastPurchased, now);
 
 	//call calculateEstimate with previousEstimate, daysSinceLastPurchase, and totalPurchases
 	const offsetDays = calculateEstimate(
