@@ -37,7 +37,9 @@ export function AddItem({ listToken, data }) {
 				return;
 			}
 			if (normalizedItemName === updatedExistingItem) {
-				setUserAlertMessage(`${existingItem} is already on your list.`);
+				setUserAlertMessage(
+					`The item '${existingItem}' is already on your list.`,
+				);
 				return;
 			}
 		}
