@@ -130,29 +130,29 @@ export async function updateItem(listId, listItemId) {
 	//access totalPurchases
 	const totalPurchases = itemSnap.totalPurchases;
 
-	//compute previousEstimate as days between dateNextPurchased and dateLastPurchased calling getDaysBetweenDates utility function
-	const previousEstimate = getDaysBetweenDates(
+	//compute previousEstimateOfDays as days between dateNextPurchased and dateLastPurchased calling getDaysBetweenDates utility function
+	const previousEstimateOfDays = getDaysBetweenDates(
 		dateLastPurchased,
 		dateNextPurchased,
 	);
 
-	//compute daysSinceLastPurchase as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
-	const daysSinceLastPurchase = getDaysBetweenDates(dateLastPurchased, now);
+	//compute actualNumberOfDays as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
+	const actualNumberOfDays = getDaysBetweenDates(dateLastPurchased, now);
 
-	//call calculateEstimate with previousEstimate, daysSinceLastPurchase, and totalPurchases
-	const offsetDays = calculateEstimate(
-		previousEstimate,
-		daysSinceLastPurchase,
+	//call calculateEstimate with previousEstimateOfDays, actualNumberOfDays, and totalPurchases
+	const newEstimateOfDays = calculateEstimate(
+		previousEstimateOfDays,
+		actualNumberOfDays,
 		totalPurchases,
 	);
 
-	// console.log(`previousEstimate: ${previousEstimate} ; daysSinceLastPurchase: ${daysSinceLastPurchase} ; totalPurchases: ${totalPurchases} ; offset: ${offsetDays}`);
+	// console.log(`previousEstimateOfDays: ${previousEstimateOfDays} ; actualNumberOfDays: ${actualNumberOfDays} ; totalPurchases: ${totalPurchases} ; offset: ${newEstimateOfDays}`);
 
-	const newDateNextPurchase = getFutureDate(offsetDays);
+	const newDateNextPurchased = getFutureDate(newEstimateOfDays);
 
 	await updateDoc(listItemRef, {
 		dateLastPurchased: now,
-		dateNextPurchased: newDateNextPurchase,
+		dateNextPurchased: newDateNextPurchased,
 		totalPurchases: increment(1),
 	});
 }
