@@ -9,24 +9,7 @@ export function AddItem({ listToken, data }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// Pseudocode:
-		// 1. If user's item name input is empty, alert user and don't save input to database.
-		// 		if (user item name input === '') {
-		// 			alert user;
-		// 			return;}
-		// 2. If user's item name input is identical to an existing item, alert user and don't save input to database.
-		//		if (user item name input === existing item) {
-		//			alert user;
-		// 			return;}
-		// 3. If user's item name input has unconventional title case or spacing but still matches an existing item, alert user OR user confirms and don't save input to datebase.
-		//		const updatedItem = user item input, converted to lower case and spaces removed
-		// 		(ex: "App les" becomes "apples", "root beer" becomes "rootbeer")
 		const normalizedItemName = itemName.replace(/[\s\W]|_+/g, '').toLowerCase();
-		//		const existingItem = existing item, converted to lower case and spaces removed
-		//		if (updatedItem === existingItem) {
-		// 			alert user;
-		// 			return;}
-		//FILTER THROUGH THE DATA ARRAY AND MAKE EACH ITEM LOWERCASE WITHOUT SPACES AND PUNCTUATION. SAVE TO A NEW VARIABLE.
 		for (const item of data) {
 			const existingItem = item.name;
 			const updatedExistingItem = existingItem
@@ -43,7 +26,6 @@ export function AddItem({ listToken, data }) {
 				return;
 			}
 		}
-		// 		else
 		try {
 			await addItem(listToken, {
 				itemName,
