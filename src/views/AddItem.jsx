@@ -10,15 +10,21 @@ export function AddItem({ listToken, data }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const normalizedItemName = itemName.replace(/[\s\W]|_+/g, '').toLowerCase();
+
+		if (normalizedItemName === '') {
+			setUserAlertMessage('Please enter an item name.');
+			return;
+		}
+
 		for (const item of data) {
 			const existingItem = item.name;
 			const updatedExistingItem = existingItem
 				.replace(/[\s\W]|_+/g, '')
 				.toLowerCase();
-			if (normalizedItemName === '') {
-				setUserAlertMessage('Please enter an item name.');
-				return;
-			}
+			// if (normalizedItemName === '') {
+			// 	setUserAlertMessage('Please enter an item name.');
+			// 	return;
+			// }
 			if (normalizedItemName === updatedExistingItem) {
 				setUserAlertMessage(
 					`The item '${existingItem}' is already on your list.`,
