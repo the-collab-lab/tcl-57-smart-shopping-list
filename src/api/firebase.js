@@ -115,10 +115,11 @@ export async function updateItem(listId, listItemId) {
 
 	const itemSnap = await (await getDoc(listItemRef)).data();
 
-	// conditional assignment to handle user's first purchase of an item (i.e., dateLastPurchased === null)
-	const dateLastPurchased = itemSnap.dateLastPurchased
-		? itemSnap.dateLastPurchased.toDate()
-		: now;
+	// conditional assignment to handle user's first purchase of an item
+	const dateLastPurchased =
+		itemSnap.dateLastPurchased === null
+			? now
+			: itemSnap.dateLastPurchased.toDate();
 
 	// normalize firestore's timestamp date object to a JS date object
 	const dateNextPurchased = itemSnap.dateNextPurchased.toDate();
