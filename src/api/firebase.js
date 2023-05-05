@@ -125,6 +125,7 @@ export async function updateItem(listId, listItemId) {
 	const dateNextPurchased = itemSnap.dateNextPurchased.toDate();
 
 	const totalPurchases = itemSnap.totalPurchases;
+	const newTotalPurchases = totalPurchases + 1;
 
 	// calculate the last estimate of the number of days until the user was likely to purchase this item again
 	const previousEstimateOfDays = getDaysBetweenDates(
@@ -139,7 +140,7 @@ export async function updateItem(listId, listItemId) {
 	const newEstimateOfDays = calculateEstimate(
 		previousEstimateOfDays,
 		actualNumberOfDays,
-		totalPurchases,
+		newTotalPurchases,
 	);
 
 	// calculate the next date the user is predicted to purchase this item again
@@ -149,7 +150,7 @@ export async function updateItem(listId, listItemId) {
 	await updateDoc(listItemRef, {
 		dateLastPurchased: now,
 		dateNextPurchased: newDateNextPurchased,
-		totalPurchases: increment(1),
+		totalPurchases: newTotalPurchases,
 	});
 }
 
