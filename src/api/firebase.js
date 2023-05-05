@@ -97,9 +97,7 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	const listCollectionRef = collection(db, listId);
 	await addDoc(listCollectionRef, {
 		dateCreated: new Date(),
-		// NOTE: This is null because the item has just been created.
-		// We'll use updateItem to put a Date here when the item is purchased!
-		dateLastPurchased: null,
+		dateLastPurchased: null, // note: null until the item is purchased, at which point this field is updated by updateItem
 		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 		name: itemName,
 		totalPurchases: 0,
@@ -116,40 +114,38 @@ export async function updateItem(listId, listItemId) {
 	const listItemRef = doc(db, listId, listItemId);
 	const now = new Date();
 
-	//take a snapshot of the item in question
 	const itemSnap = await (await getDoc(listItemRef)).data();
 
-	//access dateLastPurchased from firestore and convert to javascript date object
+	// conditional assignment to handle user's first purchase of an item (i.e., dateLastPurchased === null)
 	const dateLastPurchased = itemSnap.dateLastPurchased
 		? itemSnap.dateLastPurchased.toDate()
 		: now;
 
-	//access dateNextPurchased from firestore and convert to javascript date object
+	// normalize firestore's timestamp date object to a JS date object
 	const dateNextPurchased = itemSnap.dateNextPurchased.toDate();
 
-	//access totalPurchases
 	const totalPurchases = itemSnap.totalPurchases;
 
-	//compute previousEstimateOfDays as days between dateNextPurchased and dateLastPurchased calling getDaysBetweenDates utility function
+	// calculate the last estimate of the number of days until the user was likely to purchase this item again
 	const previousEstimateOfDays = getDaysBetweenDates(
 		dateLastPurchased,
 		dateNextPurchased,
 	);
 
-	//compute actualNumberOfDays as days between today's date and dateLastPurchased calling getDaysBetweenDates utility function
+	// calculate the actual number of days it took the user to buy the item again
 	const actualNumberOfDays = getDaysBetweenDates(dateLastPurchased, now);
 
-	//call calculateEstimate with previousEstimateOfDays, actualNumberOfDays, and totalPurchases
+	// calculate the new estimate of the number of days until the user is likely to purchase this item again based on purchasing behavior
 	const newEstimateOfDays = calculateEstimate(
 		previousEstimateOfDays,
 		actualNumberOfDays,
 		totalPurchases,
 	);
 
-	// console.log(`previousEstimateOfDays: ${previousEstimateOfDays} ; actualNumberOfDays: ${actualNumberOfDays} ; totalPurchases: ${totalPurchases} ; offset: ${newEstimateOfDays}`);
-
+	// calculate the next date the user is predicted to purchase this item again
 	const newDateNextPurchased = getFutureDate(newEstimateOfDays);
 
+	// update entry for purchased item
 	await updateDoc(listItemRef, {
 		dateLastPurchased: now,
 		dateNextPurchased: newDateNextPurchased,

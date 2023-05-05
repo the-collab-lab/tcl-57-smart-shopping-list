@@ -12,17 +12,21 @@ export function getFutureDate(offset) {
 	return new Date(Date.now() + offset * ONE_DAY_IN_MILLISECONDS);
 }
 
-//create a function called getDaysBetweenDates that takes two javascript dates
+/**
+ * Compute days between two JavaScript Date objects.
+ * @param {Date} starting date of interval
+ * @param {Date} ending date of interval
+ */
 export function getDaysBetweenDates(startingDate, endingDate) {
-	//convert passed in arguments into milliseconds
+	// normalize date by converting to time
 	const startingDateInMilliseconds = startingDate.getTime();
 	const endingDateInMilliseconds = endingDate.getTime();
-	//compute the difference between the two times
-	//compute the whole number of days of the difference
-	const dayInterval = Math.floor(
+
+	// calculate the number of days that elapsed between both times
+	const daysElapsed = Math.floor(
 		(endingDateInMilliseconds - startingDateInMilliseconds) /
 			ONE_DAY_IN_MILLISECONDS,
 	);
-	//return the whole number of days
-	return dayInterval;
+
+	return daysElapsed;
 }
