@@ -1,25 +1,47 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
 
-export function AddItem({ listToken }) {
+export function AddItem({ listToken, data }) {
 	const [itemName, setItemName] = useState('');
 	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
-	const [itemAdded, setItemAdded] = useState(false);
 	const [error, setError] = useState(false);
+	const [userAlertMessage, setUserAlertMessage] = useState('');
+	const normalizedItemNameRegex = /[\s\W]|_+|s$/g; //Targets all spaces, non-letter characters, and 's' character at the end of the string
 
-	// TODO: dynamically pass in the list token so item is added to correct list
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const normalizedItemName = itemName
+			.toLowerCase()
+			.replace(normalizedItemNameRegex, '');
+
+		if (normalizedItemName === '') {
+			setUserAlertMessage('Please enter an item name.');
+			return;
+		}
+
+		for (const item of data) {
+			const existingItem = item.name;
+			const updatedExistingItem = existingItem
+				.toLowerCase()
+				.replace(normalizedItemNameRegex, '');
+
+			if (normalizedItemName === updatedExistingItem) {
+				setUserAlertMessage(
+					`The item '${existingItem}' is already on your list.`,
+				);
+				return;
+			}
+		}
 		try {
 			await addItem(listToken, {
 				itemName,
 				daysUntilNextPurchase,
 			});
-			setItemAdded(true);
+			setUserAlertMessage(`${itemName} has been added to your list.`);
 			setError(false);
 		} catch (e) {
 			setError(true);
-			setItemAdded(false);
+			setUserAlertMessage('');
 		}
 	};
 	// TODO: implement clear input after user adds item to list
@@ -61,8 +83,7 @@ export function AddItem({ listToken }) {
 				<input type="submit" value="Add item" />
 			</form>
 			{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
-			{itemAdded && <p>Your item has been added.</p>}
-			{error && <p>Oh no, something went wrong.</p>}
+			{error ? <p>Oh no, something went wrong.</p> : <p>{userAlertMessage}</p>}
 		</>
 	);
 }
