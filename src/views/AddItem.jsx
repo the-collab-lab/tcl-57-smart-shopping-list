@@ -6,13 +6,13 @@ export function AddItem({ listToken, data }) {
 	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
 	const [error, setError] = useState(false);
 	const [userAlertMessage, setUserAlertMessage] = useState('');
-	const normalizedItemNameRegex = /[\s\W]|_+/g;
+	const normalizedItemNameRegex = /[\s\W]|_+|s$/g; //Targets all spaces, non-letter characters, and 's' character at the end of the string
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const normalizedItemName = itemName
-			.replace(normalizedItemNameRegex, '')
-			.toLowerCase();
+			.toLowerCase()
+			.replace(normalizedItemNameRegex, '');
 
 		if (normalizedItemName === '') {
 			setUserAlertMessage('Please enter an item name.');
@@ -22,8 +22,8 @@ export function AddItem({ listToken, data }) {
 		for (const item of data) {
 			const existingItem = item.name;
 			const updatedExistingItem = existingItem
-				.replace(normalizedItemNameRegex, '')
-				.toLowerCase();
+				.toLowerCase()
+				.replace(normalizedItemNameRegex, '');
 
 			if (normalizedItemName === updatedExistingItem) {
 				setUserAlertMessage(
