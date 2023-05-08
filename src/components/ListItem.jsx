@@ -12,6 +12,12 @@ export function ListItem({
 		setCheckedItemId(itemId);
 	}
 
+	/* PSEUDOCODE FOR ISSUE #12:
+	 *	1. Render different background color for each item based on urgency as provided by item.urgency property.
+	 *		ex: pseudo-element or style={backgroundColor: {data.urgency}} or add className for background color.
+	 *	2. Refactor UI for better accessibility.
+	 */
+
 	return (
 		<li className="ListItem">
 			<input
