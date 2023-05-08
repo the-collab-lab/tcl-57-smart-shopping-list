@@ -17,9 +17,10 @@ export function ListItem({
 
 	//function deleteItemFromList {
 	//if (window.confirm("Do you really want to delete this item?")) {
+	//call deletItem ( parameters );
 	//window.open("Your item has been deleted");
-	//}
-
+	//}else {
+	//window.open("Your item has not been deleted");
 	//}
 
 	function clickHandler(event, itemId) {
