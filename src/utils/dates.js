@@ -31,6 +31,50 @@ export function getDaysBetweenDates(startingDate, endingDate) {
 	return daysElapsed;
 }
 
+export function comparePurchaseUrgency(filteredList) {
+	const activeItems = [];
+	const inactiveItems = [];
+	const today = new Date();
+
+	for (let i = 0; i < filteredList.length; i++) {
+		const item = filteredList[i];
+		const dateLastPurchased = item.dateLastPurchased
+			? item.dateLastPurchased.toDate()
+			: today;
+		const daysSincePurchase = getDaysBetweenDates(dateLastPurchased, today);
+		const dateNextPurchased = item.dateNextPurchased;
+
+		if (daysSincePurchase > 60 && today > dateNextPurchased) {
+			item.urgency = 'inactive';
+			inactiveItems.push(item);
+		} else {
+			if (daysSincePurchase < 60 && today > dateNextPurchased) {
+				item.urgency = 'overdue';
+				console.log('in overdue');
+			}
+
+			if (dateNextPurchased < 7) {
+				item.urgency = 'soon';
+				console.log('in soon');
+			}
+
+			if (dateNextPurchased >= 7 && dateNextPurchased <= 30) {
+				item.urgency = 'kind of soon';
+				console.log('in soonish');
+			}
+
+			if (dateNextPurchased > 30) {
+				item.urgency = 'not soon';
+				console.log('in not soon');
+			}
+
+			activeItems.push(item);
+		}
+	}
+
+	return [...activeItems, ...inactiveItems];
+}
+
 /* PSEUDOCODE FOR ISSUE #12:
  * 1. Write comparePurchaseUrgency function which sorts items by urgency status.
  *     - Take in list of filtered items as an argument and return a sorted list based on purchase urgency.
@@ -43,17 +87,17 @@ export function getDaysBetweenDates(startingDate, endingDate) {
  *
  * 		filter items into active and inactive arrays in list:
  *	 		a. active:
- *	 			if (days since purchased < 60 AND today > dateNextPurchase)
+ *	 			if (days since purchased < 60 AND today > dateNextPurchased)
  *					- assign urgency property "overdue"
- *				if (dateNextPurchase < 7 days)
+ *				if (dateNextPurchased < 7 days)
  * 					- assign urgency property "soon"
- * 				if (dateNextPurchase between 7-30 days)
+ * 				if (dateNextPurchased between 7-30 days)
  * 					- assign urgency property "kind of soon"
- * 				if (dateNextPurchase > 30 days)
+ * 				if (dateNextPurchased > 30 days)
  *  				- assign urgency property "not soon"
  *				push to active
  * 			b. inactive:
- * 				if (days since purchased > 60 AND today > dateNextPurchase)
+ * 				if (days since purchased > 60 AND today > dateNextPurchased)
  * 					- assign urgency property "inactive"
  *				push to inactive
  *
