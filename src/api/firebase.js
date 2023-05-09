@@ -156,7 +156,8 @@ export async function updateItem(listId, listItemId) {
 }
 
 /**
- * @param {string} listId The id of the list we're adding to.
+ * Deletes an individual item from the user's shopping list.
+ * @param {string} listId The id of the list we're deleting from.
  * @param {string} listItemId The id of the indiividual item
  */
 
