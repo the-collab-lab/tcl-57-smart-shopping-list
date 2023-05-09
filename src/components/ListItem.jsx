@@ -1,4 +1,5 @@
 import './ListItem.css';
+import { deleteItem } from '../api/firebase.js';
 
 export function ListItem({
 	name,
@@ -23,6 +24,15 @@ export function ListItem({
 	//window.open("Your item has not been deleted");
 	//}
 
+	function deleteItemFromList() {
+		if (window.confirm('Do you really want to delete this item?')) {
+			//deleteItem (listToken, itemId);
+			window.alert('Your item has been deleted');
+		} else {
+			window.alert('Your item has not been deleted');
+		}
+	}
+
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
 		setCheckedItemId(itemId);
@@ -39,6 +49,14 @@ export function ListItem({
 				defaultChecked={isDefaultChecked}
 			/>
 			<label htmlFor={itemId}>{name}</label>
+			<button
+				type="button"
+				onClick={() => {
+					deleteItemFromList();
+				}}
+			>
+				Delete
+			</button>
 		</li>
 	);
 }
