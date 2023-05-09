@@ -158,14 +158,15 @@ export async function updateItem(listId, listItemId) {
 /**
  * @param {string} listId The id of the list we're adding to.
  * @param {string} itemData.itemName The name of the item.
+ * @param {string} listItemId The id of the indiividual item
  */
 
-export async function deleteItem(listId, { itemName }) {
+export async function deleteItem(listId, listItemId) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to delete an existing item. You'll need to figure out what arguments
 	 * this function must accept!
 	 */
 
-	await deleteDoc(doc(db, listId, itemName));
+	await deleteDoc(doc(db, listId, listItemId));
 }

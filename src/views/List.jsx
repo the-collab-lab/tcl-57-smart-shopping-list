@@ -35,6 +35,7 @@ export function List({ data, listToken }) {
 			itemId={item.id}
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
+			listToken={listToken}
 		/>
 	));
 

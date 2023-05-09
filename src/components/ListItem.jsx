@@ -7,6 +7,7 @@ export function ListItem({
 	itemId,
 	setIsChecked,
 	setCheckedItemId,
+	listToken,
 }) {
 	//1. Add a button inside the <li> element for each list item.
 	//<button type="button">Delete</button>
@@ -26,7 +27,7 @@ export function ListItem({
 
 	function deleteItemFromList() {
 		if (window.confirm('Do you really want to delete this item?')) {
-			//deleteItem (listToken, itemId);
+			deleteItem(listToken, itemId);
 			window.alert('Your item has been deleted');
 		} else {
 			window.alert('Your item has not been deleted');
