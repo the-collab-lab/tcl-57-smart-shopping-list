@@ -10,7 +10,11 @@ export function ListItem({
 	listToken,
 }) {
 	function deleteItemFromList() {
-		if (window.confirm('Do you really want to delete this item?')) {
+		if (
+			window.confirm(
+				'Do you really want to delete this item? Click OK to confirm.',
+			)
+		) {
 			window.alert('Your item will now be deleted');
 			deleteItem(listToken, itemId);
 		} else {
