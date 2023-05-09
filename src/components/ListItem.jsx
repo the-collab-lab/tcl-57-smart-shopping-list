@@ -50,12 +50,7 @@ export function ListItem({
 				defaultChecked={isDefaultChecked}
 			/>
 			<label htmlFor={itemId}>{name}</label>
-			<button
-				type="button"
-				onClick={() => {
-					deleteItemFromList();
-				}}
-			>
+			<button type="button" onClick={deleteItemFromList}>
 				Delete
 			</button>
 		</li>
