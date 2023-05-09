@@ -31,6 +31,21 @@ export function getDaysBetweenDates(startingDate, endingDate) {
 	return daysElapsed;
 }
 
+function compareItemUrgencyCallback(itemA, itemB) {
+	const today = new Date();
+	const dateNextPurchasedA = itemA.dateNextPurchased.toDate();
+	const dateNextPurchasedB = itemB.dateNextPurchased.toDate();
+	const itemANumOfDays = getDaysBetweenDates(today, dateNextPurchasedA);
+	const itemBNumOfDays = getDaysBetweenDates(today, dateNextPurchasedB);
+	if (itemANumOfDays < itemBNumOfDays) {
+		return -1;
+	}
+	if (itemANumOfDays > itemBNumOfDays) {
+		return 1;
+	}
+	return 0;
+}
+
 export function comparePurchaseUrgency(filteredList) {
 	const activeItems = [];
 	const inactiveItems = [];
@@ -44,11 +59,9 @@ export function comparePurchaseUrgency(filteredList) {
 		const daysSinceLastPurchased = getDaysBetweenDates(
 			dateLastPurchased,
 			today,
-		); //returns whole number
+		);
 		const dateNextPurchased = item.dateNextPurchased.toDate();
 		const daysUntilNextPurchase = getDaysBetweenDates(today, dateNextPurchased);
-		console.log('daysSinceLastPurchased', daysSinceLastPurchased);
-		console.log('dateNextPurchased', dateNextPurchased);
 
 		if (
 			daysSinceLastPurchased >= 60 &&
@@ -62,58 +75,25 @@ export function comparePurchaseUrgency(filteredList) {
 				today.getTime() > dateNextPurchased.getTime()
 			) {
 				item.urgency = 'overdue';
-				console.log('in overdue');
 			}
-
 			if (
 				daysUntilNextPurchase < 7 &&
 				today.getTime() < dateNextPurchased.getTime()
 			) {
 				item.urgency = 'soon';
-				console.log('in soon');
 			}
-
 			if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase <= 30) {
 				item.urgency = 'kind of soon';
-				console.log('in soonish');
 			}
-
 			if (daysUntilNextPurchase > 30) {
 				item.urgency = 'not soon';
-				console.log('in not soon');
 			}
-
 			activeItems.push(item);
 		}
 	}
-	activeItems.sort((itemA, itemB) => {
-		const dateNextPurchasedA = itemA.dateNextPurchased.toDate();
-		const dateNextPurchasedB = itemB.dateNextPurchased.toDate();
-		const itemANumOfDays = getDaysBetweenDates(today, dateNextPurchasedA);
-		const itemBNumOfDays = getDaysBetweenDates(today, dateNextPurchasedB);
-		if (itemANumOfDays < itemBNumOfDays) {
-			return -1;
-		}
-		if (itemANumOfDays > itemBNumOfDays) {
-			return 1;
-		}
-		return 0;
-	});
-	inactiveItems.sort((itemA, itemB) => {
-		const dateNextPurchasedA = itemA.dateNextPurchased.toDate();
-		const dateNextPurchasedB = itemB.dateNextPurchased.toDate();
-		const itemANumOfDays = getDaysBetweenDates(today, dateNextPurchasedA);
-		const itemBNumOfDays = getDaysBetweenDates(today, dateNextPurchasedB);
-		if (itemANumOfDays < itemBNumOfDays) {
-			return -1;
-		}
-		if (itemANumOfDays > itemBNumOfDays) {
-			return 1;
-		}
-		return 0;
-	});
-	console.log('active: ', activeItems);
-	console.log('inactive: ', inactiveItems);
+	activeItems.sort(compareItemUrgencyCallback);
+	inactiveItems.sort(compareItemUrgencyCallback);
+
 	return [...activeItems, ...inactiveItems];
 }
 
