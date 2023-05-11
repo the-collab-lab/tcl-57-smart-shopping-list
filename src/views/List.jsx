@@ -28,16 +28,6 @@ export function List({ data, listToken }) {
 		}
 	});
 
-	/* PSEUDOCODE FOR ISSUE #12:
-	 * 1. Call comparePurchaseUrgency on filteredList.
-	 *     This should return sorted list.
-	 *     const sortedList = comparePurchaseUrgency(filteredList)
-	 * 2. Map over sorted list and render ListItem with urgency indicator.
-	 *     const renderedList = sortedList.map((item) => (
-	 *     		<ListItem...
-	 *              urgency={item.urgency} .../>
-	 */
-
 	const sortedList = comparePurchaseUrgency(filteredList);
 
 	const renderedList = sortedList.map((item) => (
