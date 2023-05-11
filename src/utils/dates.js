@@ -32,12 +32,14 @@ export function getDaysBetweenDates(startingDate, endingDate) {
 }
 
 /**
- * Sorting compare callback function. Defines sorting order based on decreasing purchasing urgency.'
+ * Sorting compare callback function. Defines sorting order based on purchasing urgency.'
  * @param {Date} first element up for comparison.
  * @param {Date} second element up for comparison.
  */
 function compareItemUrgencyCallback(itemA, itemB) {
 	const today = new Date();
+	const nameOfItemA = itemA.name;
+	const nameOfItemB = itemB.name;
 	const dateNextPurchasedItemA = itemA.dateNextPurchased.toDate();
 	const dateNextPurchasedItemB = itemB.dateNextPurchased.toDate();
 	const daysUntilNextPurchaseItemA = getDaysBetweenDates(
@@ -49,11 +51,18 @@ function compareItemUrgencyCallback(itemA, itemB) {
 		dateNextPurchasedItemB,
 	);
 
-	return daysUntilNextPurchaseItemA - daysUntilNextPurchaseItemB;
+	// sort items by purchasing urgency if urgencies are different
+	if (daysUntilNextPurchaseItemA !== daysUntilNextPurchaseItemB) {
+		return daysUntilNextPurchaseItemA - daysUntilNextPurchaseItemB;
+	}
+	// sort items alphabetically by name if urgencies are the same
+	else {
+		return nameOfItemA.localeCompare(nameOfItemB);
+	}
 }
 
 /**
- * Filter items into active and inactive categories and sort each category based on decreasing purchasing urgency.
+ * Filter items into active and inactive categories and sort each category based on purchasing urgency.
  * @param {Object[]} An array of objects representing the user's unsorted list
  * @returns {Object[]} An array of objects representing the user's sorted list.
  */
@@ -110,6 +119,9 @@ export function comparePurchaseUrgency(unsortedList) {
 	// sort active and inactive items
 	activeItems.sort(compareItemUrgencyCallback);
 	inactiveItems.sort(compareItemUrgencyCallback);
+
+	console.log(activeItems);
+	console.log(inactiveItems);
 
 	const sortedList = [...activeItems, ...inactiveItems];
 
