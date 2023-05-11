@@ -31,6 +31,11 @@ export function getDaysBetweenDates(startingDate, endingDate) {
 	return daysElapsed;
 }
 
+/**
+ * Sorting compare callback function. Defines sorting order based on decreasing purchasing urgency.'
+ * @param {Date} first element up for comparison.
+ * @param {Date} second element up for comparison.
+ */
 function compareItemUrgencyCallback(itemA, itemB) {
 	const today = new Date();
 	const dateNextPurchasedA = itemA.dateNextPurchased.toDate();
@@ -46,12 +51,18 @@ function compareItemUrgencyCallback(itemA, itemB) {
 	return 0;
 }
 
+/**
+ * Filter items into active and inactive categories and sort each category based on decreasing purchasing urgency.
+ * @param {Object[]} An array of objects representing the user's unsorted list
+ * @returns {Object[]} An array of objects representing the user's sorted list.
+ */
 export function comparePurchaseUrgency(filteredList) {
 	const activeItems = [];
 	const inactiveItems = [];
 	const today = new Date();
 	const todayInMilliseconds = today.getTime();
 
+	// filter items as inactive/active and append an urgency property to each object
 	for (let i = 0; i < filteredList.length; i++) {
 		const item = filteredList[i];
 		const dateLastPurchased = item.dateLastPurchased
@@ -65,13 +76,17 @@ export function comparePurchaseUrgency(filteredList) {
 		const dateNextPurchasedInMilliseconds = dateNextPurchased.getTime();
 		const daysUntilNextPurchase = getDaysBetweenDates(today, dateNextPurchased);
 
+		// inactive items
 		if (
 			daysSinceLastPurchased >= 60 &&
 			todayInMilliseconds > dateNextPurchasedInMilliseconds
 		) {
 			item.urgency = 'inactive';
 			inactiveItems.push(item);
-		} else {
+		}
+
+		// active items
+		else {
 			if (
 				daysSinceLastPurchased < 60 &&
 				todayInMilliseconds >= dateNextPurchasedInMilliseconds
@@ -90,9 +105,12 @@ export function comparePurchaseUrgency(filteredList) {
 			activeItems.push(item);
 		}
 	}
+
+	// sort active and inactive items
 	activeItems.sort(compareItemUrgencyCallback);
 	inactiveItems.sort(compareItemUrgencyCallback);
 
+	// return sorted items
 	return [...activeItems, ...inactiveItems];
 }
 
