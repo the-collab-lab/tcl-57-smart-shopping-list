@@ -50,6 +50,7 @@ export function comparePurchaseUrgency(filteredList) {
 	const activeItems = [];
 	const inactiveItems = [];
 	const today = new Date();
+	const todayInMilliseconds = today.getTime();
 
 	for (let i = 0; i < filteredList.length; i++) {
 		const item = filteredList[i];
@@ -61,18 +62,19 @@ export function comparePurchaseUrgency(filteredList) {
 			today,
 		);
 		const dateNextPurchased = item.dateNextPurchased.toDate();
+		const dateNextPurchasedInMilliseconds = dateNextPurchased.getTime();
 		const daysUntilNextPurchase = getDaysBetweenDates(today, dateNextPurchased);
 
 		if (
 			daysSinceLastPurchased >= 60 &&
-			today.getTime() > dateNextPurchased.getTime()
+			todayInMilliseconds > dateNextPurchasedInMilliseconds
 		) {
 			item.urgency = 'inactive';
 			inactiveItems.push(item);
 		} else {
 			if (
 				daysSinceLastPurchased < 60 &&
-				today.getTime() > dateNextPurchased.getTime()
+				todayInMilliseconds >= dateNextPurchasedInMilliseconds
 			) {
 				item.urgency = 'overdue';
 			}
