@@ -120,9 +120,6 @@ export function comparePurchaseUrgency(unsortedList) {
 	activeItems.sort(compareItemUrgencyCallback);
 	inactiveItems.sort(compareItemUrgencyCallback);
 
-	console.log(activeItems);
-	console.log(inactiveItems);
-
 	const sortedList = [...activeItems, ...inactiveItems];
 
 	return sortedList;
