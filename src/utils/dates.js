@@ -56,15 +56,15 @@ function compareItemUrgencyCallback(itemA, itemB) {
  * @param {Object[]} An array of objects representing the user's unsorted list
  * @returns {Object[]} An array of objects representing the user's sorted list.
  */
-export function comparePurchaseUrgency(filteredList) {
+export function comparePurchaseUrgency(unsortedList) {
 	const activeItems = [];
 	const inactiveItems = [];
 	const today = new Date();
 	const todayInMilliseconds = today.getTime();
 
 	// filter items as inactive/active and append an urgency property to each object
-	for (let i = 0; i < filteredList.length; i++) {
-		const item = filteredList[i];
+	for (let i = 0; i < unsortedList.length; i++) {
+		const item = unsortedList[i];
 		const dateLastPurchased = item.dateLastPurchased
 			? item.dateLastPurchased.toDate()
 			: today;
@@ -110,8 +110,9 @@ export function comparePurchaseUrgency(filteredList) {
 	activeItems.sort(compareItemUrgencyCallback);
 	inactiveItems.sort(compareItemUrgencyCallback);
 
-	// return sorted items
-	return [...activeItems, ...inactiveItems];
+	const sortedList = [...activeItems, ...inactiveItems];
+
+	return sortedList;
 }
 
 /* PSEUDOCODE FOR ISSUE #12:
@@ -119,7 +120,7 @@ export function comparePurchaseUrgency(filteredList) {
  *     - Take in list of filtered items as an argument and return a sorted list based on purchase urgency.
  *     - Purchase urgency will be assigned using getDaysBetween.
  *
- *	export function comparePurchaseUrgency(filteredList) {
+ *	export function comparePurchaseUrgency(unsortedList) {
  *		const active = []
  *		const inactive =[]
  *		today = new Date()
