@@ -161,6 +161,6 @@ export async function updateItem(listId, listItemId) {
  * @param {string} listItemId The id of the indiividual item
  */
 
-export async function deleteItem(listId, listItemId) {
-	await deleteDoc(doc(db, listId, listItemId));
+export function deleteItem(listId, listItemId) {
+	return deleteDoc(doc(db, listId, listItemId));
 }
