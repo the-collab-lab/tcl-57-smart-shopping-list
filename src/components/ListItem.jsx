@@ -20,8 +20,20 @@ export function ListItem({
 		dialogRef.current.showModal();
 	}
 
-	//HANDLER FUNCTION FOR NO BUTTON
 	//HANDLER FUNCTION FOR YES BUTTON
+	async function handleYesClick() {
+		deleteItemFromList(listToken, itemId);
+		setAlertMessage('Your item has now been deleted');
+		dialogRef.current.close();
+		dialogRef.current.showModal();
+		dialogRef.current.close();
+	}
+	//HANDLER FUNCTION FOR NO BUTTON
+
+	function handleNoClick() {
+		setAlertMessage('No item has been deleted');
+		dialogRef.current.showModal();
+	}
 
 	// async function deleteItemFromList() {
 	// 	if (
@@ -56,7 +68,11 @@ export function ListItem({
 			<button type="button" onClick={deleteItemFromList}>
 				Delete
 			</button>
-			<dialog ref={dialogRef}>{alertMessage}</dialog>
+			<dialog ref={dialogRef}>
+				{alertMessage}
+				<button onClick={handleYesClick}>Yes</button>
+				<button onClick={handleNoClick}>No</button>
+			</dialog>
 		</li>
 	);
 }
