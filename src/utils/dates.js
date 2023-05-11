@@ -38,17 +38,18 @@ export function getDaysBetweenDates(startingDate, endingDate) {
  */
 function compareItemUrgencyCallback(itemA, itemB) {
 	const today = new Date();
-	const dateNextPurchasedA = itemA.dateNextPurchased.toDate();
-	const dateNextPurchasedB = itemB.dateNextPurchased.toDate();
-	const itemANumOfDays = getDaysBetweenDates(today, dateNextPurchasedA);
-	const itemBNumOfDays = getDaysBetweenDates(today, dateNextPurchasedB);
-	if (itemANumOfDays < itemBNumOfDays) {
-		return -1;
-	}
-	if (itemANumOfDays > itemBNumOfDays) {
-		return 1;
-	}
-	return 0;
+	const dateNextPurchasedItemA = itemA.dateNextPurchased.toDate();
+	const dateNextPurchasedItemB = itemB.dateNextPurchased.toDate();
+	const daysUntilNextPurchaseItemA = getDaysBetweenDates(
+		today,
+		dateNextPurchasedItemA,
+	);
+	const daysUntilNextPurchaseItemB = getDaysBetweenDates(
+		today,
+		dateNextPurchasedItemB,
+	);
+
+	return daysUntilNextPurchaseItemA - daysUntilNextPurchaseItemB;
 }
 
 /**
