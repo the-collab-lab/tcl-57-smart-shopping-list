@@ -76,13 +76,13 @@ export function comparePurchaseUrgency(filteredList) {
 			) {
 				item.urgency = 'overdue';
 			}
-			if (daysUntilNextPurchase < 7) {
+			if (daysUntilNextPurchase <= 7) {
 				item.urgency = 'soon';
 			}
-			if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase <= 30) {
+			if (daysUntilNextPurchase > 7 && daysUntilNextPurchase < 30) {
 				item.urgency = 'kind of soon';
 			}
-			if (daysUntilNextPurchase > 30) {
+			if (daysUntilNextPurchase >= 30) {
 				item.urgency = 'not soon';
 			}
 			activeItems.push(item);
