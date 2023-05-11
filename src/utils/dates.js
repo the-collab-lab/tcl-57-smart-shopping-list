@@ -106,10 +106,11 @@ export function comparePurchaseUrgency(unsortedList) {
 			if (daysUntilNextPurchase <= 7) {
 				item.urgency = 'soon';
 			}
-			if (daysUntilNextPurchase > 7 && daysUntilNextPurchase < 30) {
+			// TODO: decide the appropriate timeframe for each urgency category
+			if (daysUntilNextPurchase > 7 && daysUntilNextPurchase <= 21) {
 				item.urgency = 'kind of soon';
 			}
-			if (daysUntilNextPurchase >= 30) {
+			if (daysUntilNextPurchase > 21) {
 				item.urgency = 'not soon';
 			}
 			activeItems.push(item);
