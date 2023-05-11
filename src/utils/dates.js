@@ -76,10 +76,7 @@ export function comparePurchaseUrgency(filteredList) {
 			) {
 				item.urgency = 'overdue';
 			}
-			if (
-				daysUntilNextPurchase < 7 &&
-				today.getTime() < dateNextPurchased.getTime()
-			) {
+			if (daysUntilNextPurchase < 7) {
 				item.urgency = 'soon';
 			}
 			if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase <= 30) {
