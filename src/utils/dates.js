@@ -97,22 +97,18 @@ export function comparePurchaseUrgency(unsortedList) {
 
 		// active items
 		else {
-			if (
-				daysSinceLastPurchased < 60 &&
-				todayInMilliseconds >= dateNextPurchasedInMilliseconds
-			) {
-				item.urgency = 'overdue';
-			}
-			if (daysUntilNextPurchase <= 7) {
-				item.urgency = 'soon';
-			}
 			// TODO: decide the appropriate timeframe for each urgency category
-			if (daysUntilNextPurchase > 7 && daysUntilNextPurchase <= 21) {
-				item.urgency = 'kind of soon';
-			}
-			if (daysUntilNextPurchase > 21) {
-				item.urgency = 'not soon';
-			}
+			// defaulting to AC guidelines results in items added as not-soon
+			// getting immediately labeled as kind-of-soon
+			item.urgency =
+				daysUntilNextPurchase >= 0 && daysUntilNextPurchase <= 7
+					? 'soon'
+					: daysUntilNextPurchase > 7 && daysUntilNextPurchase < 21
+					? 'kind of soon'
+					: daysUntilNextPurchase >= 21
+					? 'not soon'
+					: 'overdue';
+
 			activeItems.push(item);
 		}
 	}
