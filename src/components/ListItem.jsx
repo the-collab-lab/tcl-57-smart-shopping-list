@@ -10,23 +10,17 @@ export function ListItem({
 	setCheckedItemId,
 	listToken,
 }) {
-	// const [alertMessage, setAlertMessage] = useState(''); // Don't need state anymore with just one message popup
-
 	const dialogRef = useRef();
 
 	function confirmDelete() {
-		//I changed the name of our function to be more descriptive. The actual item deletion happens now in the handleYesClick
-		// setAlertMessage("Are you sure you want to delete this?"); //Put this message back directly into the JSX return statement
 		dialogRef.current.showModal();
 	}
 
-	//HANDLER FUNCTION FOR YES BUTTON
 	function handleYesClick() {
-		deleteItem(listToken, itemId); //This should be "deleteItem" -- our function imported from firebase.
+		deleteItem(listToken, itemId);
 		dialogRef.current.close();
 	}
 
-	//HANDLER FUNCTION FOR NO BUTTON
 	function handleNoClick() {
 		dialogRef.current.close();
 	}
