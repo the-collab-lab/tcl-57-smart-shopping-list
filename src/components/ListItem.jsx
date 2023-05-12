@@ -1,7 +1,6 @@
 import './ListItem.css';
 import { deleteItem } from '../api/firebase.js';
 import { useRef } from 'react';
-import { useState } from 'react';
 
 export function ListItem({
 	name,
@@ -11,43 +10,26 @@ export function ListItem({
 	setCheckedItemId,
 	listToken,
 }) {
-	const [alertMessage, setAlertMessage] = useState('');
+	// const [alertMessage, setAlertMessage] = useState(''); // Don't need state anymore with just one message popup
 
-	const dialogRef = useRef(null);
+	const dialogRef = useRef();
 
-	function deleteItemFromList() {
-		setAlertMessage('Are you sure you want to delete this?');
+	function confirmDelete() {
+		//I changed the name of our function to be more descriptive. The actual item deletion happens now in the handleYesClick
+		// setAlertMessage("Are you sure you want to delete this?"); //Put this message back directly into the JSX return statement
 		dialogRef.current.showModal();
 	}
 
 	//HANDLER FUNCTION FOR YES BUTTON
-	async function handleYesClick() {
-		deleteItemFromList(listToken, itemId);
-		setAlertMessage('Your item has now been deleted');
-		dialogRef.current.close();
-		dialogRef.current.showModal();
+	function handleYesClick() {
+		deleteItem(listToken, itemId); //This should be "deleteItem" -- our function imported from firebase.
 		dialogRef.current.close();
 	}
+
 	//HANDLER FUNCTION FOR NO BUTTON
-
 	function handleNoClick() {
-		setAlertMessage('No item has been deleted');
-		dialogRef.current.showModal();
+		dialogRef.current.close();
 	}
-
-	// async function deleteItemFromList() {
-	// 	if (
-	// 		window.confirm(
-	// 			'Do you really want to delete this item? Click OK to confirm.',
-	// 		)
-	// 	) {
-	// 		await deleteItem(listToken, itemId);
-	// 		window.alert('Your item was deleted.');
-
-	// 	} else {
-	// 		window.alert('No items have been deleted');
-	// 	}
-	// }
 
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
@@ -65,11 +47,11 @@ export function ListItem({
 				defaultChecked={isDefaultChecked}
 			/>
 			<label htmlFor={itemId}>{name}</label>
-			<button type="button" onClick={deleteItemFromList}>
+			<button type="button" onClick={confirmDelete}>
 				Delete
 			</button>
 			<dialog ref={dialogRef}>
-				{alertMessage}
+				<p>Are you sure you want to remove "{name}" from your list?</p>
 				<button onClick={handleYesClick}>Yes</button>
 				<button onClick={handleNoClick}>No</button>
 			</dialog>
