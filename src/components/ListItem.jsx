@@ -12,7 +12,7 @@ export function ListItem({
 }) {
 	const dialogRef = useRef();
 
-	function confirmDelete() {
+	function openModal() {
 		dialogRef.current.showModal();
 	}
 
@@ -41,7 +41,7 @@ export function ListItem({
 				defaultChecked={isDefaultChecked}
 			/>
 			<label htmlFor={itemId}>{name}</label>
-			<button type="button" onClick={confirmDelete}>
+			<button type="button" onClick={openModal}>
 				Delete
 			</button>
 			<dialog ref={dialogRef}>
