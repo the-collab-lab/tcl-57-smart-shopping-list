@@ -92,7 +92,8 @@ export function List({ data, listToken }) {
 				</>
 			)}
 			<dialog ref={dialogRef}>
-				<p>Are you sure you want to remove this item from your list?</p>
+				<p>Are you sure you want to remove this item from your list?</p>{' '}
+				{/*To do: replace "this item" with the item name*/}
 				<button onClick={handleModalConfirmClick}>Yes</button>
 				<button onClick={handleModalCancelClick}>No</button>
 			</dialog>
