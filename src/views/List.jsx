@@ -7,7 +7,7 @@ export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [checkedItemId, setCheckedItemId] = useState('');
 	const [isChecked, setIsChecked] = useState(false);
-	const [itemId, setItemId] = useState('');
+	const [selectedItemId, setSelectedItemId] = useState('');
 	const dialogRef = useRef(null);
 	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
 	persist when user unchecks item.
@@ -34,11 +34,9 @@ export function List({ data, listToken }) {
 			isDefaultChecked={item.isDefaultChecked}
 			key={item.id}
 			itemId={item.id}
-			setItemId={setItemId}
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
-			listToken={listToken}
-			dialogRef={dialogRef}
+			onDeleteClick={openModal}
 		/>
 	));
 
@@ -49,12 +47,19 @@ export function List({ data, listToken }) {
 
 	const renderedListLength = renderedList.length;
 
-	function handleYesClick() {
-		deleteItem(listToken, itemId);
+	//Delete Item functionality with showing and closing modal
+
+	function openModal(id) {
+		setSelectedItemId(id);
+		dialogRef.current.showModal();
+	}
+
+	function handleModalConfirmClick() {
+		deleteItem(listToken, selectedItemId);
 		dialogRef.current.close();
 	}
 
-	function handleNoClick() {
+	function handleModalCancelClick() {
 		dialogRef.current.close();
 	}
 
@@ -88,8 +93,8 @@ export function List({ data, listToken }) {
 			)}
 			<dialog ref={dialogRef}>
 				<p>Are you sure you want to remove this item from your list?</p>
-				<button onClick={handleYesClick}>Yes</button>
-				<button onClick={handleNoClick}>No</button>
+				<button onClick={handleModalConfirmClick}>Yes</button>
+				<button onClick={handleModalCancelClick}>No</button>
 			</dialog>
 		</>
 	);
