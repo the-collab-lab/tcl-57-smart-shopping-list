@@ -1,6 +1,6 @@
 import './ListItem.css';
-import { deleteItem } from '../api/firebase.js';
-import { useRef } from 'react';
+// import { deleteItem } from '../api/firebase.js';
+// import { useRef } from 'react';
 
 export function ListItem({
 	name,
@@ -9,21 +9,24 @@ export function ListItem({
 	setIsChecked,
 	setCheckedItemId,
 	listToken,
+	dialogRef,
+	setItemId,
 }) {
-	const dialogRef = useRef();
+	// const dialogRef = useRef();
 
 	function openModal() {
+		setItemId(itemId);
 		dialogRef.current.showModal();
 	}
 
-	function handleYesClick() {
-		deleteItem(listToken, itemId);
-		dialogRef.current.close();
-	}
+	// function handleYesClick() {
+	// 	deleteItem(listToken, itemId);
+	// 	dialogRef.current.close();
+	// }
 
-	function handleNoClick() {
-		dialogRef.current.close();
-	}
+	// function handleNoClick() {
+	// 	dialogRef.current.close();
+	// }
 
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
@@ -44,11 +47,11 @@ export function ListItem({
 			<button type="button" onClick={openModal}>
 				Delete
 			</button>
-			<dialog ref={dialogRef}>
+			{/* <dialog ref={dialogRef}>
 				<p>Are you sure you want to remove "{name}" from your list?</p>
 				<button onClick={handleYesClick}>Yes</button>
 				<button onClick={handleNoClick}>No</button>
-			</dialog>
+			</dialog> */}
 		</li>
 	);
 }

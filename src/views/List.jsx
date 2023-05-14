@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ListItem } from '../components';
-import { updateItem } from '../api/firebase.js';
+import { updateItem, deleteItem } from '../api/firebase.js';
 import { Link } from 'react-router-dom';
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [checkedItemId, setCheckedItemId] = useState('');
 	const [isChecked, setIsChecked] = useState(false);
-
+	const [itemId, setItemId] = useState('');
+	const dialogRef = useRef(null);
 	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
 	persist when user unchecks item.
 	TO DO: Consider adding option for user to navigate home to create a new list.
@@ -33,9 +34,11 @@ export function List({ data, listToken }) {
 			isDefaultChecked={item.isDefaultChecked}
 			key={item.id}
 			itemId={item.id}
+			setItemId={setItemId}
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
 			listToken={listToken}
+			dialogRef={dialogRef}
 		/>
 	));
 
@@ -45,6 +48,15 @@ export function List({ data, listToken }) {
 	};
 
 	const renderedListLength = renderedList.length;
+
+	function handleYesClick() {
+		deleteItem(listToken, itemId);
+		dialogRef.current.close();
+	}
+
+	function handleNoClick() {
+		dialogRef.current.close();
+	}
 
 	return (
 		<>
@@ -74,6 +86,11 @@ export function List({ data, listToken }) {
 					</Link>
 				</>
 			)}
+			<dialog ref={dialogRef}>
+				<p>Are you sure you want to remove this item from your list?</p>
+				<button onClick={handleYesClick}>Yes</button>
+				<button onClick={handleNoClick}>No</button>
+			</dialog>
 		</>
 	);
 }
