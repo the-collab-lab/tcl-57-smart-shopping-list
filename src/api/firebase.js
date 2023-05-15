@@ -1,5 +1,6 @@
 import {
 	addDoc,
+	deleteDoc,
 	collection,
 	onSnapshot,
 	getDocs,
@@ -154,10 +155,12 @@ export async function updateItem(listId, listItemId) {
 	});
 }
 
-export async function deleteItem() {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to delete an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
+/**
+ * Deletes an individual item from the user's shopping list.
+ * @param {string} listId The id of the list we're deleting from.
+ * @param {string} listItemId The id of the indiividual item
+ */
+
+export function deleteItem(listId, listItemId) {
+	return deleteDoc(doc(db, listId, listItemId));
 }

@@ -6,6 +6,7 @@ export function ListItem({
 	itemId,
 	setIsChecked,
 	setCheckedItemId,
+	onDeleteClick,
 }) {
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
@@ -23,6 +24,14 @@ export function ListItem({
 				defaultChecked={isDefaultChecked}
 			/>
 			<label htmlFor={itemId}>{name}</label>
+			<button
+				type="button"
+				onClick={() => {
+					onDeleteClick(itemId);
+				}}
+			>
+				Delete
+			</button>
 		</li>
 	);
 }
