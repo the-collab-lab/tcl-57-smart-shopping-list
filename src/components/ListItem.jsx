@@ -7,6 +7,7 @@ export function ListItem({
 	urgency,
 	setIsChecked,
 	setCheckedItemId,
+	onDeleteClick,
 }) {
 	const urgencyIcon =
 		urgency === 'overdue'
@@ -35,6 +36,14 @@ export function ListItem({
 				defaultChecked={isDefaultChecked}
 			/>
 			<label htmlFor={itemId}>{`${name} (${urgencyIcon} ${urgency})`}</label>
+			<button
+				type="button"
+				onClick={() => {
+					onDeleteClick(itemId);
+				}}
+			>
+				Delete
+			</button>
 		</li>
 	);
 }
