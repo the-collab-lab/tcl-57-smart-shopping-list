@@ -68,22 +68,24 @@ function compareItemUrgencyCallback(itemA, itemB) {
 export function comparePurchaseUrgency(unsortedList) {
 	const activeItems = [];
 	const inactiveItems = [];
-	const today = new Date();
-	const todayInMilliseconds = today.getTime();
+	const todayInMilliseconds = CURRENT_DATE.getTime();
 
 	// filter items as inactive/active and append an urgency property to each object
 	for (let i = 0; i < unsortedList.length; i++) {
 		const item = unsortedList[i];
 		const dateLastPurchased = item.dateLastPurchased
 			? item.dateLastPurchased.toDate()
-			: today;
+			: CURRENT_DATE;
 		const daysSinceLastPurchased = getDaysBetweenDates(
 			dateLastPurchased,
-			today,
+			CURRENT_DATE,
 		);
 		const dateNextPurchased = item.dateNextPurchased.toDate();
 		const dateNextPurchasedInMilliseconds = dateNextPurchased.getTime();
-		const daysUntilNextPurchase = getDaysBetweenDates(today, dateNextPurchased);
+		const daysUntilNextPurchase = getDaysBetweenDates(
+			CURRENT_DATE,
+			dateNextPurchased,
+		);
 
 		// inactive items
 		if (
