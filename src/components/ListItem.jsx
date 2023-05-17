@@ -9,16 +9,15 @@ export function ListItem({
 	setCheckedItemId,
 	onDeleteClick,
 }) {
-	const urgencyIcon =
-		urgency === 'overdue'
-			? '🔴'
-			: urgency === 'soon'
-			? '🟠'
-			: urgency === 'kind of soon'
-			? '🟡'
-			: urgency === 'not soon'
-			? '🟢'
-			: '⚫️';
+	const iconsByUrgency = {
+		soon: '🟠',
+		'kind of soon': '🟡',
+		'not soon': '🟢',
+		inactive: '⚫️',
+		overdue: '🔴',
+	};
+
+	const urgencyIcon = iconsByUrgency[urgency];
 
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
