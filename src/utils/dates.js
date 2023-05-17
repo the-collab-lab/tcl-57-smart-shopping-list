@@ -37,17 +37,16 @@ export function getDaysBetweenDates(startingDate, endingDate) {
  * @param {Date} second element up for comparison.
  */
 function compareItemUrgencyCallback(itemA, itemB) {
-	const today = new Date();
 	const nameOfItemA = itemA.name;
 	const nameOfItemB = itemB.name;
 	const dateNextPurchasedItemA = itemA.dateNextPurchased.toDate();
 	const dateNextPurchasedItemB = itemB.dateNextPurchased.toDate();
 	const daysUntilNextPurchaseItemA = getDaysBetweenDates(
-		today,
+		CURRENT_DATE,
 		dateNextPurchasedItemA,
 	);
 	const daysUntilNextPurchaseItemB = getDaysBetweenDates(
-		today,
+		CURRENT_DATE,
 		dateNextPurchasedItemB,
 	);
 
