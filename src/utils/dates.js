@@ -51,6 +51,8 @@ function compareItemUrgencyCallback(itemA, itemB) {
 	// sort inactive items last
 	if (itemA.urgency === 'inactive' && itemB.urgency !== 'inactive') {
 		return 1;
+	} else if (itemA.urgency !== 'inactive' && itemB.urgency === 'inactive') {
+		return -1;
 	}
 	// sort items in ascending order of days until purchase
 	else if (daysUntilNextPurchaseItemA > daysUntilNextPurchaseItemB) {
