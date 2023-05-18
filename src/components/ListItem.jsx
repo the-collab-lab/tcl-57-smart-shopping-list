@@ -4,10 +4,21 @@ export function ListItem({
 	name,
 	isDefaultChecked,
 	itemId,
+	urgency,
 	setIsChecked,
 	setCheckedItemId,
 	onDeleteClick,
 }) {
+	const iconsByUrgency = {
+		soon: '🟠',
+		'kind of soon': '🟡',
+		'not soon': '🟢',
+		inactive: '⚫️',
+		overdue: '🔴',
+	};
+
+	const urgencyIcon = iconsByUrgency[urgency];
+
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
 		setCheckedItemId(itemId);
@@ -23,7 +34,7 @@ export function ListItem({
 				}}
 				defaultChecked={isDefaultChecked}
 			/>
-			<label htmlFor={itemId}>{name}</label>
+			<label htmlFor={itemId}>{`${name} (${urgencyIcon} ${urgency})`}</label>
 			<button
 				type="button"
 				onClick={() => {

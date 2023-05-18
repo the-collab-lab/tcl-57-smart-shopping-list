@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ListItem } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { Link } from 'react-router-dom';
+import { comparePurchaseUrgency } from '../utils/dates';
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -28,12 +29,15 @@ export function List({ data, listToken }) {
 		}
 	});
 
-	const renderedList = filteredList.map((item) => (
+	const sortedList = comparePurchaseUrgency(filteredList);
+
+	const renderedList = sortedList.map((item) => (
 		<ListItem
 			name={item.name}
 			isDefaultChecked={item.isDefaultChecked}
 			key={item.id}
 			itemId={item.id}
+			urgency={item.urgency}
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
 			onDeleteClick={openModal}
