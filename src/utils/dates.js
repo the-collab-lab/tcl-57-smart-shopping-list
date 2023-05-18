@@ -37,10 +37,9 @@ export function getDaysBetweenDates(startingDate, endingDate) {
  * @param {Date} second element up for comparison.
  */
 function compareItemUrgencyCallback(itemA, itemB) {
-	const nameOfItemA = itemA.name;
-	const nameOfItemB = itemB.name;
 	const dateNextPurchasedItemA = itemA.dateNextPurchased.toDate();
 	const dateNextPurchasedItemB = itemB.dateNextPurchased.toDate();
+
 	const daysUntilNextPurchaseItemA = getDaysBetweenDates(
 		CURRENT_DATE,
 		dateNextPurchasedItemA,
@@ -49,30 +48,31 @@ function compareItemUrgencyCallback(itemA, itemB) {
 		CURRENT_DATE,
 		dateNextPurchasedItemB,
 	);
-
-	// sort items by purchasing urgency if urgencies are different
-	if (daysUntilNextPurchaseItemA !== daysUntilNextPurchaseItemB) {
-		return daysUntilNextPurchaseItemA - daysUntilNextPurchaseItemB;
+	// sort inactive items last
+	if (itemA.urgency === 'inactive' && itemB.urgency !== 'inactive') {
+		return 1;
 	}
-	// sort items alphabetically by name if urgencies are the same
+	// sort items in ascending order of days until purchase
+	else if (daysUntilNextPurchaseItemA > daysUntilNextPurchaseItemB) {
+		return 1;
+	} else if (daysUntilNextPurchaseItemA < daysUntilNextPurchaseItemB) {
+		return -1;
+	}
+	// sort items alphabetically by name if days until purchase are the same
 	else {
-		return nameOfItemA.localeCompare(nameOfItemB);
+		return itemA.name.localeCompare(itemB.name);
 	}
 }
 
 /**
- * Filter items into active and inactive categories and sort each category based on purchasing urgency.
+ * Assign a purchase urgency property to each item in an unsorted array and
+ * return the array sorted in order of purchase urgency.
  * @param {Object[]} An array of objects representing the user's unsorted list
  * @returns {Object[]} An array of objects representing the user's sorted list.
  */
 export function comparePurchaseUrgency(unsortedList) {
-	const activeItems = [];
-	const inactiveItems = [];
-	const todayInMilliseconds = CURRENT_DATE.getTime();
-
-	// filter items as inactive/active and append an urgency property to each object
-	for (let i = 0; i < unsortedList.length; i++) {
-		const item = unsortedList[i];
+	// append an urgency property to each item object
+	for (let item of unsortedList) {
 		const dateLastPurchased = item.dateLastPurchased
 			? item.dateLastPurchased.toDate()
 			: CURRENT_DATE;
@@ -80,45 +80,24 @@ export function comparePurchaseUrgency(unsortedList) {
 			dateLastPurchased,
 			CURRENT_DATE,
 		);
-		const dateNextPurchased = item.dateNextPurchased.toDate();
-		const dateNextPurchasedInMilliseconds = dateNextPurchased.getTime();
 		const daysUntilNextPurchase = getDaysBetweenDates(
 			CURRENT_DATE,
-			dateNextPurchased,
+			item.dateNextPurchased.toDate(),
 		);
-
-		// inactive items
-		if (
-			daysSinceLastPurchased >= 60 &&
-			todayInMilliseconds > dateNextPurchasedInMilliseconds
-		) {
-			item.urgency = 'inactive';
-			inactiveItems.push(item);
-		}
-
-		// active items
-		else {
-			// TODO: decide the appropriate timeframe for each urgency category
-			// defaulting to AC guidelines results in items added as not-soon
-			// getting immediately labeled as kind-of-soon
-			item.urgency =
-				daysUntilNextPurchase >= 0 && daysUntilNextPurchase <= 7
-					? 'soon'
-					: daysUntilNextPurchase > 7 && daysUntilNextPurchase < 21
-					? 'kind of soon'
-					: daysUntilNextPurchase >= 21
-					? 'not soon'
-					: 'overdue';
-
-			activeItems.push(item);
-		}
+		/* TODO: decide the appropriate time frame for each urgency category
+		defaulting to AC guidelines results in items added as not-soon
+		getting immediately labeled as kind-of-soon */
+		item.urgency =
+			daysUntilNextPurchase >= 0 && daysUntilNextPurchase <= 7
+				? 'soon'
+				: daysUntilNextPurchase > 7 && daysUntilNextPurchase < 21
+				? 'kind of soon'
+				: daysUntilNextPurchase >= 21
+				? 'not soon'
+				: daysUntilNextPurchase < 0 && daysSinceLastPurchased < 60
+				? 'overdue'
+				: 'inactive';
 	}
-
-	// sort active and inactive items
-	activeItems.sort(compareItemUrgencyCallback);
-	inactiveItems.sort(compareItemUrgencyCallback);
-
-	const sortedList = [...activeItems, ...inactiveItems];
-
-	return sortedList;
+	// return sorted list;
+	return unsortedList.sort(compareItemUrgencyCallback);
 }
