@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
@@ -39,9 +40,14 @@ export function Home({ setListToken }) {
 				You can create a new shopping list, or type in a token to view an
 				existing list.
 			</h3>
-			<button type="button" onClick={handleClick}>
+			<Button
+				type="button"
+				variant="contained"
+				size="large"
+				onClick={handleClick}
+			>
 				Create new list
-			</button>
+			</Button>
 			<p> - or - </p>
 			<form onSubmit={handleSumbit}>
 				<label htmlFor="tokenInput">Three word token:</label>
