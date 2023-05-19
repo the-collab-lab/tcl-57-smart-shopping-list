@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
+import { Button } from '@mui/material';
 
 export function AddItem({ listToken, data }) {
 	const [itemName, setItemName] = useState('');
@@ -79,8 +80,16 @@ export function AddItem({ listToken, data }) {
 					/>
 					<label htmlFor="not-soon">Not soon</label>
 				</fieldset>
-
-				<input type="submit" value="Add item" />
+				{/* <input type="submit" value="Add item"> */}
+				<Button
+					type="button"
+					variant="contained"
+					size="large"
+					onClick={handleSubmit}
+				>
+					Add item
+				</Button>
+				{/* </input> */}
 			</form>
 			{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
 			{error ? <p>Oh no, something went wrong.</p> : <p>{userAlertMessage}</p>}
