@@ -6,6 +6,7 @@ import {
 	RadioGroup,
 	FormControlLabel,
 	Radio,
+	FormLabel,
 } from '@mui/material';
 
 export function AddItem({ listToken, data }) {
@@ -77,7 +78,14 @@ export function AddItem({ listToken, data }) {
 				/>
 				<RadioGroup>
 					{/* <fieldset> */}
-					<legend>How soon will you buy this again?</legend>
+					<FormLabel
+					// sx={{
+					// 	color: white,
+					// }}
+					>
+						How soon will you buy this again?
+					</FormLabel>
+					{/* <legend>How soon will you buy this again?</legend> */}
 					<FormControlLabel
 						value="soon"
 						control={<Radio />}
