@@ -1,7 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { Container } from '@mui/material';
-import { Typography } from '@mui/material';
-import { Paper } from '@mui/material';
+import {
+	Container,
+	Typography,
+	Paper,
+	AppBar,
+	Toolbar,
+	Menu,
+	MenuItem,
+} from '@mui/material';
+import { flexbox } from '@mui/system';
 
 // import './Layout.css';
 //Note: color is used for visualization purpose only. Will change colors of app features later in development of app styling.
@@ -11,7 +18,31 @@ export function Layout() {
 		<>
 			{/*Possibly replace this with AppBar component*/}
 			<Container maxWidth="false" sx={{ bgcolor: '#739C83' }}>
-				<Container
+				<AppBar position="relative">
+					<Container maxWidth="sm">
+						<Toolbar>
+							<Typography
+								variant="h6"
+								noWrap
+								component="a"
+								href="/"
+								sx={{
+									mr: 2,
+									display: { xs: 'none', md: 'flex' },
+									fontFamily: 'monospace',
+									fontWeight: 700,
+									letterSpacing: '.3rem',
+									color: 'inherit',
+									textDecoration: 'none',
+								}}
+							>
+								Smart Shopping List
+							</Typography>
+						</Toolbar>
+					</Container>
+				</AppBar>
+
+				{/* <Container
 					maxWidth="lg"
 					sx={{ bgcolor: '#cfe8fc', display: 'flex', justifyContent: 'left' }}
 				>
@@ -30,8 +61,8 @@ export function Layout() {
 						<Typography variant="h3" gutterBottom>
 							Smart shopping list
 						</Typography>
-					</header>
-				</Container>
+					</header> */}
+				{/* </Container> */}
 				{/* <Paper> */}
 				<Container
 					maxWidth="lg"
