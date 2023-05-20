@@ -9,10 +9,10 @@ export function Layout() {
 	return (
 		<>
 			{/*Possibly replace this with AppBar component*/}
-			<Container maxWidth="false" sx={{ bgcolor: 'silver' }}>
+			<Container maxWidth="false" sx={{ bgcolor: '#739C83' }}>
 				<Container
-					maxWidth="false"
-					sx={{ bgcolor: '#cfe8fc', display: 'flex', justifyContent: 'center' }}
+					maxWidth="lg"
+					sx={{ bgcolor: '#cfe8fc', display: 'flex', justifyContent: 'left' }}
 				>
 					<header className="Layout-header">
 						<nav className="Nav">
@@ -33,12 +33,13 @@ export function Layout() {
 				</Container>
 				{/* <Paper> */}
 				<Container
-					maxWidth="false"
+					maxWidth="lg"
 					sx={{
-						bgcolor: 'lightpink',
+						bgcolor: '#DDECA9',
 						display: 'flex',
 						justifyContent: 'center',
 						height: '100vh',
+						pt: '25px',
 					}}
 				>
 					<main className="Layout-main">
