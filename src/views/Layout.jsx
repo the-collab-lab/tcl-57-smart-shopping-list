@@ -4,6 +4,7 @@ import { Typography } from '@mui/material';
 import { Paper } from '@mui/material';
 
 // import './Layout.css';
+//Note: color is used for visualization purpose only. Will change colors of app features later in development of app styling.
 
 export function Layout() {
 	return (
