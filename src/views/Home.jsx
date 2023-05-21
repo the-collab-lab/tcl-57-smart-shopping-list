@@ -1,5 +1,11 @@
 import { Navigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import {
+	Button,
+	Grid,
+	ThemeProvider,
+	Typography,
+	createTheme,
+} from '@mui/material';
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
@@ -33,36 +39,52 @@ export function Home({ setListToken }) {
 		}
 	}
 
-	return (
-		<div className="Home">
-			<h2>Welcome to your Smart Shopping List! </h2>
-			<h3>
-				You can create a new shopping list, or type in a token to view an
-				existing list.
-			</h3>
-			<Button
-				type="button"
-				variant="contained"
-				size="large"
-				onClick={handleClick}
-			>
-				Create new list
-			</Button>
-			<p> - or - </p>
-			<form onSubmit={handleSumbit}>
-				<label htmlFor="tokenInput">Three word token:</label>
-				<div>
-					<input
-						type="text"
-						id="tokenInput"
-						onChange={(event) => setUserTokenInput(event.target.value)}
-						required
-					/>
+	const mainTheme = createTheme({
+		typography: {
+			fontSize: 60,
+		},
+	});
 
-					<button type="submit">Submit</button>
-				</div>
-			</form>
-			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
-		</div>
+	return (
+		<ThemeProvider theme={mainTheme}>
+			<div className="Home">
+				<Grid container>
+					<Grid item>
+						<h2>Welcome to your Smart Shopping List! </h2>
+						<h3>
+							You can create a new shopping list, or type in a token to view an
+							existing list.
+						</h3>
+						<Button
+							type="button"
+							variant="contained"
+							size="large"
+							onClick={handleClick}
+						>
+							Create new list
+						</Button>
+						<p> - or - </p>
+						<form onSubmit={handleSumbit}>
+							<label htmlFor="tokenInput">Three word token:</label>
+							<div>
+								<input
+									type="text"
+									id="tokenInput"
+									onChange={(event) => setUserTokenInput(event.target.value)}
+									required
+								/>
+
+								<button type="submit">Submit</button>
+							</div>
+						</form>
+					</Grid>
+					<Grid item>
+						<Typography>item 2 </Typography>
+					</Grid>
+				</Grid>
+
+				{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
+			</div>
+		</ThemeProvider>
 	);
 }
