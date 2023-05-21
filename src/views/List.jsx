@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { ListItem } from '../components';
+import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { Link } from 'react-router-dom';
 import { comparePurchaseUrgency } from '../utils/dates';
+import { List as MuiListComponent } from '@mui/material';
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -32,7 +33,7 @@ export function List({ data, listToken }) {
 	const sortedList = comparePurchaseUrgency(filteredList);
 
 	const renderedList = sortedList.map((item) => (
-		<ListItem
+		<ListItemComponent
 			name={item.name}
 			isDefaultChecked={item.isDefaultChecked}
 			key={item.id}
@@ -84,7 +85,15 @@ export function List({ data, listToken }) {
 						<button type="submit">Search</button>
 					</form>
 					<h3>Here are the items in your list:</h3>
-					<ul>{renderedList}</ul>
+					<MuiListComponent
+						sx={{
+							'& > .aTest': {
+								width: '60vw',
+							},
+						}}
+					>
+						{renderedList}
+					</MuiListComponent>
 				</>
 			) : (
 				<>
