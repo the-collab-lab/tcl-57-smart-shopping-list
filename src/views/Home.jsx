@@ -41,20 +41,25 @@ export function Home({ setListToken }) {
 
 	const mainTheme = createTheme({
 		typography: {
-			fontSize: 60,
+			fontSize: 20,
+		},
+		palette: {
+			primary: {
+				main: '#F298BF',
+			},
 		},
 	});
 
 	return (
 		<ThemeProvider theme={mainTheme}>
 			<div className="Home">
-				<Grid container>
+				<Grid container sx={{ backgroundColor: 'primary.main' }}>
 					<Grid item>
 						<h2>Welcome to your Smart Shopping List! </h2>
-						<h3>
+						<Typography>
 							You can create a new shopping list, or type in a token to view an
 							existing list.
-						</h3>
+						</Typography>
 						<Button
 							type="button"
 							variant="contained"
