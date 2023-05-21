@@ -6,6 +6,7 @@ import {
 	ListItemText,
 	ListItemIcon,
 	Checkbox,
+	Chip,
 } from '@mui/material';
 
 export function ListItemComponent({
@@ -16,15 +17,15 @@ export function ListItemComponent({
 	setIsChecked,
 	setCheckedItemId,
 }) {
-	const iconsByUrgency = {
-		soon: '🟠',
-		'kind of soon': '🟡',
-		'not soon': '🟢',
-		inactive: '⚫️',
-		overdue: '🔴',
+	const colorByUrgency = {
+		soon: 'orange',
+		'kind of soon': 'gold',
+		'not soon': 'green',
+		inactive: 'black',
+		overdue: 'red',
 	};
 
-	const urgencyIcon = iconsByUrgency[urgency];
+	const urgencyColor = colorByUrgency[urgency];
 
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
@@ -48,9 +49,16 @@ export function ListItemComponent({
 						inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
 					/>
 				</ListItemIcon>
-				<ListItemText
-					id={itemId}
-					primary={`${name} (${urgencyIcon} ${urgency})`}
+				<ListItemText id={itemId} primary={name} />
+				<Chip
+					size="small"
+					label={urgency}
+					sx={{
+						'&': {
+							backgroundColor: `${urgencyColor}`,
+							color: 'white',
+						},
+					}}
 				/>
 			</ListItemButton>
 		</ListItem>
