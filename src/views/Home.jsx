@@ -1,13 +1,18 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Navigate } from 'react-router-dom';
 import {
 	Box,
 	Button,
 	Grid,
+	FormLabel,
+	TextField,
 	ThemeProvider,
 	Typography,
 	createTheme,
 } from '@mui/material';
+
 import './Home.css';
+import retro from '../../public/retro.png';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
 import { validateToken } from '../api/firebase';
@@ -47,9 +52,9 @@ export function Home({ setListToken }) {
 		},
 		palette: {
 			primary: {
-				main: '#edf2ff',
+				main: '#EAE7D6',
 				background: {
-					default: '#edf2ff',
+					default: '#EAE7D6',
 				},
 			},
 		},
@@ -57,8 +62,9 @@ export function Home({ setListToken }) {
 
 	return (
 		<ThemeProvider theme={mainTheme}>
+			<img src={retro} class="center"></img>
 			<div className="Home">
-				<Box sx={{ backgroundColor: 'pink' }}>
+				<Box sx={{ backgroundColor: 'EAE7D6' }}>
 					<Box
 						display="flex"
 						justifyContent="center"
@@ -102,7 +108,7 @@ export function Home({ setListToken }) {
 								</Typography>
 
 								<div>
-									<input
+									<TextField
 										type="text"
 										id="tokenInput"
 										onChange={(event) => setUserTokenInput(event.target.value)}
@@ -116,7 +122,14 @@ export function Home({ setListToken }) {
 							</form>
 						</Grid>
 						<Grid item width={50} margin={'16px'}>
-							<Typography variant="h2"> item 2 </Typography>
+							<Box id="checklist">
+								<TextField id="01" type="checkbox" name="r" value="1" checked />
+								<FormLabel for="01">Bread</FormLabel>
+								<TextField id="02" type="checkbox" name="r" value="2" />
+								<FormLabel for="02">Cheese</FormLabel>
+								<TextField id="03" type="checkbox" name="r" value="3" />
+								<FormLabel for="03">Coffee</FormLabel>
+							</Box>
 						</Grid>
 					</Grid>
 
