@@ -43,12 +43,13 @@ export function Home({ setListToken }) {
 	const mainTheme = createTheme({
 		typography: {
 			fontFamily: 'Times New Roman',
+			fontSize: '16px',
 		},
 		palette: {
 			primary: {
-				main: '#F298BF',
+				main: '#edf2ff',
 				background: {
-					default: '#F298BF',
+					default: '#edf2ff',
 				},
 			},
 		},
@@ -57,55 +58,70 @@ export function Home({ setListToken }) {
 	return (
 		<ThemeProvider theme={mainTheme}>
 			<div className="Home">
-				<Box
-					display="flex"
-					justifyContent="center"
-					alignItems="center"
-					minHeight="30vh"
-				>
-					Welcome to your Smart Shopping List!{' '}
-				</Box>
-				<Grid
-					container
-					spacing={10}
-					direction="row"
-					justifyContent="center"
-					alignItems="center"
-				>
-					<Grid item sx={{ width: '50%' }}>
-						<Typography variant="subtitle1">
-							You can create a new shopping list, or type in a token to view an
-							existing list.
+				<Box sx={{ backgroundColor: 'pink' }}>
+					<Box
+						display="flex"
+						justifyContent="center"
+						alignItems="center"
+						minHeight="30vh"
+					>
+						<Typography variant="h1">
+							Welcome to your Smart Shopping List!
 						</Typography>
-						<Button
-							type="button"
-							variant="contained"
-							size="large"
-							onClick={handleClick}
-						>
-							Create new list
-						</Button>
-						<p> - or - </p>
-						<form onSubmit={handleSumbit}>
-							<label htmlFor="tokenInput">Three word token:</label>
-							<div>
-								<input
-									type="text"
-									id="tokenInput"
-									onChange={(event) => setUserTokenInput(event.target.value)}
-									required
-								/>
+					</Box>
 
-								<button type="submit">Submit</button>
-							</div>
-						</form>
-					</Grid>
-					<Grid item>
-						<Typography variant="h1"> item 2 </Typography>
-					</Grid>
-				</Grid>
+					<Grid
+						container
+						spacing={30}
+						direction="row"
+						justifyContent="center"
+						alignItems="center"
+						alignContent={'center'}
+						xs={12}
+					>
+						<Grid item xs={6} margin={'16px'}>
+							<Typography variant="h2">
+								You can create a new shopping list, or type in a token to view
+								an existing list.
+							</Typography>
+							<Button
+								type="button"
+								variant="contained"
+								size="large"
+								onClick={handleClick}
+							>
+								<Typography variant="h2"> Create new list</Typography>
+							</Button>
+							<Typography variant="h2">
+								<p> - or - </p>
+							</Typography>
 
-				{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
+							<form onSubmit={handleSumbit}>
+								<Typography variant="h2">
+									<label htmlFor="tokenInput">Three word token:</label>
+								</Typography>
+
+								<div>
+									<input
+										type="text"
+										id="tokenInput"
+										onChange={(event) => setUserTokenInput(event.target.value)}
+										required
+									/>
+
+									<Button variant="contained" size="large" type="submit">
+										<Typography variant="h2">Submit</Typography>
+									</Button>
+								</div>
+							</form>
+						</Grid>
+						<Grid item width={50} margin={'16px'}>
+							<Typography variant="h2"> item 2 </Typography>
+						</Grid>
+					</Grid>
+
+					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
+				</Box>
 			</div>
 		</ThemeProvider>
 	);
