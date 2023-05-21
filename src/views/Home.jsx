@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import {
+	Box,
 	Button,
 	Grid,
 	ThemeProvider,
@@ -46,6 +47,9 @@ export function Home({ setListToken }) {
 		palette: {
 			primary: {
 				main: '#F298BF',
+				background: {
+					default: '#F298BF',
+				},
 			},
 		},
 	});
@@ -53,11 +57,22 @@ export function Home({ setListToken }) {
 	return (
 		<ThemeProvider theme={mainTheme}>
 			<div className="Home">
-				<Grid container sx={{ backgroundColor: 'primary.main' }}>
-					<Grid item>
-						<Typography variant="h1">
-							Welcome to your Smart Shopping List!{' '}
-						</Typography>
+				<Box
+					display="flex"
+					justifyContent="center"
+					alignItems="center"
+					minHeight="30vh"
+				>
+					Welcome to your Smart Shopping List!{' '}
+				</Box>
+				<Grid
+					container
+					spacing={10}
+					direction="row"
+					justifyContent="center"
+					alignItems="center"
+				>
+					<Grid item sx={{ width: '50%' }}>
 						<Typography variant="subtitle1">
 							You can create a new shopping list, or type in a token to view an
 							existing list.
@@ -86,7 +101,7 @@ export function Home({ setListToken }) {
 						</form>
 					</Grid>
 					<Grid item>
-						<Typography>item 2 </Typography>
+						<Typography variant="h1"> item 2 </Typography>
 					</Grid>
 				</Grid>
 
