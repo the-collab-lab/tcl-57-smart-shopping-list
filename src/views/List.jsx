@@ -87,8 +87,9 @@ export function List({ data, listToken }) {
 					<h3>Here are the items in your list:</h3>
 					<MuiListComponent
 						sx={{
-							'& > .aTest': {
+							'&': {
 								width: '60vw',
+								margin: 'auto',
 							},
 						}}
 					>
