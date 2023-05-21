@@ -41,7 +41,7 @@ export function Home({ setListToken }) {
 
 	const mainTheme = createTheme({
 		typography: {
-			fontSize: 20,
+			fontFamily: 'Times New Roman',
 		},
 		palette: {
 			primary: {
@@ -55,8 +55,10 @@ export function Home({ setListToken }) {
 			<div className="Home">
 				<Grid container sx={{ backgroundColor: 'primary.main' }}>
 					<Grid item>
-						<h2>Welcome to your Smart Shopping List! </h2>
-						<Typography>
+						<Typography variant="h1">
+							Welcome to your Smart Shopping List!{' '}
+						</Typography>
+						<Typography variant="subtitle1">
 							You can create a new shopping list, or type in a token to view an
 							existing list.
 						</Typography>
