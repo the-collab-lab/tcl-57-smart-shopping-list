@@ -7,7 +7,10 @@ import {
 	ListItemIcon,
 	Checkbox,
 	Chip,
+	IconButton,
 } from '@mui/material';
+
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export function ListItemComponent({
 	name,
@@ -16,6 +19,7 @@ export function ListItemComponent({
 	isDefaultChecked,
 	setIsChecked,
 	setCheckedItemId,
+	onDeleteClick,
 }) {
 	const colorByUrgency = {
 		soon: 'orange',
@@ -33,7 +37,20 @@ export function ListItemComponent({
 	}
 
 	return (
-		<ListItem disablePadding>
+		<ListItem
+			disablePadding
+			secondaryAction={
+				<IconButton
+					edge="end"
+					aria-label="delete"
+					onClick={() => {
+						onDeleteClick(itemId);
+					}}
+				>
+					<DeleteIcon />
+				</IconButton>
+			}
+		>
 			<ListItemButton
 				role={undefined}
 				onClick={(event) => clickHandler(event, itemId)}
