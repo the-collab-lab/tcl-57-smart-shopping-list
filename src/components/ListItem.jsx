@@ -2,7 +2,6 @@ import './ListItem.css';
 
 import {
 	ListItem,
-	ListItemButton,
 	ListItemText,
 	ListItemIcon,
 	Checkbox,
@@ -68,37 +67,27 @@ export function ListItemComponent({
 				</IconButton>
 			}
 		>
-			<ListItemButton
-				role={undefined}
-				onClick={(event) => clickHandler(event, itemId)}
-				dense
-			>
-				<ListItemIcon>
-					<Checkbox
-						id={itemId}
-						edge="start"
-						defaultChecked={isDefaultChecked}
-						tabIndex={-1}
-						disableRipple
-						inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
-					/>
-				</ListItemIcon>
-				<ListItemText
+			<ListItemIcon>
+				<Checkbox
 					id={itemId}
-					primary={name}
-					secondary={additionalItemInfo}
+					edge="start"
+					defaultChecked={isDefaultChecked}
+					tabIndex={-1}
+					disableRipple
+					inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
 				/>
-				<Chip
-					size="small"
-					label={urgency}
-					sx={{
-						'&': {
-							backgroundColor: `${urgencyColor}`,
-							color: 'white',
-						},
-					}}
-				/>
-			</ListItemButton>
+			</ListItemIcon>
+			<ListItemText id={itemId} primary={name} secondary={additionalItemInfo} />
+			<Chip
+				size="small"
+				label={urgency}
+				sx={{
+					'&': {
+						backgroundColor: `${urgencyColor}`,
+						color: 'white',
+					},
+				}}
+			/>
 		</ListItem>
 	);
 }
