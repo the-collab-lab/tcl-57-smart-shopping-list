@@ -3,7 +3,14 @@ import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { Link } from 'react-router-dom';
 import { comparePurchaseUrgency } from '../utils/dates';
-import { List as MuiListComponent } from '@mui/material';
+import {
+	Container,
+	List as MuiListComponent,
+	TextField,
+	InputAdornment,
+	IconButton,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -46,11 +53,6 @@ export function List({ data, listToken }) {
 		/>
 	));
 
-	const clearSearchField = (e) => {
-		e.preventDefault();
-		setSearchTerm('');
-	};
-
 	const renderedListLength = renderedList.length;
 
 	//Delete Item functionality with showing and closing modal
@@ -73,19 +75,34 @@ export function List({ data, listToken }) {
 		<>
 			{renderedListLength > 0 ? (
 				<>
-					<form onSubmit={clearSearchField}>
-						<label htmlFor="search-filter">
-							Search for an item in your list:
-						</label>
-						<input
-							type="text"
-							id="search-filter"
-							value={searchTerm}
-							onChange={(e) => setSearchTerm(e.target.value)}
+					<Container
+						sx={{
+							width: '100%',
+							display: 'flex',
+							justifyContent: 'center',
+						}}
+					>
+						<TextField
+							id="outlined-search"
+							label="Search for an item in your list..."
+							type="search"
+							size="small"
+							margin="normal"
+							color="primary"
+							sx={{ width: '30%' }}
+							onChange={(event) => setSearchTerm(event.target.value)}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton aria-label="search icon" edge="end">
+											<SearchIcon />
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
 						/>
-						<button type="submit">Search</button>
-					</form>
-					<h3>Here are the items in your list:</h3>
+					</Container>
+
 					<MuiListComponent
 						sx={{
 							'&': {
