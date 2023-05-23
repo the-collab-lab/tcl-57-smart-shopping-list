@@ -67,16 +67,14 @@ export function ListItemComponent({
 				</IconButton>
 			}
 		>
-			<ListItemIcon>
-				<Checkbox
-					id={itemId}
-					edge="start"
-					defaultChecked={isDefaultChecked}
-					tabIndex={-1}
-					disableRipple
-					inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
-				/>
-			</ListItemIcon>
+			<Checkbox
+				id={itemId}
+				edge="start"
+				defaultChecked={isDefaultChecked}
+				tabIndex={-1}
+				disableRipple
+				inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
+			/>
 			<ListItemText id={itemId} primary={name} secondary={additionalItemInfo} />
 			<Chip
 				size="small"
