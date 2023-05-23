@@ -53,20 +53,7 @@ export function ListItemComponent({
 	}
 
 	return (
-		<ListItem
-			disablePadding
-			secondaryAction={
-				<IconButton
-					edge="end"
-					aria-label="delete"
-					onClick={() => {
-						onDeleteClick(itemId);
-					}}
-				>
-					<DeleteIcon />
-				</IconButton>
-			}
-		>
+		<ListItem disablePadding>
 			<Checkbox
 				id={itemId}
 				edge="start"
@@ -86,6 +73,15 @@ export function ListItemComponent({
 					},
 				}}
 			/>
+			<IconButton
+				edge="end"
+				aria-label="delete"
+				onClick={() => {
+					onDeleteClick(itemId);
+				}}
+			>
+				<DeleteIcon />
+			</IconButton>
 		</ListItem>
 	);
 }
