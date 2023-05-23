@@ -61,6 +61,9 @@ export function ListItemComponent({
 				tabIndex={-1}
 				disableRipple
 				inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
+				onClick={(event) => {
+					clickHandler(event, itemId);
+				}}
 			/>
 			<ListItemText id={itemId} primary={name} secondary={additionalItemInfo} />
 			<Chip
