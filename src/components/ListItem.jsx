@@ -72,6 +72,7 @@ export function ListItemComponent({
 					'&': {
 						backgroundColor: `${urgencyColor}`,
 						color: 'white',
+						width: '90px',
 					},
 				}}
 			/>
