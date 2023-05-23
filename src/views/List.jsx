@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
-import { Link } from 'react-router-dom';
 import { comparePurchaseUrgency } from '../utils/dates';
 import {
 	Container,
@@ -9,8 +8,11 @@ import {
 	TextField,
 	InputAdornment,
 	IconButton,
+	Typography,
+	Button,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -75,11 +77,19 @@ export function List({ data, listToken }) {
 		<>
 			{listIsEmpty ? (
 				<>
-					<h2>Your list currently has no items.</h2>
-					<h3>Click on the add first item button to start your list.</h3>
-					<Link to="/add-item">
-						<button>Add first item</button>
-					</Link>
+					<Typography variant="h2">Your list is currently empty.</Typography>
+					<Typography variant="h3">
+						Add your first item by clicking the button below.
+					</Typography>
+					<Button
+						type="button"
+						variant="contained"
+						size="large"
+						href="/add-item"
+						startIcon={<AddIcon />}
+					>
+						Add first item
+					</Button>
 				</>
 			) : (
 				<>
