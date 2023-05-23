@@ -53,7 +53,7 @@ export function List({ data, listToken }) {
 		/>
 	));
 
-	const renderedListLength = renderedList.length;
+	const listIsEmpty = Boolean(!data.length);
 
 	//Delete Item functionality with showing and closing modal
 
@@ -73,7 +73,15 @@ export function List({ data, listToken }) {
 
 	return (
 		<>
-			{renderedListLength > 0 ? (
+			{listIsEmpty ? (
+				<>
+					<h2>Your list currently has no items.</h2>
+					<h3>Click on the add first item button to start your list.</h3>
+					<Link to="/add-item">
+						<button>Add first item</button>
+					</Link>
+				</>
+			) : (
 				<>
 					<Container
 						sx={{
@@ -113,14 +121,6 @@ export function List({ data, listToken }) {
 					>
 						{renderedList}
 					</MuiListComponent>
-				</>
-			) : (
-				<>
-					<h2>Your list currently has no items.</h2>
-					<h3>Click on the add first item button to start your list.</h3>
-					<Link to="/add-item">
-						<button>Add first item</button>
-					</Link>
 				</>
 			)}
 			<dialog ref={dialogRef}>
