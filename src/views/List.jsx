@@ -89,7 +89,7 @@ export function List({ data, listToken }) {
 					<MuiListComponent
 						sx={{
 							'&': {
-								width: '60vw',
+								width: '50vw',
 								margin: 'auto',
 							},
 						}}

@@ -6,6 +6,7 @@ import {
 	Checkbox,
 	Chip,
 	IconButton,
+	Container,
 } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -52,19 +53,52 @@ export function ListItemComponent({
 	}
 
 	return (
-		<ListItem disablePadding>
-			<Checkbox
-				id={itemId}
-				edge="start"
-				defaultChecked={isDefaultChecked}
-				tabIndex={-1}
-				disableRipple
-				inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
-				onClick={(event) => {
-					clickHandler(event, itemId);
+		<ListItem
+			disablePadding
+			sx={{
+				'&': {
+					display: 'flex',
+					justifyContent: 'space-between',
+				},
+			}}
+		>
+			<Container
+				sx={{
+					'&': {
+						display: 'flex',
+						alignItems: 'center',
+						padding: '0',
+						margin: '0',
+						maxWidth: '50%',
+					},
 				}}
-			/>
-			<ListItemText id={itemId} primary={name} secondary={additionalItemInfo} />
+			>
+				<Checkbox
+					id={itemId}
+					edge="start"
+					defaultChecked={isDefaultChecked}
+					tabIndex={-1}
+					disableRipple
+					inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
+					onClick={(event) => {
+						clickHandler(event, itemId);
+					}}
+				/>
+				<ListItemText
+					id={itemId}
+					primary={name}
+					secondary={additionalItemInfo}
+					secondaryTypographyProps={{
+						color: '#9c9c9c',
+						fontSize: 'small',
+					}}
+					sx={{
+						'&': {
+							marginLeft: '10px',
+						},
+					}}
+				/>
+			</Container>
 			<Chip
 				size="small"
 				label={urgency}
