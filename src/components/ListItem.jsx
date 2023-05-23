@@ -3,7 +3,6 @@ import './ListItem.css';
 import {
 	ListItem,
 	ListItemText,
-	ListItemIcon,
 	Checkbox,
 	Chip,
 	IconButton,
