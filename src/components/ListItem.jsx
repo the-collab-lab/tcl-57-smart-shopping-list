@@ -8,6 +8,7 @@ import {
 	Checkbox,
 	Chip,
 	IconButton,
+	Tooltip,
 } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -20,6 +21,7 @@ export function ListItemComponent({
 	setIsChecked,
 	setCheckedItemId,
 	onDeleteClick,
+	item,
 }) {
 	const colorByUrgency = {
 		soon: 'orange',
@@ -30,6 +32,22 @@ export function ListItemComponent({
 	};
 
 	const urgencyColor = colorByUrgency[urgency];
+	const dateLastPurchasedFormatted = item.dateLastPurchased
+		? `${item.dateLastPurchased
+				.toDate()
+				.getMonth()
+				.toString()
+				.padStart(2, '0')}/${item.dateLastPurchased
+				.toDate()
+				.getDate()
+				.toString()
+				.padStart(2, '0')}/${item.dateLastPurchased
+				.toDate()
+				.getFullYear()
+				.toString()
+				.substring(2)}`
+		: 'N/A';
+	const additionalItemInfo = `Last Purchased: ${dateLastPurchasedFormatted} • Total Purchases: ${item.totalPurchases}`;
 
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
@@ -37,47 +55,49 @@ export function ListItemComponent({
 	}
 
 	return (
-		<ListItem
-			disablePadding
-			secondaryAction={
-				<IconButton
-					edge="end"
-					aria-label="delete"
-					onClick={() => {
-						onDeleteClick(itemId);
-					}}
-				>
-					<DeleteIcon />
-				</IconButton>
-			}
-		>
-			<ListItemButton
-				role={undefined}
-				onClick={(event) => clickHandler(event, itemId)}
-				dense
+		<Tooltip title={additionalItemInfo}>
+			<ListItem
+				disablePadding
+				secondaryAction={
+					<IconButton
+						edge="end"
+						aria-label="delete"
+						onClick={() => {
+							onDeleteClick(itemId);
+						}}
+					>
+						<DeleteIcon />
+					</IconButton>
+				}
 			>
-				<ListItemIcon>
-					<Checkbox
-						id={itemId}
-						edge="start"
-						defaultChecked={isDefaultChecked}
-						tabIndex={-1}
-						disableRipple
-						inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
+				<ListItemButton
+					role={undefined}
+					onClick={(event) => clickHandler(event, itemId)}
+					dense
+				>
+					<ListItemIcon>
+						<Checkbox
+							id={itemId}
+							edge="start"
+							defaultChecked={isDefaultChecked}
+							tabIndex={-1}
+							disableRipple
+							inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
+						/>
+					</ListItemIcon>
+					<ListItemText id={itemId} primary={name} />
+					<Chip
+						size="small"
+						label={urgency}
+						sx={{
+							'&': {
+								backgroundColor: `${urgencyColor}`,
+								color: 'white',
+							},
+						}}
 					/>
-				</ListItemIcon>
-				<ListItemText id={itemId} primary={name} />
-				<Chip
-					size="small"
-					label={urgency}
-					sx={{
-						'&': {
-							backgroundColor: `${urgencyColor}`,
-							color: 'white',
-						},
-					}}
-				/>
-			</ListItemButton>
-		</ListItem>
+				</ListItemButton>
+			</ListItem>
+		</Tooltip>
 	);
 }

@@ -42,6 +42,7 @@ export function List({ data, listToken }) {
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
 			onDeleteClick={openModal}
+			item={item}
 		/>
 	));
 
