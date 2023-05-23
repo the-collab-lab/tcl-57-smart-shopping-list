@@ -8,7 +8,6 @@ import {
 	Checkbox,
 	Chip,
 	IconButton,
-	Tooltip,
 } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -55,49 +54,51 @@ export function ListItemComponent({
 	}
 
 	return (
-		<Tooltip title={additionalItemInfo}>
-			<ListItem
-				disablePadding
-				secondaryAction={
-					<IconButton
-						edge="end"
-						aria-label="delete"
-						onClick={() => {
-							onDeleteClick(itemId);
-						}}
-					>
-						<DeleteIcon />
-					</IconButton>
-				}
-			>
-				<ListItemButton
-					role={undefined}
-					onClick={(event) => clickHandler(event, itemId)}
-					dense
+		<ListItem
+			disablePadding
+			secondaryAction={
+				<IconButton
+					edge="end"
+					aria-label="delete"
+					onClick={() => {
+						onDeleteClick(itemId);
+					}}
 				>
-					<ListItemIcon>
-						<Checkbox
-							id={itemId}
-							edge="start"
-							defaultChecked={isDefaultChecked}
-							tabIndex={-1}
-							disableRipple
-							inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
-						/>
-					</ListItemIcon>
-					<ListItemText id={itemId} primary={name} />
-					<Chip
-						size="small"
-						label={urgency}
-						sx={{
-							'&': {
-								backgroundColor: `${urgencyColor}`,
-								color: 'white',
-							},
-						}}
+					<DeleteIcon />
+				</IconButton>
+			}
+		>
+			<ListItemButton
+				role={undefined}
+				onClick={(event) => clickHandler(event, itemId)}
+				dense
+			>
+				<ListItemIcon>
+					<Checkbox
+						id={itemId}
+						edge="start"
+						defaultChecked={isDefaultChecked}
+						tabIndex={-1}
+						disableRipple
+						inputProps={{ 'aria-labelledby': `checkbox-liist-label=${name}` }}
 					/>
-				</ListItemButton>
-			</ListItem>
-		</Tooltip>
+				</ListItemIcon>
+				<ListItemText
+					id={itemId}
+					primary={name}
+					secondary={additionalItemInfo}
+				/>
+				<Chip
+					size="small"
+					label={urgency}
+					sx={{
+						'&': {
+							backgroundColor: `${urgencyColor}`,
+							color: 'white',
+						},
+					}}
+				/>
+			</ListItemButton>
+		</ListItem>
 	);
 }
