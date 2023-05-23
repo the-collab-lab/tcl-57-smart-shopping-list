@@ -7,6 +7,7 @@ import {
 	FormControlLabel,
 	Radio,
 	FormLabel,
+	TextField,
 } from '@mui/material';
 
 export function AddItem({ listToken, data }) {
@@ -56,36 +57,15 @@ export function AddItem({ listToken, data }) {
 	return (
 		<>
 			<h2>Add an item to your shopping list</h2>
-			{/* <FormControl>
-  <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel>
-  <RadioGroup
-    aria-labelledby="demo-controlled-radio-buttons-group"
-    name="controlled-radio-buttons-group"
-    value={value}
-    onChange={handleChange}
-  >
-    <FormControlLabel value="female" control={<Radio />} label="Female" />
-    <FormControlLabel value="male" control={<Radio />} label="Male" />
-  </RadioGroup>
-</FormControl> */}
 			<FormControl>
-				{/* <form onSubmit={handleSubmit}> */}
-				<label htmlFor="item-name-input">Item name:</label>
-				<input
-					type="text"
+				<TextField
 					id="item-name-input"
+					label="Item name"
+					variant="outlined"
 					onChange={(e) => setItemName(e.target.value)}
 				/>
 				<RadioGroup>
-					{/* <fieldset> */}
-					<FormLabel
-					// sx={{
-					// 	color: white,
-					// }}
-					>
-						How soon will you buy this again?
-					</FormLabel>
-					{/* <legend>How soon will you buy this again?</legend> */}
+					<FormLabel>How soon will you buy this again?</FormLabel>
 					<FormControlLabel
 						value="soon"
 						control={<Radio />}
@@ -93,13 +73,6 @@ export function AddItem({ listToken, data }) {
 						onChange={() => setDaysUntilNextPurchase(7)}
 						checked={daysUntilNextPurchase === 7}
 					/>
-					{/* <input
-						type="radio"
-						id="soon"
-						onChange={() => setDaysUntilNextPurchase(7)}
-						checked={daysUntilNextPurchase === 7}
-					/>
-					<label htmlFor="soon">Soon</label> <br /> */}
 					<FormControlLabel
 						value="kind of soon"
 						control={<Radio />}
@@ -107,14 +80,6 @@ export function AddItem({ listToken, data }) {
 						onChange={() => setDaysUntilNextPurchase(14)}
 						checked={daysUntilNextPurchase === 14}
 					/>
-					{/* 
-					<input
-						type="radio"
-						id="kind-of-soon"
-						onChange={() => setDaysUntilNextPurchase(14)}
-						checked={daysUntilNextPurchase === 14}
-					/>
-					<label htmlFor="kind-of-soon">Kind of soon</label> <br /> */}
 					<FormControlLabel
 						value="not soon"
 						control={<Radio />}
@@ -122,28 +87,18 @@ export function AddItem({ listToken, data }) {
 						onChange={() => setDaysUntilNextPurchase(30)}
 						checked={daysUntilNextPurchase === 30}
 					/>
-					{/* <input
-						type="radio"
-						id="not-soon"
-						onChange={() => setDaysUntilNextPurchase(30)}
-						checked={daysUntilNextPurchase === 30}
-					/>
-					<label htmlFor="not-soon">Not soon</label> */}
-					{/* </fieldset> */}
 				</RadioGroup>
-				{/* <input type="submit" value="Add item"> */}
 
 				<Button
-					type="button"
+					type="submit"
 					variant="contained"
 					size="large"
 					onClick={handleSubmit}
 				>
 					Add item
 				</Button>
-				{/* </input> */}
-				{/* </form> */}
 			</FormControl>
+
 			{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
 			{error ? <p>Oh no, something went wrong.</p> : <p>{userAlertMessage}</p>}
 		</>
