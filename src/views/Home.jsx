@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 import './Home.css';
-import retro from '../../public/retro.png';
+import retro from '../retro.png';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
 import { validateToken } from '../api/firebase';
@@ -55,7 +55,7 @@ export function Home({ setListToken }) {
 	const mainTheme = createTheme({
 		typography: {
 			fontFamily: 'Times New Roman',
-			fontSize: '16px',
+			fontSize: '10px',
 		},
 		palette: {
 			primary: {
