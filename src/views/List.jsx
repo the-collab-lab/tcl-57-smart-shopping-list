@@ -150,12 +150,12 @@ export function List({ data, listToken }) {
 				TransitionComponent={Transition}
 				keepMounted
 				onClose={handleCloseDialog}
-				aria-describedby="alert-dialog-slide-description"
+				aria-describedby="confirm-delete-dialog-slide-description"
 			>
 				<DialogTitle>{'Delete this item from your list?'}</DialogTitle>
 				<DialogContent>
-					<DialogContentText id="alert-dialog-slide-description">
-						Are you sure you want to delete? This will permanently remove the
+					<DialogContentText id="confirm-delete-dialog-slide-description">
+						Are you sure you want to delete <span id='dialogItemName'>{selectedItem.name}</span>? This will permanently remove the
 						item and its purchase history from your list.
 					</DialogContentText>
 				</DialogContent>
