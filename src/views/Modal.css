@@ -1,0 +1,22 @@
+#modalContainer {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 9999;
+}
+
+#modalContent {
+	background-color: #fff;
+	max-width: 400px;
+	margin: 100px auto;
+	padding: 20px;
+}
+
+#closeModalButton {
+	display: block;
+	margin-top: 10px;
+}

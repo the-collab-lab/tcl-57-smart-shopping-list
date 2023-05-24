@@ -9,6 +9,7 @@ import {
 	ThemeProvider,
 	Typography,
 	createTheme,
+	Container,
 } from '@mui/material';
 
 import './Home.css';
@@ -18,10 +19,16 @@ import { useState } from 'react';
 import { validateToken } from '../api/firebase';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import Modal from '../views/Modal';
 
 export function Home({ setListToken }) {
 	const [userTokenInput, setUserTokenInput] = useState('');
 	const [tokenExists, setTokenExists] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const toggleModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
 
 	function handleClick() {
 		const token = generateToken();
@@ -62,7 +69,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<ThemeProvider theme={mainTheme}>
-			<img src={retro} class="center"></img>
+			<img src={retro} className="center" alt="logo"></img>
 			<div className="Home">
 				<Box sx={{ backgroundColor: 'EAE7D6' }}>
 					<Box
@@ -124,14 +131,21 @@ export function Home({ setListToken }) {
 						<Grid item width={50} margin={'16px'}>
 							<div id="checklist">
 								<input id="01" type="checkbox" name="r" value="1" />
-								<label for="01">Bread</label>
+								<label htmlFor="01">Bread</label>
 								<input id="02" type="checkbox" name="r" value="2" />
-								<label for="02">Cheese</label>
+								<label htmlFor="02">Cheese</label>
 								<input id="03" type="checkbox" name="r" value="3" />
-								<label for="03">Coffee</label>
+								<label htmlFor="03">Coffee</label>
 							</div>
 						</Grid>
 					</Grid>
+
+					<Container>
+						<div>
+							<button onClick={toggleModal}>Learn More</button>
+							{isModalOpen && <Modal closeModal={toggleModal} />}
+						</div>
+					</Container>
 
 					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 				</Box>
