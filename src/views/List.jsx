@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
+import './List.css';
 
 const Transition = forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -155,8 +156,9 @@ export function List({ data, listToken }) {
 				<DialogTitle>{'Delete this item from your list?'}</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="confirm-delete-dialog-slide-description">
-						Are you sure you want to delete <span id='dialogItemName'>{selectedItem.name}</span>? This will permanently remove the
-						item and its purchase history from your list.
+						Are you sure you want to delete{' '}
+						<span id="dialogItemName">{selectedItem.name}</span>? This will
+						permanently remove the item and its purchase history from your list.
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
