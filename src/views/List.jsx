@@ -1,15 +1,37 @@
-import { useState, useEffect, useRef } from 'react';
-import { ListItem } from '../components';
+import { useState, useEffect, forwardRef } from 'react';
+import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
-import { Link } from 'react-router-dom';
 import { comparePurchaseUrgency } from '../utils/dates';
+import {
+	Container,
+	List as MuiListComponent,
+	TextField,
+	InputAdornment,
+	IconButton,
+	Typography,
+	Button,
+	Dialog,
+	DialogActions,
+	DialogTitle,
+	DialogContent,
+	DialogContentText,
+	Slide,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
+import './List.css';
+
+const Transition = forwardRef(function Transition(props, ref) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [checkedItemId, setCheckedItemId] = useState('');
 	const [isChecked, setIsChecked] = useState(false);
-	const [selectedItemId, setSelectedItemId] = useState('');
-	const dialogRef = useRef(null);
+	const [selectedItem, setSelectedItem] = useState('');
+	const [open, setOpen] = useState(false);
+
 	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
 	persist when user unchecks item.
 	TO DO: Consider adding option for user to navigate home to create a new list.
@@ -32,7 +54,7 @@ export function List({ data, listToken }) {
 	const sortedList = comparePurchaseUrgency(filteredList);
 
 	const renderedList = sortedList.map((item) => (
-		<ListItem
+		<ListItemComponent
 			name={item.name}
 			isDefaultChecked={item.isDefaultChecked}
 			key={item.id}
@@ -40,67 +62,110 @@ export function List({ data, listToken }) {
 			urgency={item.urgency}
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
-			onDeleteClick={openModal}
+			onDeleteClick={handleOpenDialog}
+			item={item}
 		/>
 	));
 
-	const clearSearchField = (e) => {
-		e.preventDefault();
-		setSearchTerm('');
-	};
-
-	const renderedListLength = renderedList.length;
+	const listIsEmpty = Boolean(!data.length);
 
 	//Delete Item functionality with showing and closing modal
 
-	function openModal(id) {
-		setSelectedItemId(id);
-		dialogRef.current.showModal();
+	function handleOpenDialog(item) {
+		setSelectedItem(item);
+		setOpen(true);
 	}
 
-	function handleModalConfirmClick() {
-		deleteItem(listToken, selectedItemId);
-		dialogRef.current.close();
+	function handleCloseDialog() {
+		setOpen(false);
 	}
 
-	function handleModalCancelClick() {
-		dialogRef.current.close();
+	function handleDeleteItem() {
+		deleteItem(listToken, selectedItem.id);
+		setOpen(false);
 	}
 
 	return (
 		<>
-			{renderedListLength > 0 ? (
+			{listIsEmpty ? (
 				<>
-					<form onSubmit={clearSearchField}>
-						<label htmlFor="search-filter">
-							Search for an item in your list:
-						</label>
-						<input
-							type="text"
-							id="search-filter"
-							value={searchTerm}
-							onChange={(e) => setSearchTerm(e.target.value)}
-						/>
-						<button type="submit">Search</button>
-					</form>
-					<h3>Here are the items in your list:</h3>
-					<ul>{renderedList}</ul>
+					<Typography variant="h2">Your list is currently empty.</Typography>
+					<Typography variant="h3">
+						Add your first item by clicking the button below.
+					</Typography>
+					<Button
+						type="button"
+						variant="contained"
+						size="large"
+						href="/add-item"
+						startIcon={<AddIcon />}
+					>
+						Add first item
+					</Button>
 				</>
 			) : (
 				<>
-					<h2>Your list currently has no items.</h2>
-					<h3>Click on the add first item button to start your list.</h3>
-					<Link to="/add-item">
-						<button>Add first item</button>
-					</Link>
+					<Container
+						sx={{
+							width: '100%',
+							display: 'flex',
+							justifyContent: 'center',
+						}}
+					>
+						<TextField
+							id="outlined-search"
+							label="Search for an item in your list..."
+							type="search"
+							size="small"
+							margin="normal"
+							color="primary"
+							sx={{ width: '30%' }}
+							onChange={(event) => setSearchTerm(event.target.value)}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton aria-label="search icon" edge="end">
+											<SearchIcon />
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
+						/>
+					</Container>
+
+					<MuiListComponent
+						sx={{
+							'&': {
+								width: '50vw',
+								margin: 'auto',
+							},
+						}}
+					>
+						{renderedList}
+					</MuiListComponent>
 				</>
 			)}
-			<dialog ref={dialogRef}>
-				<p>Are you sure you want to remove this item from your list?</p>{' '}
-				{/*To do: replace "this item" with the item name*/}
-				<button onClick={handleModalConfirmClick}>Yes</button>
-				<button onClick={handleModalCancelClick}>No</button>
-			</dialog>
+
+			<Dialog
+				open={open}
+				TransitionComponent={Transition}
+				keepMounted
+				onClose={handleCloseDialog}
+				aria-describedby="confirm-delete-dialog-slide-description"
+			>
+				<DialogTitle>{'Delete this item from your list?'}</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="confirm-delete-dialog-slide-description">
+						Are you sure you want to delete{' '}
+						<span id="dialogItemName">{selectedItem.name}</span>? This will
+						permanently remove the item and its purchase history from your list.
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleDeleteItem}>Delete</Button>
+					<Button onClick={handleCloseDialog}>Cancel</Button>
+				</DialogActions>
+			</Dialog>
 		</>
 	);
 }
