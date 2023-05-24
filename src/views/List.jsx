@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, forwardRef } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { comparePurchaseUrgency } from '../utils/dates';
