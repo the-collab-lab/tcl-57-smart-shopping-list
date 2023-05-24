@@ -23,9 +23,14 @@ export function Layout() {
 		<>
 			<Container
 				maxWidth="false"
-				sx={{ bgcolor: 'silver', display: 'flex', flexDirection: 'column' }}
+				sx={{
+					bgcolor: 'silver',
+					display: 'flex',
+					flexDirection: 'column',
+					maxWidth: '100%',
+				}}
 			>
-				<Container maxWidth="lg" sx={{ p: '0' }} disableGutters>
+				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
 					<AppBar position="relative">
 						<Container maxWidth="xl">
 							<Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -90,7 +95,7 @@ export function Layout() {
 				</Container>
 
 				<Container
-					maxWidth="lg"
+					maxWidth="xl"
 					sx={{
 						bgcolor: 'white',
 						display: 'flex',

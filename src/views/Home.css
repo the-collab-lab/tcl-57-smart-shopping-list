@@ -1,4 +1,4 @@
-#checklist {
+/* #checklist {
 	--background: #ffffff;
 	--text: #414856;
 	--check: #4f29f0;
@@ -265,7 +265,7 @@
 			-14px -8px 0 0px #4f29f0;
 	}
 }
-body {
+/* body {
 	background: #e8ebf3;
 	height: 100vh;
 	font: 400 16px 'Varela Round', sans-serif;
@@ -273,8 +273,8 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
+} */
 
-.logo {
+/* .logo {
 	margin: 25px 50px;
-}
+} */
