@@ -122,14 +122,14 @@ export function Home({ setListToken }) {
 							</form>
 						</Grid>
 						<Grid item width={50} margin={'16px'}>
-							<Box id="checklist">
-								<TextField id="01" type="checkbox" name="r" value="1" checked />
-								<FormLabel for="01">Bread</FormLabel>
-								<TextField id="02" type="checkbox" name="r" value="2" />
-								<FormLabel for="02">Cheese</FormLabel>
-								<TextField id="03" type="checkbox" name="r" value="3" />
-								<FormLabel for="03">Coffee</FormLabel>
-							</Box>
+							<div id="checklist">
+								<input id="01" type="checkbox" name="r" value="1" />
+								<label for="01">Bread</label>
+								<input id="02" type="checkbox" name="r" value="2" />
+								<label for="02">Cheese</label>
+								<input id="03" type="checkbox" name="r" value="3" />
+								<label for="03">Coffee</label>
+							</div>
 						</Grid>
 					</Grid>
 
