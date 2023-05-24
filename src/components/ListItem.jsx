@@ -114,7 +114,7 @@ export function ListItemComponent({
 				edge="end"
 				aria-label="delete"
 				onClick={() => {
-					onDeleteClick(itemId);
+					onDeleteClick(item);
 				}}
 			>
 				<DeleteIcon />

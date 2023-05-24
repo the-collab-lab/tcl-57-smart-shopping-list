@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { comparePurchaseUrgency } from '../utils/dates';
@@ -10,16 +10,27 @@ import {
 	IconButton,
 	Typography,
 	Button,
+	Dialog,
+	DialogActions,
+	DialogTitle,
+	DialogContent,
+	DialogContentText,
+	Slide,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
+
+const Transition = forwardRef(function Transition(props, ref) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export function List({ data, listToken }) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [checkedItemId, setCheckedItemId] = useState('');
 	const [isChecked, setIsChecked] = useState(false);
-	const [selectedItemId, setSelectedItemId] = useState('');
-	const dialogRef = useRef(null);
+	const [selectedItem, setSelectedItem] = useState('');
+	const [open, setOpen] = useState(false);
+
 	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
 	persist when user unchecks item.
 	TO DO: Consider adding option for user to navigate home to create a new list.
@@ -50,7 +61,7 @@ export function List({ data, listToken }) {
 			urgency={item.urgency}
 			setCheckedItemId={setCheckedItemId}
 			setIsChecked={setIsChecked}
-			onDeleteClick={openModal}
+			onDeleteClick={handleOpenDialog}
 			item={item}
 		/>
 	));
@@ -59,18 +70,18 @@ export function List({ data, listToken }) {
 
 	//Delete Item functionality with showing and closing modal
 
-	function openModal(id) {
-		setSelectedItemId(id);
-		dialogRef.current.showModal();
+	function handleOpenDialog(item) {
+		setSelectedItem(item);
+		setOpen(true);
 	}
 
-	function handleModalConfirmClick() {
-		deleteItem(listToken, selectedItemId);
-		dialogRef.current.close();
+	function handleCloseDialog() {
+		setOpen(false);
 	}
 
-	function handleModalCancelClick() {
-		dialogRef.current.close();
+	function handleDeleteItem() {
+		deleteItem(listToken, selectedItem.id);
+		setOpen(false);
 	}
 
 	return (
@@ -133,12 +144,26 @@ export function List({ data, listToken }) {
 					</MuiListComponent>
 				</>
 			)}
-			<dialog ref={dialogRef}>
-				<p>Are you sure you want to remove this item from your list?</p>{' '}
-				{/*To do: replace "this item" with the item name*/}
-				<button onClick={handleModalConfirmClick}>Yes</button>
-				<button onClick={handleModalCancelClick}>No</button>
-			</dialog>
+
+			<Dialog
+				open={open}
+				TransitionComponent={Transition}
+				keepMounted
+				onClose={handleCloseDialog}
+				aria-describedby="alert-dialog-slide-description"
+			>
+				<DialogTitle>{'Delete this item from your list?'}</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-slide-description">
+						Are you sure you want to delete? This will permanently remove the
+						item and its purchase history from your list.
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleDeleteItem}>Delete</Button>
+					<Button onClick={handleCloseDialog}>Cancel</Button>
+				</DialogActions>
+			</Dialog>
 		</>
 	);
 }
