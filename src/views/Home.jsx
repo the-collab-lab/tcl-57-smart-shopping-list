@@ -4,7 +4,6 @@ import {
 	Box,
 	Button,
 	Grid,
-	FormLabel,
 	TextField,
 	ThemeProvider,
 	Typography,
@@ -69,7 +68,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<ThemeProvider theme={mainTheme}>
-			<img src={retro} className="center" alt="logo"></img>
+			<img src={retro} className="logo" alt="logo"></img>
 			<div className="Home">
 				<Box sx={{ backgroundColor: 'EAE7D6' }}>
 					<Box

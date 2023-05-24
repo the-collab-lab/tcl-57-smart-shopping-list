@@ -274,19 +274,7 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-body .socials {
-	position: fixed;
-	display: block;
-	left: 20px;
-	bottom: 20px;
-}
-body .socials > a {
-	display: block;
-	width: 30px;
-	opacity: 0.2;
-	transform: scale(var(--scale, 0.8));
-	transition: transform 0.3s cubic-bezier(0.38, -0.12, 0.24, 1.91);
-}
-body .socials > a:hover {
-	--scale: 1;
+
+.logo {
+	margin: 25px 50px;
 }
