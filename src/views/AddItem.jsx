@@ -1,5 +1,15 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase.js';
+import {
+	Button,
+	FormControl,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
+	FormLabel,
+	TextField,
+	Box,
+} from '@mui/material';
 
 export function AddItem({ listToken, data }) {
 	const [itemName, setItemName] = useState('');
@@ -47,43 +57,56 @@ export function AddItem({ listToken, data }) {
 	// TODO: implement clear input after user adds item to list
 	return (
 		<>
-			<h2>Add an item to your shopping list</h2>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="item-name-input">Item name:</label>
-				<input
-					type="text"
-					id="item-name-input"
-					onChange={(e) => setItemName(e.target.value)}
-				/>
-				<fieldset>
-					<legend>How soon will you buy this again?</legend>
-					<input
-						type="radio"
-						id="soon"
-						onChange={() => setDaysUntilNextPurchase(7)}
-						checked={daysUntilNextPurchase === 7}
+			<Box display="flex" justifyContent="center" minHeight="100vh">
+				<FormControl>
+					<h2>Add an item to your shopping list:</h2>
+					<TextField
+						id="item-name-input"
+						label="Item name"
+						variant="outlined"
+						onChange={(e) => setItemName(e.target.value)}
 					/>
-					<label htmlFor="soon">Soon</label> <br />
-					<input
-						type="radio"
-						id="kind-of-soon"
-						onChange={() => setDaysUntilNextPurchase(14)}
-						checked={daysUntilNextPurchase === 14}
-					/>
-					<label htmlFor="kind-of-soon">Kind of soon</label> <br />
-					<input
-						type="radio"
-						id="not-soon"
-						onChange={() => setDaysUntilNextPurchase(30)}
-						checked={daysUntilNextPurchase === 30}
-					/>
-					<label htmlFor="not-soon">Not soon</label>
-				</fieldset>
+					<RadioGroup>
+						<FormLabel>How soon will you buy this again?</FormLabel>
+						<FormControlLabel
+							value="soon"
+							control={<Radio />}
+							label="Soon"
+							onChange={() => setDaysUntilNextPurchase(7)}
+							checked={daysUntilNextPurchase === 7}
+						/>
+						<FormControlLabel
+							value="kind of soon"
+							control={<Radio />}
+							label="Kind of soon"
+							onChange={() => setDaysUntilNextPurchase(14)}
+							checked={daysUntilNextPurchase === 14}
+						/>
+						<FormControlLabel
+							value="not soon"
+							control={<Radio />}
+							label="Not soon"
+							onChange={() => setDaysUntilNextPurchase(30)}
+							checked={daysUntilNextPurchase === 30}
+						/>
+					</RadioGroup>
 
-				<input type="submit" value="Add item" />
-			</form>
-			{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
-			{error ? <p>Oh no, something went wrong.</p> : <p>{userAlertMessage}</p>}
+					<Button
+						type="submit"
+						variant="contained"
+						size="large"
+						onClick={handleSubmit}
+					>
+						Add item
+					</Button>
+					{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
+					{error ? (
+						<p>Oh no, something went wrong.</p>
+					) : (
+						<p>{userAlertMessage}</p>
+					)}
+				</FormControl>
+			</Box>
 		</>
 	);
 }
