@@ -1,4 +1,4 @@
-/* #checklist {
+#checklist {
 	--background: #ffffff;
 	--text: #414856;
 	--check: #4f29f0;
@@ -275,6 +275,6 @@
 	align-items: center;
 } */
 
-/* .logo {
+.logo {
 	margin: 25px 50px;
-} */
+}
