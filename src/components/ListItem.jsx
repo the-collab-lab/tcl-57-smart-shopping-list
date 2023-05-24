@@ -31,22 +31,18 @@ export function ListItemComponent({
 
 	const urgencyColor = colorByUrgency[urgency];
 	const dateLastPurchasedFormatted = item.dateLastPurchased
-		? `${item.dateLastPurchased
-				.toDate()
-				.getMonth()
-				.toString()
-				.padStart(2, '0')}/${item.dateLastPurchased
-				.toDate()
-				.getDate()
-				.toString()
-				.padStart(2, '0')}/${item.dateLastPurchased
-				.toDate()
-				.getFullYear()
-				.toString()
-				.substring(2)}`
+		? formatDate(item.dateLastPurchased)
 		: 'N/A';
 	const additionalItemInfo = `Last Purchased: ${dateLastPurchasedFormatted} • Total Purchases: ${item.totalPurchases}`;
 
+	function formatDate(timestamp) {
+		const date = timestamp.toDate();
+		const month = (1 + date.getMonth()).toString().padStart(2, '0'); // add 1 because Months are zero-offset in JS
+		const day = date.getDate().toString().padStart(2, '0');
+		const year = date.getFullYear().toString().substring(2);
+
+		return `${month}/${day}/${year}`;
+	}
 	function clickHandler(event, itemId) {
 		setIsChecked(event.target.checked);
 		setCheckedItemId(itemId);
