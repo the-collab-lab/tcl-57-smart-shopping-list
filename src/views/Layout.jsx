@@ -24,7 +24,6 @@ export function Layout() {
 			<Container
 				maxWidth="false"
 				sx={{
-					bgcolor: 'silver',
 					display: 'flex',
 					flexDirection: 'column',
 					maxWidth: '100%',
@@ -55,11 +54,7 @@ export function Layout() {
 
 								<div>
 									{/* Consider using drawer or nav icon for mobile screen size */}
-									<Breadcrumbs
-										aria-label="breadcrumb"
-										color="white"
-										separator=""
-									>
+									<Breadcrumbs aria-label="breadcrumb" separator="">
 										<NavLink to="/" className="Nav-link">
 											Home
 										</NavLink>
@@ -98,7 +93,6 @@ export function Layout() {
 				<Container
 					maxWidth="xl"
 					sx={{
-						bgcolor: 'white',
 						display: 'flex',
 						justifyContent: 'center',
 						pt: '25px',
