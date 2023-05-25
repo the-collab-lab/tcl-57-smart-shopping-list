@@ -122,6 +122,10 @@ export function List({ data, listToken }) {
 							size="small"
 							margin="normal"
 							color="primary"
+							error={noMatchingItems}
+							helperText={
+								noMatchingItems ? 'No items matching your search terms.' : null
+							}
 							sx={{ width: '30%' }}
 							onChange={(event) => setSearchTerm(event.target.value)}
 							InputProps={{
