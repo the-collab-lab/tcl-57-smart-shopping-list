@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useEffect, useState } from 'react';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -12,21 +11,10 @@ import { AddItem, Home, Layout, List } from './views';
 
 import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
-import { themeSettings } from './Theme/themeSettings';
+import { useTheme } from './Theme/themeSettings';
 
 export function App() {
-	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-	const theme = useMemo(
-		() =>
-			createTheme({
-				palette: {
-					...themeSettings,
-					mode: prefersDarkMode ? 'dark' : 'light',
-				},
-			}),
-		[prefersDarkMode],
-	);
+	const theme = useTheme();
 	const [data, setData] = useState([]);
 
 	/**

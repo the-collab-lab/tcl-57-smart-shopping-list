@@ -1,3 +1,6 @@
+import { useMemo } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { colors } from './colors';
 
 const palette = {
@@ -54,5 +57,20 @@ const typography = {
 	},
 };
 
-// mui theme settings
-export const themeSettings = { palette, typography };
+export function useTheme() {
+	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+	return useMemo(
+		() =>
+			responsiveFontSizes(
+				createTheme({
+					palette: {
+						...palette,
+						mode: prefersDarkMode ? 'dark' : 'light',
+					},
+					typography,
+				}),
+			),
+		[prefersDarkMode],
+	);
+}
