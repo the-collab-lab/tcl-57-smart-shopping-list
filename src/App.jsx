@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -10,12 +12,22 @@ import { AddItem, Home, Layout, List } from './views';
 
 import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { themeSettings } from './Theme/themeSettings';
 
 export function App() {
+	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+	const theme = useMemo(
+		() =>
+			createTheme({
+				palette: {
+					...themeSettings,
+					mode: prefersDarkMode ? 'dark' : 'light',
+				},
+			}),
+		[prefersDarkMode],
+	);
 	const [data, setData] = useState([]);
-	const theme = createTheme(themeSettings);
 
 	/**
 	 * Here, we're using a custom hook to create `listToken` and a function
