@@ -16,6 +16,7 @@ import {
 	DialogContent,
 	DialogContentText,
 	Slide,
+	Box,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -86,7 +87,7 @@ export function List({ data, listToken }) {
 	}
 
 	return (
-		<>
+		<Box minHeight="100vh">
 			{listIsEmpty ? (
 				<>
 					<Typography variant="h2">Your list is currently empty.</Typography>
@@ -166,6 +167,6 @@ export function List({ data, listToken }) {
 					<Button onClick={handleCloseDialog}>Cancel</Button>
 				</DialogActions>
 			</Dialog>
-		</>
+		</Box>
 	);
 }
