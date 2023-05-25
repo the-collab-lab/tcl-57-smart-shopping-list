@@ -87,7 +87,7 @@ export function List({ data, listToken }) {
 	}
 
 	return (
-		<>
+		<Box minHeight="100vh">
 			{listIsEmpty ? (
 				<Box display="flex" flexDirection="column" minHeight="100vh">
 					<Typography variant="h6" paddingTop="75px" paddingBottom="50px">
@@ -169,6 +169,6 @@ export function List({ data, listToken }) {
 					<Button onClick={handleCloseDialog}>Cancel</Button>
 				</DialogActions>
 			</Dialog>
-		</>
+		</Box>
 	);
 }
