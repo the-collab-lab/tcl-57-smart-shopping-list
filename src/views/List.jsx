@@ -1,4 +1,5 @@
 import { useState, useEffect, forwardRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { comparePurchaseUrgency } from '../utils/dates';
@@ -164,6 +165,15 @@ export function List({ data, listToken }) {
 									<SearchIcon />
 								</Icon>
 								<Typography>No matching items found.</Typography>
+								<Button
+									type="button"
+									variant="contained"
+									href="/add-item"
+									size="large"
+									startIcon={<AddIcon />}
+								>
+									{`Add '${searchTerm}' to your list?`}
+								</Button>
 							</Container>
 						)}
 					</MuiListComponent>
