@@ -16,6 +16,7 @@ import {
 	DialogContent,
 	DialogContentText,
 	Slide,
+	Box,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -88,11 +89,13 @@ export function List({ data, listToken }) {
 	return (
 		<>
 			{listIsEmpty ? (
-				<>
-					<Typography variant="h2">Your list is currently empty.</Typography>
-					<Typography variant="h3">
-						Add your first item by clicking the button below.
+				<Box display="flex" flexDirection="column" minHeight="100vh">
+					<Typography variant="h6" paddingTop="75px" paddingBottom="50px">
+						Your list is currently empty.
 					</Typography>
+					{/* <Typography variant="body2">
+						Add your first item by clicking the button below.
+					</Typography> */}
 					<Button
 						type="button"
 						variant="contained"
@@ -102,7 +105,7 @@ export function List({ data, listToken }) {
 					>
 						Add first item
 					</Button>
-				</>
+				</Box>
 			) : (
 				<>
 					<Container
