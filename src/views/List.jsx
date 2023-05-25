@@ -17,6 +17,7 @@ import {
 	DialogContentText,
 	Slide,
 	Box,
+	Icon,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -69,6 +70,7 @@ export function List({ data, listToken }) {
 	));
 
 	const listIsEmpty = Boolean(!data.length);
+	const noMatchingItems = Boolean(!filteredList.length);
 
 	//Delete Item functionality with showing and closing modal
 
@@ -143,6 +145,23 @@ export function List({ data, listToken }) {
 						}}
 					>
 						{renderedList}
+						{noMatchingItems && (
+							<Container
+								sx={{
+									'&': {
+										display: 'flex',
+										flexDirection: 'column',
+										alignItems: 'center',
+										border: '1px solid red',
+									},
+								}}
+							>
+								<Icon>
+									<SearchIcon />
+								</Icon>
+								<Typography>No matching items found.</Typography>
+							</Container>
+						)}
 					</MuiListComponent>
 				</>
 			)}
