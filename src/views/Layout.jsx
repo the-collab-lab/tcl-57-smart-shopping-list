@@ -28,6 +28,7 @@ export function Layout() {
 					display: 'flex',
 					flexDirection: 'column',
 					maxWidth: '100%',
+					minHeight: '100%',
 				}}
 			>
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
@@ -100,12 +101,10 @@ export function Layout() {
 						bgcolor: 'white',
 						display: 'flex',
 						justifyContent: 'center',
-						height: '100vh',
 						pt: '25px',
-						border: 'solid red',
 					}}
 				>
-					<main className="Layout-main">
+					<main>
 						<Outlet />
 					</main>
 				</Container>
