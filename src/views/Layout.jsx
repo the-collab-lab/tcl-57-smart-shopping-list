@@ -20,7 +20,7 @@ import './Layout.css';
 
 export function Layout() {
 	return (
-		<>
+		<Paper sx={{ minHeight: '100dvh' }}>
 			<Container
 				maxWidth="false"
 				sx={{
@@ -103,6 +103,6 @@ export function Layout() {
 					</main>
 				</Container>
 			</Container>
-		</>
+		</Paper>
 	);
 }
