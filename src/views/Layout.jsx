@@ -54,7 +54,11 @@ export function Layout() {
 
 								<div>
 									{/* Consider using drawer or nav icon for mobile screen size */}
-									<Breadcrumbs aria-label="breadcrumb" separator="">
+									<Breadcrumbs
+										aria-label="breadcrumb"
+										color="white"
+										separator=""
+									>
 										<NavLink to="/" className="Nav-link">
 											Home
 										</NavLink>
