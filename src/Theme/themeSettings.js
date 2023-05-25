@@ -1,9 +1,6 @@
-import { useMemo } from 'react';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { colors } from './colors';
 
-const palette = {
+export const palette = {
 	primary: {
 		dark: colors.primary[500],
 		main: colors.primary[700],
@@ -28,7 +25,7 @@ const palette = {
 
 const fontFamily = `Roboto, sans-serif`;
 
-const typography = {
+export const typography = {
 	fontFamily: fontFamily,
 	fontSize: 12,
 	h1: {
@@ -56,21 +53,3 @@ const typography = {
 		fontSize: 14,
 	},
 };
-
-export function useTheme() {
-	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-	return useMemo(
-		() =>
-			responsiveFontSizes(
-				createTheme({
-					palette: {
-						...palette,
-						mode: prefersDarkMode ? 'dark' : 'light',
-					},
-					typography,
-				}),
-			),
-		[prefersDarkMode],
-	);
-}

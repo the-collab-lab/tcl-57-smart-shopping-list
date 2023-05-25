@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -11,10 +10,9 @@ import { AddItem, Home, Layout, List } from './views';
 
 import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
-import { useTheme } from './Theme/themeSettings';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 export function App() {
-	const theme = useTheme();
 	const [data, setData] = useState([]);
 
 	/**
@@ -57,39 +55,37 @@ export function App() {
 	}, [listToken]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline>
-				<Router>
-					<Routes>
-						<Route path="/" element={<Layout />}>
-							<Route
-								path="/"
-								element={
-									listToken ? (
-										<Navigate to="/list" />
-									) : (
-										<Home setListToken={setListToken} />
-									)
-								}
-							/>
-							<Route
-								path="/list"
-								element={
-									listToken ? (
-										<List data={data} listToken={listToken} />
-									) : (
-										<Navigate to="/" />
-									)
-								}
-							/>
-							<Route
-								path="/add-item"
-								element={<AddItem data={data} listToken={listToken} />}
-							/>
-						</Route>
-					</Routes>
-				</Router>
-			</CssBaseline>
+		<ThemeProvider>
+			<Router>
+				<Routes>
+					<Route path="/" element={<Layout />}>
+						<Route
+							path="/"
+							element={
+								listToken ? (
+									<Navigate to="/list" />
+								) : (
+									<Home setListToken={setListToken} />
+								)
+							}
+						/>
+						<Route
+							path="/list"
+							element={
+								listToken ? (
+									<List data={data} listToken={listToken} />
+								) : (
+									<Navigate to="/" />
+								)
+							}
+						/>
+						<Route
+							path="/add-item"
+							element={<AddItem data={data} listToken={listToken} />}
+						/>
+					</Route>
+				</Routes>
+			</Router>
 		</ThemeProvider>
 	);
 }
