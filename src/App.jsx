@@ -10,9 +10,13 @@ import { AddItem, Home, Layout, List } from './views';
 
 import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { themeSettings } from './Theme/themeSettings';
 
 export function App() {
 	const [data, setData] = useState([]);
+	const theme = createTheme(themeSettings);
+
 	/**
 	 * Here, we're using a custom hook to create `listToken` and a function
 	 * that can be used to update `listToken` later.
@@ -53,35 +57,39 @@ export function App() {
 	}, [listToken]);
 
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<Layout />}>
-					<Route
-						path="/"
-						element={
-							listToken ? (
-								<Navigate to="/list" />
-							) : (
-								<Home setListToken={setListToken} />
-							)
-						}
-					/>
-					<Route
-						path="/list"
-						element={
-							listToken ? (
-								<List data={data} listToken={listToken} />
-							) : (
-								<Navigate to="/" />
-							)
-						}
-					/>
-					<Route
-						path="/add-item"
-						element={<AddItem data={data} listToken={listToken} />}
-					/>
-				</Route>
-			</Routes>
-		</Router>
+		<ThemeProvider theme={theme}>
+			<CssBaseline>
+				<Router>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route
+								path="/"
+								element={
+									listToken ? (
+										<Navigate to="/list" />
+									) : (
+										<Home setListToken={setListToken} />
+									)
+								}
+							/>
+							<Route
+								path="/list"
+								element={
+									listToken ? (
+										<List data={data} listToken={listToken} />
+									) : (
+										<Navigate to="/" />
+									)
+								}
+							/>
+							<Route
+								path="/add-item"
+								element={<AddItem data={data} listToken={listToken} />}
+							/>
+						</Route>
+					</Routes>
+				</Router>
+			</CssBaseline>
+		</ThemeProvider>
 	);
 }
