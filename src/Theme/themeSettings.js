@@ -2,19 +2,18 @@ import { colors } from './colors';
 
 const palette = {
 	primary: {
-		dark: colors.primary[200],
-		main: colors.primary[300],
-		light: colors.primary[800],
+		dark: colors.primary[500],
+		main: colors.primary[700],
+		light: colors.primary[900],
 	},
 	secondary: {
-		dark: colors.secondary[200],
-		main: colors.secondary[500],
-		light: colors.secondary[800],
+		dark: colors.secondary[500],
+		main: colors.secondary[700],
+		light: colors.secondary[900],
 	},
 	neutral: {
 		dark: colors.grey[100],
 		main: colors.grey[200],
-		mediumMain: colors.grey[300],
 		medium: colors.grey[400],
 		light: colors.grey[700],
 	},
