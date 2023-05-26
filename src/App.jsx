@@ -12,7 +12,7 @@ import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
 
 export function App() {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState([]);
 	/**
 	 * Here, we're using a custom hook to create `listToken` and a function
 	 * that can be used to update `listToken` later.
@@ -53,37 +53,35 @@ export function App() {
 	}, [listToken]);
 
 	return (
-		data && (
-			<Router>
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route
-							path="/"
-							element={
-								listToken ? (
-									<Navigate to="/list" />
-								) : (
-									<Home setListToken={setListToken} />
-								)
-							}
-						/>
-						<Route
-							path="/list"
-							element={
-								listToken ? (
-									<List data={data} listToken={listToken} />
-								) : (
-									<Navigate to="/" />
-								)
-							}
-						/>
-						<Route
-							path="/add-item"
-							element={<AddItem data={data} listToken={listToken} />}
-						/>
-					</Route>
-				</Routes>
-			</Router>
-		)
+		<Router>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route
+						path="/"
+						element={
+							listToken ? (
+								<Navigate to="/list" />
+							) : (
+								<Home setListToken={setListToken} />
+							)
+						}
+					/>
+					<Route
+						path="/list"
+						element={
+							listToken ? (
+								<List data={data} listToken={listToken} />
+							) : (
+								<Navigate to="/" />
+							)
+						}
+					/>
+					<Route
+						path="/add-item"
+						element={<AddItem data={data} listToken={listToken} />}
+					/>
+				</Route>
+			</Routes>
+		</Router>
 	);
 }
