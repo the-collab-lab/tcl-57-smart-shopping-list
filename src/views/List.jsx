@@ -1,4 +1,5 @@
 import { useState, useEffect, forwardRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ListItemComponent } from '../components';
 import { updateItem, deleteItem } from '../api/firebase.js';
 import { comparePurchaseUrgency } from '../utils/dates';
@@ -17,6 +18,7 @@ import {
 	DialogContentText,
 	Slide,
 	Box,
+	Icon,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -33,7 +35,7 @@ export function List({ data, listToken }) {
 	const [selectedItem, setSelectedItem] = useState('');
 	const [open, setOpen] = useState(false);
 
-	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
+	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore
 	persist when user unchecks item.
 	TO DO: Consider adding option for user to navigate home to create a new list.
 	TO DO: Redirect user to Add Item view if list is empty.*/
@@ -69,6 +71,7 @@ export function List({ data, listToken }) {
 	));
 
 	const listIsEmpty = Boolean(!data.length);
+	const noMatchingItems = Boolean(!filteredList.length);
 
 	//Delete Item functionality with showing and closing modal
 
@@ -122,6 +125,10 @@ export function List({ data, listToken }) {
 							size="small"
 							margin="normal"
 							color="primary"
+							error={noMatchingItems}
+							helperText={
+								noMatchingItems ? 'No items matching your search terms.' : null
+							}
 							sx={{ width: '30%' }}
 							onChange={(event) => setSearchTerm(event.target.value)}
 							InputProps={{
@@ -145,6 +152,35 @@ export function List({ data, listToken }) {
 						}}
 					>
 						{renderedList}
+						{noMatchingItems && (
+							<Container
+								sx={{
+									'&': {
+										display: 'flex',
+										flexDirection: 'column',
+										alignItems: 'center',
+									},
+								}}
+							>
+								<Link
+									to="/add-item"
+									state={{ itemUserSearchedFor: searchTerm }}
+									style={{ color: 'inherit', textDecoration: 'none' }}
+								>
+									<Button
+										type="button"
+										variant="contained"
+										size="large"
+										startIcon={<AddIcon />}
+									>
+										<Typography>
+											Add <span id="prospectiveItemName">{searchTerm}</span> to
+											your list?
+										</Typography>
+									</Button>
+								</Link>
+							</Container>
+						)}
 					</MuiListComponent>
 				</>
 			)}

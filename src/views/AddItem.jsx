@@ -10,9 +10,12 @@ import {
 	TextField,
 	Box,
 } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 export function AddItem({ listToken, data }) {
-	const [itemName, setItemName] = useState('');
+	const { state } = useLocation(); // React Router DOM state - persisted between List and Add-Item routing - leveraged to quickly add a non-existing item the user attemped to search for.
+	const itemUserSearchedFor = state?.itemUserSearchedFor;
+	const [itemName, setItemName] = useState(itemUserSearchedFor || ''); // If Add-Item was hailed from failed search attempt, initiate itemName to the item the user attempted to search for. Else, to ''.
 	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
 	const [error, setError] = useState(false);
 	const [userAlertMessage, setUserAlertMessage] = useState('');
@@ -64,6 +67,7 @@ export function AddItem({ listToken, data }) {
 						id="item-name-input"
 						label="Item name"
 						variant="outlined"
+						defaultValue={itemUserSearchedFor || null}
 						onChange={(e) => setItemName(e.target.value)}
 					/>
 					<RadioGroup>

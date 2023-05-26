@@ -51,23 +51,8 @@ export function Home({ setListToken }) {
 		}
 	}
 
-	const mainTheme = createTheme({
-		typography: {
-			fontFamily: 'Times New Roman',
-			fontSize: '10px',
-		},
-		palette: {
-			primary: {
-				main: '#EAE7D6',
-				background: {
-					default: '#EAE7D6',
-				},
-			},
-		},
-	});
-
 	return (
-		<ThemeProvider theme={mainTheme}>
+		<Box>
 			<img src={retro} className="logo" alt="logo"></img>
 			<div className="Home">
 				<Box sx={{ backgroundColor: 'EAE7D6' }}>
@@ -149,6 +134,6 @@ export function Home({ setListToken }) {
 					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 				</Box>
 			</div>
-		</ThemeProvider>
+		</Box>
 	);
 }

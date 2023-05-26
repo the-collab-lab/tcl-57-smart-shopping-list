@@ -20,11 +20,10 @@ import './Layout.css';
 
 export function Layout() {
 	return (
-		<>
+		<Paper sx={{ minHeight: '100dvh' }}>
 			<Container
 				maxWidth="false"
 				sx={{
-					bgcolor: 'silver',
 					display: 'flex',
 					flexDirection: 'column',
 					maxWidth: '100%',
@@ -98,7 +97,6 @@ export function Layout() {
 				<Container
 					maxWidth="xl"
 					sx={{
-						bgcolor: 'white',
 						display: 'flex',
 						justifyContent: 'center',
 						pt: '25px',
@@ -109,6 +107,6 @@ export function Layout() {
 					</main>
 				</Container>
 			</Container>
-		</>
+		</Paper>
 	);
 }
