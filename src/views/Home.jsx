@@ -102,14 +102,6 @@ export function Home({ setListToken }) {
 							</Button>
 						</div>
 					</form>
-					{/* <div id="checklist">
-								<input id="01" type="checkbox" name="r" value="1" />
-								<label htmlFor="01">Bread</label>
-								<input id="02" type="checkbox" name="r" value="2" />
-								<label htmlFor="02">Cheese</label>
-								<input id="03" type="checkbox" name="r" value="3" />
-								<label htmlFor="03">Coffee</label>
-							</div> */}
 
 					<Container>
 						<div>
