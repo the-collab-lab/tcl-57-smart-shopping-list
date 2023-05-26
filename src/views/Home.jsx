@@ -81,7 +81,7 @@ export function Home({ setListToken }) {
 					<label htmlFor="tokenInput">Three word token:</label>
 				</Typography>
 
-				<div>
+				<Stack gap={2}>
 					<TextField
 						type="text"
 						id="tokenInput"
@@ -92,7 +92,7 @@ export function Home({ setListToken }) {
 					<Button variant="contained" size="large" type="submit">
 						<Typography variant="h2">Submit</Typography>
 					</Button>
-				</div>
+				</Stack>
 			</form>
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 		</Stack>
