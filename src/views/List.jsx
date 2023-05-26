@@ -93,7 +93,7 @@ export function List({ data, listToken }) {
 		<Box minHeight="100vh">
 			{listIsEmpty ? (
 				<Box display="flex" flexDirection="column">
-					<Typography variant="h6" paddingTop="75px" paddingBottom="50px">
+					<Typography variant="h2" paddingTop="75px" paddingBottom="50px">
 						Your list is currently empty.
 					</Typography>
 					{/* <Typography variant="body2">
