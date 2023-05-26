@@ -167,6 +167,7 @@ export function List({ data, listToken }) {
 								<Typography>No matching items found.</Typography>
 								<Link
 									to="/add-item"
+									state={{ itemUserSearchedFor: searchTerm }}
 									style={{ color: 'inherit', textDecoration: 'none' }}
 								>
 									<Button
