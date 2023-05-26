@@ -70,12 +70,13 @@ export function Home({ setListToken }) {
 					type="button"
 					variant="contained"
 					size="large"
+					sx={{
+						fontSize: '2em',
+						minWidth: '20ch',
+					}}
 					onClick={handleClick}
 				>
-					<Typography variant="h2" sx={{ textTransform: 'capitalize' }}>
-						{' '}
-						Create list
-					</Typography>
+					Create list
 				</Button>
 			</Stack>
 
@@ -83,29 +84,38 @@ export function Home({ setListToken }) {
 				<p> - or - </p>
 			</Typography>
 
-			<form onSubmit={handleSumbit}>
-				<Typography variant="h2">
-					<label htmlFor="tokenInput">Three word token:</label>
-				</Typography>
-
-				<Stack gap={1}>
+			<Box component="form" onSubmit={handleSumbit} sx={{ width: '100%' }}>
+				<Stack gap={1} alignItems="center">
+					<Typography variant="h2">
+						<label htmlFor="tokenInput">Three word token:</label>
+					</Typography>
 					<TextField
 						type="text"
 						id="tokenInput"
 						onChange={(event) => setUserTokenInput(event.target.value)}
 						required
-						sx={{
-							width: '40ch',
+						inputProps={{
+							sx: {
+								fontSize: '2em',
+								width: '20ch',
+								maxWidth: '100dvw',
+							},
 						}}
 					/>
 
-					<Button variant="contained" size="large" type="submit">
-						<Typography variant="h2" sx={{ textTransform: 'none' }}>
-							Join List
-						</Typography>
+					<Button
+						variant="contained"
+						size="large"
+						type="submit"
+						sx={{
+							fontSize: '2em',
+							minWidth: '20ch',
+						}}
+					>
+						Join List
 					</Button>
 				</Stack>
-			</form>
+			</Box>
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 		</Stack>
 	);
