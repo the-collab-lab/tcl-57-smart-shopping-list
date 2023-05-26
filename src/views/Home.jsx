@@ -9,6 +9,7 @@ import {
 	Typography,
 	createTheme,
 	Container,
+	Stack,
 } from '@mui/material';
 
 import './Home.css';
@@ -52,7 +53,7 @@ export function Home({ setListToken }) {
 	}
 
 	return (
-		<Box>
+		<Stack>
 			<img src={retro} className="logo" alt="logo"></img>
 			<div className="Home">
 				<Box sx={{ backgroundColor: 'EAE7D6' }}>
@@ -67,62 +68,48 @@ export function Home({ setListToken }) {
 						</Typography>
 					</Box>
 
-					<Grid
-						container
-						spacing={30}
-						direction="row"
-						justifyContent="center"
-						alignItems="center"
-						alignContent={'center'}
-						xs={12}
+					<Typography variant="h2">
+						You can create a new shopping list, or type in a token to view an
+						existing list.
+					</Typography>
+					<Button
+						type="button"
+						variant="contained"
+						size="large"
+						onClick={handleClick}
 					>
-						<Grid item xs={6} margin={'16px'}>
-							<Typography variant="h2">
-								You can create a new shopping list, or type in a token to view
-								an existing list.
-							</Typography>
-							<Button
-								type="button"
-								variant="contained"
-								size="large"
-								onClick={handleClick}
-							>
-								<Typography variant="h2"> Create new list</Typography>
+						<Typography variant="h2"> Create new list</Typography>
+					</Button>
+					<Typography variant="h2">
+						<p> - or - </p>
+					</Typography>
+
+					<form onSubmit={handleSumbit}>
+						<Typography variant="h2">
+							<label htmlFor="tokenInput">Three word token:</label>
+						</Typography>
+
+						<div>
+							<TextField
+								type="text"
+								id="tokenInput"
+								onChange={(event) => setUserTokenInput(event.target.value)}
+								required
+							/>
+
+							<Button variant="contained" size="large" type="submit">
+								<Typography variant="h2">Submit</Typography>
 							</Button>
-							<Typography variant="h2">
-								<p> - or - </p>
-							</Typography>
-
-							<form onSubmit={handleSumbit}>
-								<Typography variant="h2">
-									<label htmlFor="tokenInput">Three word token:</label>
-								</Typography>
-
-								<div>
-									<TextField
-										type="text"
-										id="tokenInput"
-										onChange={(event) => setUserTokenInput(event.target.value)}
-										required
-									/>
-
-									<Button variant="contained" size="large" type="submit">
-										<Typography variant="h2">Submit</Typography>
-									</Button>
-								</div>
-							</form>
-						</Grid>
-						<Grid item width={50} margin={'16px'}>
-							<div id="checklist">
+						</div>
+					</form>
+					{/* <div id="checklist">
 								<input id="01" type="checkbox" name="r" value="1" />
 								<label htmlFor="01">Bread</label>
 								<input id="02" type="checkbox" name="r" value="2" />
 								<label htmlFor="02">Cheese</label>
 								<input id="03" type="checkbox" name="r" value="3" />
 								<label htmlFor="03">Coffee</label>
-							</div>
-						</Grid>
-					</Grid>
+							</div> */}
 
 					<Container>
 						<div>
@@ -134,6 +121,6 @@ export function Home({ setListToken }) {
 					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 				</Box>
 			</div>
-		</Box>
+		</Stack>
 	);
 }
