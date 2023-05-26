@@ -157,14 +157,9 @@ export function List({ data, listToken }) {
 										display: 'flex',
 										flexDirection: 'column',
 										alignItems: 'center',
-										border: '1px solid red',
 									},
 								}}
 							>
-								<Icon>
-									<SearchIcon />
-								</Icon>
-								<Typography>No matching items found.</Typography>
 								<Link
 									to="/add-item"
 									state={{ itemUserSearchedFor: searchTerm }}
@@ -176,8 +171,10 @@ export function List({ data, listToken }) {
 										size="large"
 										startIcon={<AddIcon />}
 									>
-										Add <span id="prospectiveItemName">{searchTerm}</span> to
-										your list?
+										<Typography>
+											Add <span id="prospectiveItemName">{searchTerm}</span> to
+											your list?
+										</Typography>
 									</Button>
 								</Link>
 							</Container>
