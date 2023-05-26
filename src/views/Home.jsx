@@ -3,16 +3,12 @@ import { Navigate } from 'react-router-dom';
 import {
 	Box,
 	Button,
-	Grid,
 	TextField,
-	ThemeProvider,
 	Typography,
-	createTheme,
 	Container,
 	Stack,
 } from '@mui/material';
 
-import './Home.css';
 import retro from '../retro.png';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
