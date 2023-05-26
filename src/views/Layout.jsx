@@ -18,7 +18,7 @@ import './Layout.css';
 
 //Note: color and borders are used for visualization purpose only. Will change colors of app features later in development of app styling.
 
-export function Layout() {
+export function Layout({ listToken }) {
 	return (
 		<>
 			<Container
@@ -60,15 +60,25 @@ export function Layout() {
 										color="white"
 										separator=""
 									>
-										<NavLink to="/" className="Nav-link">
+										{/* <NavLink to="/" className="Nav-link">
 											Home
-										</NavLink>
-										<NavLink to="/list" className="Nav-link">
-											List
-										</NavLink>
-										<NavLink to="/add-item" className="Nav-link">
-											Add Item
-										</NavLink>
+										</NavLink> */}
+										[
+										{listToken ? (
+											<NavLink to="/list" className="Nav-link">
+												List
+											</NavLink>
+										) : (
+											<></>
+										)}
+										{listToken ? (
+											<NavLink to="/add-item" className="Nav-link">
+												Add Item
+											</NavLink>
+										) : (
+											<></>
+										)}
+										]
 									</Breadcrumbs>
 								</div>
 
