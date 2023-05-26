@@ -20,11 +20,10 @@ import './Layout.css';
 
 export function Layout({ listToken }) {
 	return (
-		<>
+		<Paper sx={{ minHeight: '100dvh' }}>
 			<Container
 				maxWidth="false"
 				sx={{
-					bgcolor: 'silver',
 					display: 'flex',
 					flexDirection: 'column',
 					maxWidth: '100%',
@@ -108,7 +107,6 @@ export function Layout({ listToken }) {
 				<Container
 					maxWidth="xl"
 					sx={{
-						bgcolor: 'white',
 						display: 'flex',
 						justifyContent: 'center',
 						pt: '25px',
@@ -119,6 +117,6 @@ export function Layout({ listToken }) {
 					</main>
 				</Container>
 			</Container>
-		</>
+		</Paper>
 	);
 }

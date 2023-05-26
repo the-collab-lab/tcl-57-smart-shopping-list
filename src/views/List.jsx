@@ -35,7 +35,7 @@ export function List({ data, listToken }) {
 	const [selectedItem, setSelectedItem] = useState('');
 	const [open, setOpen] = useState(false);
 
-	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore 
+	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore
 	persist when user unchecks item.
 	TO DO: Consider adding option for user to navigate home to create a new list.
 	TO DO: Redirect user to Add Item view if list is empty.*/
