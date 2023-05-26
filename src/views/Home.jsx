@@ -99,13 +99,6 @@ export function Home({ setListToken }) {
 						</div>
 					</form>
 
-					<Container>
-						<div>
-							<button onClick={toggleModal}>Learn More</button>
-							{isModalOpen && <Modal closeModal={toggleModal} />}
-						</div>
-					</Container>
-
 					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 				</Box>
 			</div>
