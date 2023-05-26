@@ -57,16 +57,7 @@ export function Home({ setListToken }) {
 				height="284"
 				width="284"
 			></img>
-			<Box
-				display="flex"
-				justifyContent="center"
-				alignItems="center"
-				minHeight="30vh"
-			>
-				<Typography variant="h1">
-					Welcome to your Smart Shopping List!
-				</Typography>
-			</Box>
+			<Typography variant="h1">Welcome to your Smart Shopping List!</Typography>
 
 			<Typography variant="h2">
 				You can create a new shopping list, or type in a token to view an
@@ -80,6 +71,7 @@ export function Home({ setListToken }) {
 			>
 				<Typography variant="h2"> Create new list</Typography>
 			</Button>
+
 			<Typography variant="h2">
 				<p> - or - </p>
 			</Typography>
@@ -102,7 +94,6 @@ export function Home({ setListToken }) {
 					</Button>
 				</div>
 			</form>
-
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 		</Stack>
 	);
