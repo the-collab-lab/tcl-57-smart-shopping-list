@@ -20,7 +20,6 @@ export function AddItem({ listToken, data }) {
 	const [error, setError] = useState(false);
 	const [userAlertMessage, setUserAlertMessage] = useState('');
 	const normalizedItemNameRegex = /[\s\W]|_+|s$/g; //Targets all spaces, non-letter characters, and 's' character at the end of the string
-	console.log(`Item name: ${itemName}`);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
