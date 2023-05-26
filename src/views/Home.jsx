@@ -57,20 +57,27 @@ export function Home({ setListToken }) {
 				height="284"
 				width="284"
 			></img>
-			<Typography variant="h1">Welcome to your Smart Shopping List!</Typography>
 
-			<Typography variant="h2">
-				You can create a new shopping list, or type in a token to view an
-				existing list.
-			</Typography>
-			<Button
-				type="button"
-				variant="contained"
-				size="large"
-				onClick={handleClick}
-			>
-				<Typography variant="h2"> Create new list</Typography>
-			</Button>
+			<Stack gap={2} alignItems="center">
+				<Typography variant="h1" marginBottom={1}>
+					Welcome to your Smart Shopping List!
+				</Typography>
+				<Typography variant="h2">
+					You can create a new shopping list, or type in a token to view an
+					existing list.
+				</Typography>
+				<Button
+					type="button"
+					variant="contained"
+					size="large"
+					onClick={handleClick}
+				>
+					<Typography variant="h2" sx={{ textTransform: 'capitalize' }}>
+						{' '}
+						Create list
+					</Typography>
+				</Button>
+			</Stack>
 
 			<Typography variant="h2">
 				<p> - or - </p>
@@ -81,16 +88,21 @@ export function Home({ setListToken }) {
 					<label htmlFor="tokenInput">Three word token:</label>
 				</Typography>
 
-				<Stack gap={2}>
+				<Stack gap={1}>
 					<TextField
 						type="text"
 						id="tokenInput"
 						onChange={(event) => setUserTokenInput(event.target.value)}
 						required
+						sx={{
+							width: '40ch',
+						}}
 					/>
 
 					<Button variant="contained" size="large" type="submit">
-						<Typography variant="h2">Submit</Typography>
+						<Typography variant="h2" sx={{ textTransform: 'none' }}>
+							Join List
+						</Typography>
 					</Button>
 				</Stack>
 			</form>
