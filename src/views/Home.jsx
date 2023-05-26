@@ -49,59 +49,61 @@ export function Home({ setListToken }) {
 	}
 
 	return (
-		<Stack>
-			<img src={retro} className="logo" alt="logo"></img>
-			<div className="Home">
-				<Box sx={{ backgroundColor: 'EAE7D6' }}>
-					<Box
-						display="flex"
-						justifyContent="center"
-						alignItems="center"
-						minHeight="30vh"
-					>
-						<Typography variant="h1">
-							Welcome to your Smart Shopping List!
-						</Typography>
-					</Box>
+		<Stack direction="column" justifyContent="center" alignItems="center">
+			<img
+				src={retro}
+				className="logo"
+				alt="logo"
+				height="284"
+				width="284"
+			></img>
+			<Box
+				display="flex"
+				justifyContent="center"
+				alignItems="center"
+				minHeight="30vh"
+			>
+				<Typography variant="h1">
+					Welcome to your Smart Shopping List!
+				</Typography>
+			</Box>
 
-					<Typography variant="h2">
-						You can create a new shopping list, or type in a token to view an
-						existing list.
-					</Typography>
-					<Button
-						type="button"
-						variant="contained"
-						size="large"
-						onClick={handleClick}
-					>
-						<Typography variant="h2"> Create new list</Typography>
+			<Typography variant="h2">
+				You can create a new shopping list, or type in a token to view an
+				existing list.
+			</Typography>
+			<Button
+				type="button"
+				variant="contained"
+				size="large"
+				onClick={handleClick}
+			>
+				<Typography variant="h2"> Create new list</Typography>
+			</Button>
+			<Typography variant="h2">
+				<p> - or - </p>
+			</Typography>
+
+			<form onSubmit={handleSumbit}>
+				<Typography variant="h2">
+					<label htmlFor="tokenInput">Three word token:</label>
+				</Typography>
+
+				<div>
+					<TextField
+						type="text"
+						id="tokenInput"
+						onChange={(event) => setUserTokenInput(event.target.value)}
+						required
+					/>
+
+					<Button variant="contained" size="large" type="submit">
+						<Typography variant="h2">Submit</Typography>
 					</Button>
-					<Typography variant="h2">
-						<p> - or - </p>
-					</Typography>
+				</div>
+			</form>
 
-					<form onSubmit={handleSumbit}>
-						<Typography variant="h2">
-							<label htmlFor="tokenInput">Three word token:</label>
-						</Typography>
-
-						<div>
-							<TextField
-								type="text"
-								id="tokenInput"
-								onChange={(event) => setUserTokenInput(event.target.value)}
-								required
-							/>
-
-							<Button variant="contained" size="large" type="submit">
-								<Typography variant="h2">Submit</Typography>
-							</Button>
-						</div>
-					</form>
-
-					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
-				</Box>
-			</div>
+			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
 		</Stack>
 	);
 }
