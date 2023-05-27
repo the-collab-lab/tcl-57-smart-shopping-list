@@ -42,7 +42,7 @@ export function Layout({ listToken }) {
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
 					<AppBar position="relative">
 						<Container maxWidth="xl">
-							<Toolbar>
+							<Toolbar disableGutters>
 								{/* This is the App Icon Menu */}
 								{listToken ? (
 									<Box
@@ -56,7 +56,7 @@ export function Layout({ listToken }) {
 											onClick={handleOpenNavMenu}
 											color="inherit"
 										>
-											<MenuIcon />
+											<MenuIcon sx={{ mr: 1 }} />
 										</IconButton>
 
 										{/* This is the menu displayed after clicking on the icon */}
