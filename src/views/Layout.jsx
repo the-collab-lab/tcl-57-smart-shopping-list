@@ -42,7 +42,6 @@ export function Layout({ listToken }) {
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
 					<AppBar position="relative">
 						<Container maxWidth="xl">
-							{/* <Toolbar sx={{ justifyContent: 'space-between' }}> */}
 							<Toolbar>
 								{/* This is the App Icon Menu */}
 								{listToken ? (
@@ -115,27 +114,6 @@ export function Layout({ listToken }) {
 								>
 									Smart Shopping List
 								</Typography>
-
-								{/* This is the title displayed on the right for mobile version */}
-								{/* <BreakfastDiningOutlinedIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1}}/>
-								<Typography
-									variant="h4"
-									// noWrap
-									component="a"
-									sx={{
-										mr: 2,
-										display: { xs: 'flex', md: 'none' },
-										// justifyContent: 'center',
-										flexGrow: 0,
-										fontFamily: 'monospace',
-										fontWeight: 700,
-										letterSpacing: '.3rem',
-										color: 'inherit',
-										textDecoration: 'none',
-									}}
-								>
-									Smart Shopping List
-								</Typography> */}
 
 								{/* These are the Nav Links that display on right side for medium and large screens*/}
 								{listToken ? (
