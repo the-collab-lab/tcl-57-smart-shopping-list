@@ -9,7 +9,9 @@ import {
 	Stack,
 } from '@mui/material';
 
-import retro from '../retro.png';
+import logoFlat from '../logo-flat.png';
+import logoShadow from '../logo-shadow.png';
+
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
 import { validateToken } from '../api/firebase';
@@ -50,13 +52,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<Stack direction="column" justifyContent="center" alignItems="center">
-			<img
-				src={retro}
-				className="logo"
-				alt="logo"
-				height="284"
-				width="284"
-			></img>
+			<img src={logoFlat} alt="logo" height="300" width="300" />
 
 			<Stack gap={2} alignItems="center">
 				<Typography variant="h1" marginBottom={1}>
