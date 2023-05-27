@@ -30,7 +30,7 @@ export function Layout({ listToken }) {
 							<Toolbar sx={{ justifyContent: 'space-between' }}>
 								{/* This is the title displayed on the left for medium to large screen sizes */}
 								<Typography
-									variant="h5"
+									variant="h3"
 									noWrap
 									component="a"
 									href="/"
@@ -60,6 +60,30 @@ export function Layout({ listToken }) {
 									>
 										<MenuIcon />
 									</IconButton>
+									{/* <Menu
+									id="menu-appbar"
+									anchorEl={anchorElNav}
+									anchorOrigin={{
+										vertical: 'bottom',
+										horizontal: 'left',
+									}}
+									keepMounted
+									transformOrigin={{
+										vertical: 'top',
+										horizontal: 'left',
+									}}
+									open={Boolean(anchorElNav)}
+									onClose={handleCloseNavMenu}
+									sx={{
+										display: { xs: 'block', md: 'none' },
+									}}
+									>
+									{pages.map((page) => (
+										<MenuItem key={page} onClick={handleCloseNavMenu}>
+										<Typography textAlign="center">{page}</Typography>
+										</MenuItem>
+									))}
+									</Menu> */}
 								</Box>
 
 								{/* These are the Nav Links */}
@@ -69,6 +93,7 @@ export function Layout({ listToken }) {
 											aria-label="breadcrumb"
 											color="white"
 											separator=""
+											sx={{ display: { xs: 'none', md: 'block' } }}
 										>
 											<NavLink to="/list" className="Nav-link">
 												List
@@ -84,8 +109,8 @@ export function Layout({ listToken }) {
 
 								{/* This is the title displayed on the right for mobile version */}
 								<Typography
-									variant="h6"
-									noWrap
+									variant="h4"
+									// noWrap
 									component="a"
 									sx={{
 										mr: 2,
