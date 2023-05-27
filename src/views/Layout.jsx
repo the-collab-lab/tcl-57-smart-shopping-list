@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { useState } from 'react';
 import {
 	Container,
 	Typography,
@@ -8,11 +9,30 @@ import {
 	Breadcrumbs,
 	Box,
 	IconButton,
+	Menu,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import './Layout.css';
 
 export function Layout({ listToken }) {
+	const [anchorElNav, setAnchorElNav] = useState(null);
+	//   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+	const handleOpenNavMenu = (event) => {
+		setAnchorElNav(event.currentTarget);
+	};
+	//   const handleOpenUserMenu = (event) => {
+	//     setAnchorElUser(event.currentTarget);
+	//   };
+
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null);
+	};
+
+	//   const handleCloseUserMenu = () => {
+	//     setAnchorElUser(null);
+	//   };
+
 	return (
 		<Paper sx={{ minHeight: '100dvh' }}>
 			<Container
@@ -55,35 +75,42 @@ export function Layout({ listToken }) {
 										aria-label="account of current user"
 										aria-controls="menu-appbar"
 										aria-haspopup="true"
-										// onClick={handleOpenNavMenu}
+										onClick={handleOpenNavMenu}
 										color="inherit"
 									>
 										<MenuIcon />
 									</IconButton>
-									{/* <Menu
-									id="menu-appbar"
-									anchorEl={anchorElNav}
-									anchorOrigin={{
-										vertical: 'bottom',
-										horizontal: 'left',
-									}}
-									keepMounted
-									transformOrigin={{
-										vertical: 'top',
-										horizontal: 'left',
-									}}
-									open={Boolean(anchorElNav)}
-									onClose={handleCloseNavMenu}
-									sx={{
-										display: { xs: 'block', md: 'none' },
-									}}
+									{/* //This is the menu displayed after clicking on the icon */}
+									<Menu
+										id="menu-appbar"
+										anchorEl={anchorElNav}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'left',
+										}}
+										keepMounted
+										transformOrigin={{
+											vertical: 'top',
+											horizontal: 'left',
+										}}
+										open={Boolean(anchorElNav)}
+										onClose={handleCloseNavMenu}
+										sx={{
+											display: { xs: 'block', md: 'none' },
+										}}
 									>
-									{pages.map((page) => (
+										{/* <NavLink to="/list" className="Nav-link">
+											List
+										</NavLink>
+										<NavLink to="/add-item" className="Nav-link">
+											Add Item
+										</NavLink> */}
+										{/* {pages.map((page) => (
 										<MenuItem key={page} onClick={handleCloseNavMenu}>
 										<Typography textAlign="center">{page}</Typography>
 										</MenuItem>
-									))}
-									</Menu> */}
+									))} */}
+									</Menu>
 								</Box>
 
 								{/* These are the Nav Links */}
