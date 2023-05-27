@@ -50,11 +50,10 @@ export function Home({ setListToken }) {
 
 			<Stack gap={2} alignItems="center">
 				<Typography variant="h1" marginBottom={1}>
-					Welcome to your Smart Shopping List!
+					The list that knows when it's time to stock up!
 				</Typography>
 				<Typography variant="h2">
-					You can create a new shopping list, or type in a token to view an
-					existing list.
+					Start by creating a new shopping list or joining an existing one.
 				</Typography>
 				<Button
 					type="button"
