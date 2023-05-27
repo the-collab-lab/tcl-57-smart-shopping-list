@@ -10,28 +10,21 @@ import {
 	Box,
 	IconButton,
 	Menu,
+	MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import './Layout.css';
 
 export function Layout({ listToken }) {
 	const [anchorElNav, setAnchorElNav] = useState(null);
-	//   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
 	};
-	//   const handleOpenUserMenu = (event) => {
-	//     setAnchorElUser(event.currentTarget);
-	//   };
 
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
 	};
-
-	//   const handleCloseUserMenu = () => {
-	//     setAnchorElUser(null);
-	//   };
 
 	return (
 		<Paper sx={{ minHeight: '100dvh' }}>
@@ -44,6 +37,7 @@ export function Layout({ listToken }) {
 					minHeight: '100%',
 				}}
 			>
+				{/* App Bar begins here */}
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
 					<AppBar position="relative">
 						<Container maxWidth="xl">
@@ -99,17 +93,17 @@ export function Layout({ listToken }) {
 											display: { xs: 'block', md: 'none' },
 										}}
 									>
-										{/* <NavLink to="/list" className="Nav-link">
-											List
-										</NavLink>
-										<NavLink to="/add-item" className="Nav-link">
-											Add Item
-										</NavLink> */}
-										{/* {pages.map((page) => (
-										<MenuItem key={page} onClick={handleCloseNavMenu}>
-										<Typography textAlign="center">{page}</Typography>
+										<MenuItem onClick={handleCloseNavMenu}>
+											<NavLink to="/list" className="Menu-nav-link">
+												List
+											</NavLink>
 										</MenuItem>
-									))} */}
+
+										<MenuItem onClick={handleCloseNavMenu}>
+											<NavLink to="/add-item" className="Menu-nav-link">
+												Add Item
+											</NavLink>
+										</MenuItem>
 									</Menu>
 								</Box>
 
