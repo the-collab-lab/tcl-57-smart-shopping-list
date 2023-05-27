@@ -117,23 +117,21 @@ export function Layout({ listToken }) {
 
 								{/* These are the Nav Links that display on right side for medium and large screens*/}
 								{listToken ? (
-									<div>
-										<Breadcrumbs
-											aria-label="breadcrumb"
-											color="white"
-											separator=""
-											sx={{ display: { xs: 'none', md: 'block' } }}
-										>
-											<NavLink to="/list" className="Nav-link">
-												List
-											</NavLink>
-											<NavLink to="/add-item" className="Nav-link">
-												Add Item
-											</NavLink>
-										</Breadcrumbs>
-									</div>
+									<Breadcrumbs
+										aria-label="breadcrumb"
+										color="white"
+										separator=""
+										sx={{ display: { xs: 'none', md: 'block' } }}
+									>
+										<NavLink to="/list" className="Nav-link">
+											List
+										</NavLink>
+										<NavLink to="/add-item" className="Nav-link">
+											Add Item
+										</NavLink>
+									</Breadcrumbs>
 								) : (
-									<div></div>
+									<Breadcrumbs></Breadcrumbs>
 								)}
 							</Toolbar>
 						</Container>
