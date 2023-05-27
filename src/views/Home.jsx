@@ -52,9 +52,7 @@ export function Home({ setListToken }) {
 				<Typography variant="h1" marginBottom={1}>
 					The list that knows when it's time to stock up!
 				</Typography>
-				<Typography variant="h2">
-					Start by creating a new shopping list or joining an existing one.
-				</Typography>
+				<Typography variant="h2">Create a new shopping list.</Typography>
 				<Button
 					type="button"
 					variant="contained"
@@ -76,18 +74,23 @@ export function Home({ setListToken }) {
 			<Box component="form" onSubmit={handleSumbit} sx={{ width: '100%' }}>
 				<Stack gap={1} alignItems="center">
 					<Typography variant="h2">
-						<label htmlFor="tokenInput">Three word token:</label>
+						<label htmlFor="tokenInput">Join an existing list.</label>
 					</Typography>
 					<TextField
 						type="text"
 						id="tokenInput"
+						label="three word token"
 						onChange={(event) => setUserTokenInput(event.target.value)}
-						required
 						inputProps={{
 							sx: {
 								fontSize: '2em',
 								width: '20ch',
 								maxWidth: '100dvw',
+							},
+						}}
+						sx={{
+							'& .MuiInputLabel-root, fieldset': {
+								fontSize: '2em',
 							},
 						}}
 					/>
