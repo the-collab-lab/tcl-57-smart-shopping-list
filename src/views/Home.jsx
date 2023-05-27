@@ -17,16 +17,10 @@ import { useState } from 'react';
 import { validateToken } from '../api/firebase';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
-import Modal from '../views/Modal';
 
 export function Home({ setListToken }) {
 	const [userTokenInput, setUserTokenInput] = useState('');
 	const [tokenExists, setTokenExists] = useState(false);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const toggleModal = () => {
-		setIsModalOpen(!isModalOpen);
-	};
 
 	function handleClick() {
 		const token = generateToken();
