@@ -25,6 +25,7 @@ export function Layout({ listToken }) {
 					<AppBar position="relative">
 						<Container maxWidth="xl">
 							<Toolbar sx={{ justifyContent: 'space-between' }}>
+								{/* This is the title displayed on the left for medium to large screen sizes */}
 								<Typography
 									variant="h5"
 									noWrap
@@ -42,9 +43,10 @@ export function Layout({ listToken }) {
 								>
 									Smart Shopping List
 								</Typography>
+
+								{/* These are the Nav Links */}
 								{listToken ? (
 									<div>
-										{/* Consider using drawer or nav icon for mobile screen size */}
 										<Breadcrumbs
 											aria-label="breadcrumb"
 											color="white"
@@ -62,6 +64,7 @@ export function Layout({ listToken }) {
 									<div></div>
 								)}
 
+								{/* This is the title displayed on the right for mobile version */}
 								<Typography
 									variant="h6"
 									noWrap
@@ -85,6 +88,7 @@ export function Layout({ listToken }) {
 					</AppBar>
 				</Container>
 
+				{/* Main content area for each page */}
 				<Container
 					maxWidth="xl"
 					sx={{
