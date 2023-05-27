@@ -58,7 +58,7 @@ export function App() {
 		<ThemeProvider>
 			<Router>
 				<Routes>
-					<Route path="/" element={<Layout />}>
+					<Route path="/" element={<Layout listToken={listToken} />}>
 						<Route
 							path="/"
 							element={
@@ -81,7 +81,13 @@ export function App() {
 						/>
 						<Route
 							path="/add-item"
-							element={<AddItem data={data} listToken={listToken} />}
+							element={
+								listToken ? (
+									<AddItem data={data} listToken={listToken} />
+								) : (
+									<Navigate to="/" />
+								)
+							}
 						/>
 					</Route>
 				</Routes>

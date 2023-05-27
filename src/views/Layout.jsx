@@ -6,19 +6,10 @@ import {
 	AppBar,
 	Toolbar,
 	Breadcrumbs,
-	Link,
-	Menu,
-	MenuItem,
-	Box,
-	Button,
-	IconButton,
 } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
 import './Layout.css';
 
-//Note: color and borders are used for visualization purpose only. Will change colors of app features later in development of app styling.
-
-export function Layout() {
+export function Layout({ listToken }) {
 	return (
 		<Paper sx={{ minHeight: '100dvh' }}>
 			<Container
@@ -51,25 +42,25 @@ export function Layout() {
 								>
 									Smart Shopping List
 								</Typography>
-
-								<div>
-									{/* Consider using drawer or nav icon for mobile screen size */}
-									<Breadcrumbs
-										aria-label="breadcrumb"
-										color="white"
-										separator=""
-									>
-										<NavLink to="/" className="Nav-link">
-											Home
-										</NavLink>
-										<NavLink to="/list" className="Nav-link">
-											List
-										</NavLink>
-										<NavLink to="/add-item" className="Nav-link">
-											Add Item
-										</NavLink>
-									</Breadcrumbs>
-								</div>
+								{listToken ? (
+									<div>
+										{/* Consider using drawer or nav icon for mobile screen size */}
+										<Breadcrumbs
+											aria-label="breadcrumb"
+											color="white"
+											separator=""
+										>
+											<NavLink to="/list" className="Nav-link">
+												List
+											</NavLink>
+											<NavLink to="/add-item" className="Nav-link">
+												Add Item
+											</NavLink>
+										</Breadcrumbs>
+									</div>
+								) : (
+									<div></div>
+								)}
 
 								<Typography
 									variant="h6"
