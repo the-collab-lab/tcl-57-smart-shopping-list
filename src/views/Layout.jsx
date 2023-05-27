@@ -6,7 +6,10 @@ import {
 	AppBar,
 	Toolbar,
 	Breadcrumbs,
+	Box,
+	IconButton,
 } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import './Layout.css';
 
 export function Layout({ listToken }) {
@@ -43,6 +46,21 @@ export function Layout({ listToken }) {
 								>
 									Smart Shopping List
 								</Typography>
+
+								{/* This is the App Icon Menu */}
+
+								<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+									<IconButton
+										size="large"
+										aria-label="account of current user"
+										aria-controls="menu-appbar"
+										aria-haspopup="true"
+										// onClick={handleOpenNavMenu}
+										color="inherit"
+									>
+										<MenuIcon />
+									</IconButton>
+								</Box>
 
 								{/* These are the Nav Links */}
 								{listToken ? (
