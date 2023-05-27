@@ -62,52 +62,59 @@ export function Layout({ listToken }) {
 								</Typography>
 
 								{/* This is the App Icon Menu */}
+								{listToken ? (
+									<div>
+										<Box
+											sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+										>
+											<IconButton
+												size="large"
+												aria-label="account of current user"
+												aria-controls="menu-appbar"
+												aria-haspopup="true"
+												onClick={handleOpenNavMenu}
+												color="inherit"
+											>
+												<MenuIcon />
+											</IconButton>
+											{/* This is the menu displayed after clicking on the icon */}
+											<Menu
+												id="menu-appbar"
+												anchorEl={anchorElNav}
+												anchorOrigin={{
+													vertical: 'bottom',
+													horizontal: 'left',
+												}}
+												keepMounted
+												transformOrigin={{
+													vertical: 'top',
+													horizontal: 'left',
+												}}
+												open={Boolean(anchorElNav)}
+												onClose={handleCloseNavMenu}
+												sx={{
+													display: { xs: 'block', md: 'none' },
+												}}
+											>
+												<MenuItem onClick={handleCloseNavMenu}>
+													<NavLink to="/list" className="Menu-nav-link">
+														List
+													</NavLink>
+												</MenuItem>
 
-								<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-									<IconButton
-										size="large"
-										aria-label="account of current user"
-										aria-controls="menu-appbar"
-										aria-haspopup="true"
-										onClick={handleOpenNavMenu}
-										color="inherit"
-									>
-										<MenuIcon />
-									</IconButton>
-									{/* //This is the menu displayed after clicking on the icon */}
-									<Menu
-										id="menu-appbar"
-										anchorEl={anchorElNav}
-										anchorOrigin={{
-											vertical: 'bottom',
-											horizontal: 'left',
-										}}
-										keepMounted
-										transformOrigin={{
-											vertical: 'top',
-											horizontal: 'left',
-										}}
-										open={Boolean(anchorElNav)}
-										onClose={handleCloseNavMenu}
-										sx={{
-											display: { xs: 'block', md: 'none' },
-										}}
-									>
-										<MenuItem onClick={handleCloseNavMenu}>
-											<NavLink to="/list" className="Menu-nav-link">
-												List
-											</NavLink>
-										</MenuItem>
+												<MenuItem onClick={handleCloseNavMenu}>
+													<NavLink to="/add-item" className="Menu-nav-link">
+														Add Item
+													</NavLink>
+												</MenuItem>
+											</Menu>
+										</Box>
+									</div>
+								) : (
+									<div></div>
+								)}
 
-										<MenuItem onClick={handleCloseNavMenu}>
-											<NavLink to="/add-item" className="Menu-nav-link">
-												Add Item
-											</NavLink>
-										</MenuItem>
-									</Menu>
-								</Box>
-
-								{/* These are the Nav Links */}
+								{/* These are the Nav Links that display on right side for medium and large screens*/}
 								{listToken ? (
 									<div>
 										<Breadcrumbs
