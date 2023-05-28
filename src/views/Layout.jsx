@@ -15,7 +15,7 @@ import {
 	useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import BreakfastDiningIcon from '@mui/icons-material/BreakfastDining';
+import BakeryDiningIcon from '@mui/icons-material/BakeryDining';
 import './Layout.css';
 
 export function Layout({ listToken }) {
@@ -59,7 +59,7 @@ export function Layout({ listToken }) {
 						<Container maxWidth="xl">
 							<Toolbar disableGutters>
 								{/* This is the title displayed on the left for medium to large screen sizes */}
-								<BreakfastDiningIcon sx={{ mr: 1 }} fontSize="large" />
+								<BakeryDiningIcon sx={{ mr: 1 }} fontSize="large" />
 								<Typography
 									variant="h3"
 									component="a"
