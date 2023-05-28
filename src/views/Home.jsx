@@ -9,6 +9,7 @@ import {
 	useMediaQuery,
 } from '@mui/material';
 
+import logo from '../logo.png';
 import logoFlat from '../logo-flat.png';
 import logoShadow from '../logo-shadow.png';
 
@@ -47,11 +48,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<Stack direction="column" justifyContent="center" alignItems="center">
-			<img
-				src={logoFlat}
-				alt="logo"
-				width={matchesMobileDevice ? '200' : '300'}
-			/>
+			<img src={logo} alt="logo" width={matchesMobileDevice ? '200' : '300'} />
 
 			<Stack gap={2} alignItems="center">
 				<Typography variant="h1" marginBottom={1}>
