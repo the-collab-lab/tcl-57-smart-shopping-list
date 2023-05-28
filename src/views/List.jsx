@@ -132,7 +132,7 @@ export function List({ data, listToken }) {
 								noMatchingItems ? 'No items matching your search terms.' : null
 							}
 							sx={{
-								width: matchesMobileDevice ? '100%' : '30%',
+								width: matchesMobileDevice ? '100%' : '500px',
 								minWidth: '250px',
 							}}
 							onChange={(event) => setSearchTerm(event.target.value)}
