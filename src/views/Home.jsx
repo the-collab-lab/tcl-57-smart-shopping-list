@@ -1,33 +1,19 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Navigate } from 'react-router-dom';
-import {
-	Box,
-	Button,
-	Grid,
-	TextField,
-	ThemeProvider,
-	Typography,
-	createTheme,
-	Container,
-} from '@mui/material';
+import { Box, Button, TextField, Typography, Stack } from '@mui/material';
 
-import './Home.css';
-import retro from '../retro.png';
+import logoFlat from '../logo-flat.png';
+import logoShadow from '../logo-shadow.png';
+
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useState } from 'react';
 import { validateToken } from '../api/firebase';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
-import Modal from '../views/Modal';
 
 export function Home({ setListToken }) {
 	const [userTokenInput, setUserTokenInput] = useState('');
 	const [tokenExists, setTokenExists] = useState(false);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const toggleModal = () => {
-		setIsModalOpen(!isModalOpen);
-	};
 
 	function handleClick() {
 		const token = generateToken();
@@ -52,88 +38,68 @@ export function Home({ setListToken }) {
 	}
 
 	return (
-		<Box>
-			<img src={retro} className="logo" alt="logo"></img>
-			<div className="Home">
-				<Box sx={{ backgroundColor: 'EAE7D6' }}>
-					<Box
-						display="flex"
-						justifyContent="center"
-						alignItems="center"
-						minHeight="30vh"
+		<Stack direction="column" justifyContent="center" alignItems="center">
+			<img src={logoFlat} alt="logo" height="300" width="300" />
+
+			<Stack gap={2} alignItems="center">
+				<Typography variant="h1" marginBottom={1}>
+					The list that knows when it's time to stock up!
+				</Typography>
+				<Typography variant="h2">Create a new shopping list.</Typography>
+				<Button
+					type="button"
+					variant="contained"
+					size="large"
+					sx={{
+						fontSize: '2em',
+						minWidth: '20ch',
+					}}
+					onClick={handleClick}
+				>
+					Create list
+				</Button>
+			</Stack>
+
+			<Typography variant="h2">
+				<p> - or - </p>
+			</Typography>
+
+			<Box component="form" onSubmit={handleSumbit} sx={{ width: '100%' }}>
+				<Stack gap={1} alignItems="center">
+					<Typography variant="h2">Join an existing list.</Typography>
+					<TextField
+						type="text"
+						id="tokenInput"
+						label="three word token" // TODO: discuss accessibility concerns cause by MUI's label implementation
+						onChange={(event) => setUserTokenInput(event.target.value)}
+						inputProps={{
+							sx: {
+								fontSize: '2em',
+								width: '20ch',
+								maxWidth: '100dvw',
+							},
+						}}
+						sx={{
+							'& .MuiInputLabel-root, fieldset': {
+								fontSize: '2em',
+							},
+						}}
+					/>
+
+					<Button
+						variant="contained"
+						size="large"
+						type="submit"
+						sx={{
+							fontSize: '2em',
+							minWidth: '20ch',
+						}}
 					>
-						<Typography variant="h1">
-							Welcome to your Smart Shopping List!
-						</Typography>
-					</Box>
-
-					<Grid
-						container
-						spacing={30}
-						direction="row"
-						justifyContent="center"
-						alignItems="center"
-						alignContent={'center'}
-						xs={12}
-					>
-						<Grid item xs={6} margin={'16px'}>
-							<Typography variant="h2">
-								You can create a new shopping list, or type in a token to view
-								an existing list.
-							</Typography>
-							<Button
-								type="button"
-								variant="contained"
-								size="large"
-								onClick={handleClick}
-							>
-								<Typography variant="h2"> Create new list</Typography>
-							</Button>
-							<Typography variant="h2">
-								<p> - or - </p>
-							</Typography>
-
-							<form onSubmit={handleSumbit}>
-								<Typography variant="h2">
-									<label htmlFor="tokenInput">Three word token:</label>
-								</Typography>
-
-								<div>
-									<TextField
-										type="text"
-										id="tokenInput"
-										onChange={(event) => setUserTokenInput(event.target.value)}
-										required
-									/>
-
-									<Button variant="contained" size="large" type="submit">
-										<Typography variant="h2">Submit</Typography>
-									</Button>
-								</div>
-							</form>
-						</Grid>
-						<Grid item width={50} margin={'16px'}>
-							<div id="checklist">
-								<input id="01" type="checkbox" name="r" value="1" />
-								<label htmlFor="01">Bread</label>
-								<input id="02" type="checkbox" name="r" value="2" />
-								<label htmlFor="02">Cheese</label>
-								<input id="03" type="checkbox" name="r" value="3" />
-								<label htmlFor="03">Coffee</label>
-							</div>
-						</Grid>
-					</Grid>
-
-					<Container>
-						<div>
-							<button onClick={toggleModal}>Learn More</button>
-							{isModalOpen && <Modal closeModal={toggleModal} />}
-						</div>
-					</Container>
-
-					{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
-				</Box>
-			</div>
-		</Box>
+						Join List
+					</Button>
+				</Stack>
+			</Box>
+			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
+		</Stack>
 	);
 }
