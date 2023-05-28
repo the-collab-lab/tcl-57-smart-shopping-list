@@ -11,6 +11,8 @@ import {
 	IconButton,
 	Menu,
 	MenuItem,
+	useMediaQuery,
+	useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import BreakfastDiningIcon from '@mui/icons-material/BreakfastDining';
@@ -20,6 +22,8 @@ export function Layout({ listToken }) {
 	//TO DO: Refactor NavBar into a separate component
 	//TO DO: Refactor styling of NavLinks using JS instead of CSS
 	const [anchorElNav, setAnchorElNav] = useState(null);
+	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+	const theme = useTheme();
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -44,7 +48,14 @@ export function Layout({ listToken }) {
 				{/* App Bar begins here */}
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
 					{/* TODO: enable color on dark? */}
-					<AppBar position="relative" enableColorOnDark>
+					<AppBar
+						position="relative"
+						sx={{
+							backgroundColor: prefersDarkMode
+								? theme.palette.primary.dark
+								: 'inherit',
+						}}
+					>
 						<Container maxWidth="xl">
 							<Toolbar disableGutters>
 								{/* This is the title displayed on the left for medium to large screen sizes */}
