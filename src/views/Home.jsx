@@ -73,9 +73,7 @@ export function Home({ setListToken }) {
 
 			<Box component="form" onSubmit={handleSumbit} sx={{ width: '100%' }}>
 				<Stack gap={1} alignItems="center">
-					<Typography variant="h2">
-						<label htmlFor="tokenInput">Join an existing list.</label>
-					</Typography>
+					<Typography variant="h2">Join an existing list.</Typography>
 					<TextField
 						type="text"
 						id="tokenInput"
