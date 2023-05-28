@@ -38,12 +38,7 @@ export function Home({ setListToken }) {
 	}
 
 	return (
-		<Stack
-			direction="column"
-			justifyContent="center"
-			alignItems="center"
-			paddingBottom={5}
-		>
+		<Stack direction="column" justifyContent="center" alignItems="center">
 			<img src={logoFlat} alt="logo" height="300" width="300" />
 
 			<Stack gap={2} alignItems="center">
