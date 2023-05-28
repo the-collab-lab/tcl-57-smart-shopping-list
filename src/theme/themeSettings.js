@@ -2,14 +2,18 @@ import { colors } from './colors';
 
 export const palette = {
 	primary: {
-		dark: colors.primary[500],
-		main: colors.primary[700],
-		light: colors.primary[900],
+		dark: '#5B7963',
+		main: '#82AD8E',
+		light: '#9BBDA4',
+		contrastText: '#E9E4D3',
+		// contrastText: '#FFFFF0', // ivory
+		// contrastText: '#FFFFFF'  // white
 	},
 	secondary: {
-		dark: colors.secondary[500],
-		main: colors.secondary[700],
-		light: colors.secondary[900],
+		dark: '#A99346',
+		main: '#FFFFF0',
+		light: '#F4DB83',
+		contrastText: '#000000',
 	},
 	neutral: {
 		dark: colors.grey[100],

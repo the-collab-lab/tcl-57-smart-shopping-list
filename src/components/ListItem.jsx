@@ -87,7 +87,6 @@ export function ListItemComponent({
 					primary={name}
 					secondary={additionalItemInfo}
 					secondaryTypographyProps={{
-						color: '#9c9c9c',
 						fontSize: matchesMobileDevice ? 'small' : 'medium',
 					}}
 					primaryTypographyProps={{
