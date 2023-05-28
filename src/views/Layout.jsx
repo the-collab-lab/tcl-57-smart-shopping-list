@@ -62,8 +62,6 @@ export function Layout({ listToken }) {
 								<BakeryDiningIcon sx={{ mr: 1 }} fontSize="large" />
 								<Typography
 									variant="h3"
-									component="a"
-									href="/"
 									sx={{
 										mr: 2,
 										flexGrow: 1,
