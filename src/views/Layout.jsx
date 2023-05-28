@@ -42,7 +42,6 @@ export function Layout({ listToken }) {
 					flexDirection: 'column',
 					maxWidth: '100%',
 					minHeight: '100%',
-					paddingBottom: '50px',
 					bgcolor: prefersDarkMode ? 'inherit' : theme.palette.secondary.light,
 				}}
 			>
@@ -160,6 +159,8 @@ export function Layout({ listToken }) {
 						display: 'flex',
 						justifyContent: 'center',
 						pt: '25px',
+						pb: '50px',
+						mb: '25px',
 						bgcolor: prefersDarkMode ? 'inherit' : 'white',
 					}}
 				>
