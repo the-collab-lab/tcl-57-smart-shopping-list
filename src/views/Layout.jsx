@@ -13,7 +13,7 @@ import {
 	MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import BreakfastDiningOutlinedIcon from '@mui/icons-material/BreakfastDiningOutlined';
+import BreakfastDiningIcon from '@mui/icons-material/BreakfastDining';
 import './Layout.css';
 
 export function Layout({ listToken }) {
@@ -43,10 +43,30 @@ export function Layout({ listToken }) {
 					<AppBar position="relative">
 						<Container maxWidth="xl">
 							<Toolbar disableGutters>
+								{/* This is the title displayed on the left for medium to large screen sizes */}
+								<BreakfastDiningIcon sx={{ mr: 1 }} fontSize="large" />
+								<Typography
+									variant="h3"
+									// noWrap
+									component="a"
+									href="/"
+									sx={{
+										mr: 2,
+										flexGrow: 1,
+										fontFamily: 'monospace',
+										fontWeight: 700,
+										letterSpacing: '.3rem',
+										color: 'inherit',
+										textDecoration: 'none',
+									}}
+								>
+									Smart Shopping List
+								</Typography>
+
 								{/* This is the App Icon Menu */}
 								{listToken ? (
 									<Box
-										sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+										sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}
 									>
 										<IconButton
 											size="large"
@@ -56,7 +76,7 @@ export function Layout({ listToken }) {
 											onClick={handleOpenNavMenu}
 											color="inherit"
 										>
-											<MenuIcon sx={{ mr: 1 }} />
+											<MenuIcon />
 										</IconButton>
 
 										{/* This is the menu displayed after clicking on the icon */}
@@ -94,26 +114,6 @@ export function Layout({ listToken }) {
 								) : (
 									<Box></Box>
 								)}
-
-								{/* This is the title displayed on the left for medium to large screen sizes */}
-								<BreakfastDiningOutlinedIcon sx={{ mr: 1 }} />
-								<Typography
-									variant="h3"
-									// noWrap
-									component="a"
-									href="/"
-									sx={{
-										mr: 2,
-										flexGrow: 1,
-										fontFamily: 'monospace',
-										fontWeight: 700,
-										letterSpacing: '.3rem',
-										color: 'inherit',
-										textDecoration: 'none',
-									}}
-								>
-									Smart Shopping List
-								</Typography>
 
 								{/* These are the Nav Links that display on right side for medium and large screens*/}
 								{listToken ? (
