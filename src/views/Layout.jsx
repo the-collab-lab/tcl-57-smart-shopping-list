@@ -38,6 +38,7 @@ export function Layout({ listToken }) {
 					flexDirection: 'column',
 					maxWidth: '100%',
 					minHeight: '100%',
+					paddingBottom: '50px',
 				}}
 			>
 				{/* App Bar begins here */}
