@@ -1,13 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Navigate } from 'react-router-dom';
-import {
-	Box,
-	Button,
-	TextField,
-	Typography,
-	Container,
-	Stack,
-} from '@mui/material';
+import { Box, Button, TextField, Typography, Stack } from '@mui/material';
 
 import logoFlat from '../logo-flat.png';
 import logoShadow from '../logo-shadow.png';
