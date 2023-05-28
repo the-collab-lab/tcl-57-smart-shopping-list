@@ -54,7 +54,7 @@ export function ListItemComponent({
 
 	return (
 		<ListItem
-			disablePadding={matchesMobileDevice ? 'true' : null}
+			disablePadding={matchesMobileDevice ? true : null}
 			sx={{
 				'&': {
 					display: 'flex',
