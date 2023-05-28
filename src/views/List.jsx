@@ -122,7 +122,7 @@ export function List({ data, listToken }) {
 					>
 						<TextField
 							id="outlined-search"
-							label="Search for an item in your list..."
+							label="Search for an item in your list"
 							type="search"
 							size="small"
 							margin="normal"
