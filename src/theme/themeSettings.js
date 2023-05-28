@@ -15,12 +15,6 @@ export const palette = {
 		light: '#F4DB83',
 		contrastText: '#000000',
 	},
-	neutral: {
-		dark: colors.grey[100],
-		main: colors.grey[200],
-		medium: colors.grey[400],
-		light: colors.grey[700],
-	},
 	background: {
 		default: colors.grey[900],
 		alt: colors.grey[800],
