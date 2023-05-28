@@ -17,6 +17,8 @@ import BreakfastDiningIcon from '@mui/icons-material/BreakfastDining';
 import './Layout.css';
 
 export function Layout({ listToken }) {
+	//TO DO: Refactor NavBar into a separate component
+	//TO DO: Refactor styling of NavLinks using JS instead of CSS
 	const [anchorElNav, setAnchorElNav] = useState(null);
 
 	const handleOpenNavMenu = (event) => {
@@ -40,6 +42,7 @@ export function Layout({ listToken }) {
 			>
 				{/* App Bar begins here */}
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
+					{/* TODO: enable color on dark? */}
 					<AppBar position="relative">
 						<Container maxWidth="xl">
 							<Toolbar disableGutters>
@@ -47,7 +50,6 @@ export function Layout({ listToken }) {
 								<BreakfastDiningIcon sx={{ mr: 1 }} fontSize="large" />
 								<Typography
 									variant="h3"
-									// noWrap
 									component="a"
 									href="/"
 									sx={{
