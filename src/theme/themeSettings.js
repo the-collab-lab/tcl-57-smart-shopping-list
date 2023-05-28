@@ -13,6 +13,12 @@ export const palette = {
 		light: '#F4DB83',
 		contrastText: '#000000',
 	},
+	tertiary: {
+		dark: '#19717B',
+		main: '#25A2b1',
+		light: '#50B4C0',
+		contrastText: '#000000',
+	},
 	background: {
 		default: colors.grey[900],
 		alt: colors.grey[800],
