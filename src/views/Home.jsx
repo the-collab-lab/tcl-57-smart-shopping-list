@@ -70,7 +70,7 @@ export function Home({ setListToken }) {
 					<TextField
 						type="text"
 						id="tokenInput"
-						label="three word token"
+						label="three word token" // TODO: discuss accessibility concerns cause by MUI's label implementation
 						onChange={(event) => setUserTokenInput(event.target.value)}
 						inputProps={{
 							sx: {
