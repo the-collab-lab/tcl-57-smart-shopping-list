@@ -1,7 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Navigate } from 'react-router-dom';
-import { Box, Button, TextField, Typography, Stack } from '@mui/material';
+import {
+	Box,
+	Button,
+	TextField,
+	Typography,
+	Stack,
+	useMediaQuery,
+} from '@mui/material';
 
+import logo from '../logo.png';
 import logoFlat from '../logo-flat.png';
 import logoShadow from '../logo-shadow.png';
 
@@ -14,6 +22,7 @@ import 'toastify-js/src/toastify.css';
 export function Home({ setListToken }) {
 	const [userTokenInput, setUserTokenInput] = useState('');
 	const [tokenExists, setTokenExists] = useState(false);
+	const matchesMobileDevice = useMediaQuery('(max-width:600px)');
 
 	function handleClick() {
 		const token = generateToken();
@@ -39,7 +48,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<Stack direction="column" justifyContent="center" alignItems="center">
-			<img src={logoFlat} alt="logo" height="300" width="300" />
+			<img src={logo} alt="logo" width={matchesMobileDevice ? '200' : '300'} />
 
 			<Stack gap={2} alignItems="center">
 				<Typography variant="h1" marginBottom={1}>

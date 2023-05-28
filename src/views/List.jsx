@@ -19,6 +19,7 @@ import {
 	Slide,
 	Box,
 	Icon,
+	useMediaQuery,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -34,6 +35,7 @@ export function List({ data, listToken }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [selectedItem, setSelectedItem] = useState('');
 	const [open, setOpen] = useState(false);
+	const matchesMobileDevice = useMediaQuery('(max-width:600px)');
 
 	/*TO DO: Implement guard against user's accidental click. Currently the updated fields (dateLastPurchased and totalPurchases) in Firestore
 	persist when user unchecks item.
@@ -120,16 +122,19 @@ export function List({ data, listToken }) {
 					>
 						<TextField
 							id="outlined-search"
-							label="Search for an item in your list..."
+							label="Search for an item in your list"
 							type="search"
-							size="small"
+							size={matchesMobileDevice ? 'small' : 'medium'}
 							margin="normal"
 							color="primary"
 							error={noMatchingItems}
 							helperText={
 								noMatchingItems ? 'No items matching your search terms.' : null
 							}
-							sx={{ width: '30%' }}
+							sx={{
+								width: matchesMobileDevice ? '100%' : '500px',
+								minWidth: '250px',
+							}}
 							onChange={(event) => setSearchTerm(event.target.value)}
 							InputProps={{
 								endAdornment: (
@@ -146,7 +151,7 @@ export function List({ data, listToken }) {
 					<MuiListComponent
 						sx={{
 							'&': {
-								width: '50vw',
+								width: matchesMobileDevice ? '80vw' : '60vw',
 								margin: 'auto',
 							},
 						}}
