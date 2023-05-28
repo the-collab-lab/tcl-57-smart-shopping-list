@@ -7,6 +7,7 @@ import {
 	Chip,
 	IconButton,
 	Container,
+	useMediaQuery,
 } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,6 +22,7 @@ export function ListItemComponent({
 	onDeleteClick,
 	item,
 }) {
+	const matchesMobileDevice = useMediaQuery('(max-width:600px)');
 	const colorByUrgency = {
 		soon: 'orange',
 		'kind of soon': 'gold',
@@ -50,7 +52,7 @@ export function ListItemComponent({
 
 	return (
 		<ListItem
-			disablePadding
+			disablePadding={matchesMobileDevice ? 'true' : null}
 			sx={{
 				'&': {
 					display: 'flex',
