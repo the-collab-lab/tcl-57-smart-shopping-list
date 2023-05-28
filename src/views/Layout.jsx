@@ -43,6 +43,7 @@ export function Layout({ listToken }) {
 					maxWidth: '100%',
 					minHeight: '100%',
 					paddingBottom: '50px',
+					bgcolor: prefersDarkMode ? 'inherit' : theme.palette.secondary.light,
 				}}
 			>
 				{/* App Bar begins here */}
@@ -159,6 +160,7 @@ export function Layout({ listToken }) {
 						display: 'flex',
 						justifyContent: 'center',
 						pt: '25px',
+						bgcolor: prefersDarkMode ? 'inherit' : 'white',
 					}}
 				>
 					<main>
