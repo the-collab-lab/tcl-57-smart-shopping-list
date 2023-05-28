@@ -71,7 +71,7 @@ export function AddItem({ listToken, data }) {
 						onChange={(e) => setItemName(e.target.value)}
 					/>
 					<RadioGroup>
-						<FormLabel>How soon will you buy this again?</FormLabel>
+						<FormLabel>How soon will you buy this item?</FormLabel>
 						<FormControlLabel
 							value="soon"
 							control={<Radio />}
