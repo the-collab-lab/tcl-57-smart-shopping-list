@@ -60,3 +60,9 @@
 	text-decoration-thickness: 0.22em;
 	text-underline-offset: 0.1em;
 }
+
+.Menu-nav-link {
+	text-decoration: none;
+	color: #333;
+	font-size: 1.1em;
+}
