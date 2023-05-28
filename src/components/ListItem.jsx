@@ -88,7 +88,10 @@ export function ListItemComponent({
 					secondary={additionalItemInfo}
 					secondaryTypographyProps={{
 						color: '#9c9c9c',
-						fontSize: 'small',
+						fontSize: matchesMobileDevice ? 'small' : 'medium',
+					}}
+					primaryTypographyProps={{
+						fontSize: matchesMobileDevice ? 'small' : 'medium',
 					}}
 					sx={{
 						'&': {
