@@ -53,7 +53,7 @@ export function Layout({ listToken }) {
 						sx={{
 							backgroundColor: prefersDarkMode
 								? theme.palette.primary.dark
-								: 'inherit',
+								: theme.palette.primary.main,
 						}}
 					>
 						<Container maxWidth="xl">

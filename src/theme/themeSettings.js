@@ -5,9 +5,7 @@ export const palette = {
 		dark: '#5B7963',
 		main: '#82AD8E',
 		light: '#9BBDA4',
-		contrastText: '#E9E4D3',
-		// contrastText: '#FFFFF0', // ivory
-		// contrastText: '#FFFFFF'  // white
+		contrastText: '#FFFFF0', // ivory
 	},
 	secondary: {
 		dark: '#A99346',
