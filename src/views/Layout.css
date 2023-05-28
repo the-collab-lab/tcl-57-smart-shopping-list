@@ -63,6 +63,6 @@
 
 .Menu-nav-link {
 	text-decoration: none;
-	color: #333;
+	color: inherit;
 	font-size: 1.1em;
 }

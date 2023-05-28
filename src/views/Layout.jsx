@@ -44,7 +44,7 @@ export function Layout({ listToken }) {
 				{/* App Bar begins here */}
 				<Container maxWidth="xl" sx={{ p: '0' }} disableGutters>
 					{/* TODO: enable color on dark? */}
-					<AppBar position="relative">
+					<AppBar position="relative" enableColorOnDark>
 						<Container maxWidth="xl">
 							<Toolbar disableGutters>
 								{/* This is the title displayed on the left for medium to large screen sizes */}
