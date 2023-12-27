@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { validateToken } from '../api/firebase';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 export function Home({ setListToken }) {
 	const [userTokenInput, setUserTokenInput] = useState('');
@@ -63,7 +64,7 @@ export function Home({ setListToken }) {
 						fontSize: '2em',
 						minWidth: '20ch',
 					}}
-					onClick={handleClick}
+					onClick={() => console.log('Creating new lists is disabled')}
 				>
 					Create list
 				</Button>
@@ -109,6 +110,7 @@ export function Home({ setListToken }) {
 				</Stack>
 			</Box>
 			{tokenExists && <Navigate to="/list" replace={true}></Navigate>}
+			<ArchivalNoticeModal />
 		</Stack>
 	);
 }
